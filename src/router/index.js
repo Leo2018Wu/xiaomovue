@@ -56,6 +56,7 @@ Vue.use(Router)
 //   {path:'*',redirect:'/'} //重定向，针对任何未匹配路由，到达首页路由
 //   ]
 export default new Router({
+  mode:'history',
   routes:[
     // //卢露路由
     // {path:'/guide',component:Guide,

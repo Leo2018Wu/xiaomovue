@@ -1,327 +1,28 @@
 <template>
-  <div style="background: #ecf0f1">
-    <form class="form-horizontal col-xs-pull-3" style="margin-top: 200px">
-      <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 col-sm-push-2 control-label" style="height: 50px;color: white;font-size: 20px;font-weight: 100"></label>
-        <div class="col-sm-6 col-sm-push-2">
-          <input v-model="phonenum" style="height: 50px" type="text" class="form-control" id="inputEmail3" placeholder="请输入手机号">
+  <div style="min-width: 800px">
+    <div class="bg" style=" "></div>
+    <div class="mask"></div>
+    <form class="form-horizontal " style="margin-top: 200px">
+      <div class="form-group" style="margin-top:-150px">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-lg-4 col-sm-push-4 col-xs-push-4">
+            <input v-model="phonenum" style="height: 50px;width: 400px;" type="text" class="form-control" id="inputEmail3" placeholder="请输入手机号">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 col-sm-push-2 control-label" style="height: 50px;color: white;font-size: 20px;font-weight: 100;margin-top: 30px"></label>
-        <div class="col-sm-6 col-sm-push-2">
-          <input v-model="password" style="height: 50px;margin-top: 30px" type="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-lg-4 col-sm-push-4 col-xs-push-4">
+            <input v-model="password" style="height: 50px;margin-top: 30px;width: 400px;" type="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" style="height: 60px;" v-on:click="UserButton()">登录</button>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-sm-push-4 col-xs-push-4" style="text-align: center">
+            <button type="submit" class="btn btn-primary" style="height: 60px;width: 100px;margin-top:30px" v-on:click="UserButton()">登录</button>
+          </div>
         </div>
+
+
       </div>
     </form>
-    <div class="container">
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-    </div>
-
   </div>
 </template>
 
@@ -380,6 +81,10 @@
 </script>
 
 <style scoped>
-  @import "../../assets/css/style.css";
+  @import "../../assets/css/loginBg.css";
+  .mask{
+    margin-top:100px;
+    margin-left:35%;
+  }
 </style>
 

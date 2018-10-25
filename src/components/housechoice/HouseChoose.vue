@@ -54,7 +54,7 @@
     <div class="row list-pic" v-if="type== 2">
       <div class="col-xs-12 col-md-12">
         <div class="thumbnail col-xs-3 col-md-3" v-for="item in priceOrderHouse">
-          <img :src="item.hPic1" alt="">
+          <img :src="item.hPic1" alt="..">
           <div class="caption" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
             <p>{{item.hLocation}}</p>
           </div>
@@ -64,7 +64,7 @@
     <div class="row list-pic" v-else-if="type==0">
       <div class="col-xs-12 col-md-12">
         <div class="thumbnail col-xs-3 col-md-3" v-for="item in thumbOrderHouse">
-          <img :src="item.hPic1" alt="">
+          <img :src="item.hPic1" alt="..">
           <div class="caption" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
             <p>{{item.hLocation}}</p>
           </div>
@@ -74,7 +74,7 @@
     <div class="row list-pic" v-else="type==1">
       <div class="col-xs-12 col-md-12">
         <div class="thumbnail col-xs-3 col-md-3" v-for="item in scoreOrderHouse">
-          <img :src="item.hPic1" alt="">
+          <img :src="item.hPic1" alt="..">
           <div class="caption" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
             <p>{{item.hLocation}}</p>
           </div>

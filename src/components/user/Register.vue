@@ -1,30 +1,336 @@
 <template>
-  <div class="allRegidter">
-    <el-form :model="ruleForm" status-icon :rules="rules2" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="手机号" prop="phoneNum">
-        <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="昵称" prop="userName">
-        <el-input type="text" v-model="ruleForm.userName" placeholder="请输入昵称" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="确认密码" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" placeholder="请再次输入密码" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="验证码" prop="code">
-        <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off"></el-input>
-        <el-button type="primary" @click="getMessage()">获取验证码</el-button>
-      </el-form-item>
-      <el-form-item label="邀请码" prop="inviteNum" placeholder="请输入邀请码">
-        <el-input type="text" v-model="ruleForm.inviteNum"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+  <div class="allRegidter" style="min-width: 800px">
+    <div class="row">
+      <div class="col-sm-6 col-sm-push-3 col-xs-8 col-xs-push-2">
+        <el-form :model="ruleForm" status-icon :rules="rules2" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-form-item label="手机号" prop="phoneNum">
+            <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="昵称" prop="userName">
+            <el-input type="text" v-model="ruleForm.userName" placeholder="请输入昵称" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="pass">
+            <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="确认密码" prop="checkPass">
+            <el-input type="password" v-model="ruleForm.checkPass" placeholder="请再次输入密码" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="验证码" prop="code">
+            <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off"></el-input>
+            <el-button type="primary" @click="getMessage()" style="margin-top:28px">获取验证码</el-button>
+          </el-form-item>
+          <el-form-item label="邀请码" prop="inviteNum" placeholder="请输入邀请码">
+            <el-input type="text" v-model="ruleForm.inviteNum"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
+    <div class="container">
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-container">
+        <div class="circle"></div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -159,7 +465,8 @@
     }
   }
 </script>
-<style>
+<style scoped>
+  @import "../../assets/css/style.css";
   .allRegidter{
     margin-top: 100px;
   }
