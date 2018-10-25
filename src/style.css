@@ -1,0 +1,58 @@
+.pop_buttons a:first-child {
+  background: #FF666A;
+}
+.el-button--primary {
+  color: #fff;
+  background-color: #FF666A;
+  border-color: #FF666A;
+}
+.el-button--text {
+  color: #FF666A;
+  background: 0 0;
+  padding-left: 0;
+  padding-right: 0
+}
+
+.el-button--text:focus, .el-button--text:hover {
+  color: #FF666A;
+  border-color: transparent;
+  background-color: transparent
+}
+
+.el-button--text:active {
+  color: #FF666A;
+  background-color: transparent
+}
+.el-checkbox.is-bordered.is-checked {
+  border-color: #FF666A
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: #FF666A;
+  border-color: #FF666A
+}
+.el-tabs__item.is-active {
+  color: #FFF;
+  background-color: #FF666A;
+}
+.el-card__header {
+  padding: 10px 20px;
+}
+.el-tabs--border-card {
+  background: #fff;
+  border: 0px solid #fff;
+  -webkit-box-shadow: 0 0px 0px 0 , 0 0 0px 0 ;
+  box-shadow: 0 0px 0px 0 , 0 0 0px 0 ;
+}
+.el-tabs__nav-scroll{
+  background-color: #fff;
+  border-bottom: 3px solid #dcdfe6;
+}
+#tab-first, #tab-second,#tab-third{
+  margin-right: 15px;
+}
+.el-collapse-item__header {
+   height:100%;
+  line-height:100%;
+ margin-bottom: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+}

@@ -1,0 +1,221 @@
+<template>
+    <div class="map col-xs-12 col-xs-pull-1" >
+      <el-row >
+        <el-col :offset="2" :span="5">
+          <el-input :id="suggestId" v-model="houseloc[0]" :clearable='clearable' placeholder="请输入店铺地址,获取店铺坐标" >
+          </el-input>
+        </el-col>
+        <el-col :span="2">
+          <el-button id="position" @click="search" type="primary">定位</el-button>
+        </el-col>
+        <el-col :span="10" >
+          <el-tag type="success" v-clipboard:copy="userlocation.lng" v-clipboard:success="onCopy" v-clipboard:error="onError" >经度 {{userlocation.lng}}</el-tag>
+          <el-tag type="success" v-clipboard:copy="userlocation.lat" v-clipboard:success="onCopy" v-clipboard:error="onError">纬度 {{userlocation.lat}}</el-tag>
+          <el-tag type="success" ><<<<点击左侧按钮复制经纬度信息</el-tag>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :offset="2" :span="16">
+          <div id="map_canvas" class="allmap" style="border:0;"></div>
+        </el-col>
+      </el-row>
+    </div>
+  </template>
+  <script>
+    export default {
+      data() {
+        return {
+          houseloc: [], //详细地址
+          userlocation: { lng: "", lat: "" },
+          clearable: true,
+          suggestId: "suggestId",
+          map : {},
+          mk: {},
+          hId:this.$route.params.hId
+        };
+      },
+
+      methods: {
+        drawMap() {
+          setTimeout(() => {
+            this.map = new BMap.Map("map_canvas");        // 创建地图实例
+            this.map.addControl(new BMap.NavigationControl());      // 启用放大缩小 尺
+            this.map.enableScrollWheelZoom();
+            this.getlocation();//获取当前坐标 , 测试时获取定位不准。
+
+            var point = new BMap.Point(this.userlocation.lng, this.userlocation.lat); // 创建点坐标
+            this.map.centerAndZoom(point, 13);         // 初始化地图，设置中心点坐标和地图级别
+            var marker = new BMap.Marker(point);    // 创建标注
+            this.map.addOverlay(marker);           // 将标注添加到地图中
+
+            var ac = new BMap.Autocomplete({
+              //建立一个自动完成的对象
+              input: "suggestId",
+              location: this.map
+            });
+            var myValue;
+            ac.addEventListener("onconfirm", (e)=> {
+              //鼠标点击下拉列表后的事件
+              var _value = e.item.value;
+              myValue =_value.province +_value.city +_value.district +_value.street +_value.business;
+              this.address_detail = myValue;
+              this.setPlace();
+            });
+          }, 2000)
+
+        },
+        getMarker (point) {
+          this.mk = new BMap.Marker(point);
+          this.mk.addEventListener("dragend", this.showInfo);
+          this.mk.enableDragging();  //可拖拽
+          this.getAddress(point);
+          this.map.addOverlay(this.mk);//把点添加到地图上
+          this.map.panTo(point);
+        },
+        getlocation () {
+          //获取当前位置
+          var geolocation = new BMap.Geolocation();
+          geolocation.getCurrentPosition((r) =>{
+            if(geolocation.getStatus() == BMAP_STATUS_SUCCESS){
+              this.getMarker(r.point);
+              this.userlocation = r.point;
+            }else {
+              alert('failed'+this.getStatus());
+            }
+          });
+        },
+        //绑定Marker的拖拽事件
+        showInfo(e){
+          var gc = new BMap.Geocoder();
+          gc.getLocation(e.point, (rs)=>{
+            var addComp = rs.addressComponents;
+            var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;//获取地址
+
+            //画图 ---》显示地址信息
+            var label = new BMap.Label(address,{offset:new BMap.Size(20,-10)});
+            this.map.removeOverlay(this.mk.getLabel());//删除之前的label
+
+            this.mk.setLabel(label);
+            this.address_detail = address;
+            this.userlocation = e.point;
+
+          });
+        },
+        //获取地址信息，设置地址label
+        getAddress(point){
+          var gc = new BMap.Geocoder();
+
+          gc.getLocation(point, (rs)=>{
+            var addComp = rs.addressComponents;
+            var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;//获取地址
+
+            //画图 ---》显示地址信息
+            var label = new BMap.Label(address,{offset:new BMap.Size(20,-10)});
+            this.map.removeOverlay(this.mk.getLabel());//删除之前的label
+            this.address_detail = address;
+            this.mk.setLabel(label);
+
+          });
+
+        },
+        setPlace() {
+          this.map.clearOverlays(); //清除地图上所有覆盖物
+          var th = this
+          function myFun() {
+            th.userlocation = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
+            th.map.centerAndZoom(th.userlocation, 18);
+            th.getMarker(th.userlocation);
+          }
+
+          var local = new BMap.LocalSearch(this.map, {
+            onSearchComplete: myFun //智能搜索
+          });
+          local.search(this.address_detail);
+        },
+        search () {
+          var localSearch = new BMap.LocalSearch(this.map);
+          localSearch.enableAutoViewport(); //允许自动调节窗体大小
+          this.searchByInputName(localSearch);
+        },
+        searchByInputName(localSearch) {
+          this.map.clearOverlays(); //清空原来的标注
+          var th = this;
+          var keyword = this.address_detail;
+          localSearch.setSearchCompleteCallback(function(searchResult) {
+            var poi = searchResult.getPoi(0);
+            th.userlocation = poi.point;
+            th.map.centerAndZoom(poi.point, 13);
+            th.getMarker(th.userlocation);
+          });
+          localSearch.search(keyword);
+        },
+        onCopy () {
+          this.$message('内容已复制到剪贴板!');
+        },
+        onError () {
+          this.$message('内容复制失败,请重试!');
+
+        }
+
+      },
+      // created() {
+      //   var map = new BMap.Map("allmap");
+      //   var point = new BMap.Point(116.331398,39.897445);
+      //   map.centerAndZoom(point,12);
+      //   var myGeo = new BMap.Geocoder();
+      //   // 将地址解析结果显示在地图上,并调整地图视野
+      //   console.log("地图： " + this.houseloc[0])
+      //   myGeo.getPoint( this.houseloc[0], function(point){
+      //     if (point) {
+      //       map.centerAndZoom(point, 16);
+      //       map.addOverlay(new BMap.Marker(point));
+      //     }else{
+      //       alert("您选择地址没有解析到结果!");
+      //     }
+      //   }, "北京市");
+      // },
+      mounted() {
+        this.$nextTick(function () {
+          this.drawMap();
+        });
+        let _this = this
+        axios.get(`http://localhost:3000/house/details/` + this.hId).then(function (result) {
+          _this.houseloc.push(result.data.data[0].hLocation);
+
+        })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+
+
+    };
+  </script>
+  <style scoped>
+    *{
+      margin:0;
+      padding:0;
+    }
+    .map{
+      margin-top: 10px;
+      margin-left:2%;
+
+    }
+
+    .allmap {
+      height: 400px;
+      font-family: "微软雅黑";
+      border: 1px solid green;
+      margin-top: 10px;
+    }
+    .el-tag {
+      cursor: pointer;
+    }
+    @media (max-width:1144px) {
+      .map {
+        width:135%;
+
+
+      }
+    }
+  </style>

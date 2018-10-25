@@ -1,23 +1,27 @@
+
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div class="container">
+    <app-navigation-top></app-navigation-top>
+    <router-view></router-view>
+    <app-navigation-bottom></app-navigation-bottom>
   </div>
 </template>
-
 <script>
-export default {
-  name: 'App'
-}
+  import NavigationTop from './components/NavigationTop.vue'
+  import NavigationBottom from './components/NavigationBottom.vue'
+  import AllHome from './components/home/AllHome.vue'
+  export default {
+    name: 'App',
+    components:{
+      'app-navigation-top':NavigationTop,
+      'app-navigation-bottom':NavigationBottom,
+      'app-all-home':AllHome,
+
+    },
+  }
 </script>
 
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
