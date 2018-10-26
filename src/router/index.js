@@ -9,27 +9,27 @@ import FindPwd from '../components/findpwd/FindPwd.vue'
 import ChangePwd from '../components/findpwd/ChangePwd.vue'
 import IntorHouse from '../components/intorhouse/IntorHouse.vue'
 //卢露路由
-// import Guide from '../components/Guide.vue'
-// import Guidea from '../components/Guide of rent/Guidea.vue'
-// import Guideb from '../components/Guide of rent/Guideb.vue'
-// import Guidec from '../components/Guide of rent/Guidec.vue'
-// import Center from '../components/Center.vue'
-// import Sharediscount from '../components/Personal center/Sharediscount.vue'
-// import Myorder from '../components/Personal center/Myorder.vue'
-// import Orderempty from '../components/Personal center/Orderempty.vue'
-// import Myassessment from '../components/Personal center/Myassessment.vue'
-// import Mydiary from '../components/Personal center/Mydiary.vue'
-// import Diaryempty from '../components/Personal center/Diaryempty.vue'
-// import Occupant from '../components/Personal center/Occupant.vue'
-// import Personaldata from '../components/Personal center/Personaldata.vue'
-// import Mysave from '../components/Personal center/Mysave.vue'
-// import Updatepwd from '../components/Personal center/Updatepwd.vue'
-// import Diarydetail from '../components/Personal center/Diarydetail.vue'
-// import Successdetail from '../components/Personal center/Successdetail.vue'
-// import Waitdetail from '../components/Personal center/Waitdetail.vue'
-// import Finishdetail from '../components/Personal center/Finishdetail.vue'
-// import Diaryedit from '../components/Personal center/Diaryedit.vue'
-// import Assessmentedit from '../components/Personal center/Assessmentedit.vue'
+import Guide from '../components/Guide of rent/Guide.vue'
+import Guidea from '../components/Guide of rent/Guidea.vue'
+import Guideb from '../components/Guide of rent/Guideb.vue'
+import Guidec from '../components/Guide of rent/Guidec.vue'
+import Center from '../components/Personal center/Center.vue'
+import Sharediscount from '../components/Personal center/Sharediscount.vue'
+import Myorder from '../components/Personal center/Myorder.vue'
+import Orderempty from '../components/Personal center/Orderempty.vue'
+import Myassessment from '../components/Personal center/Myassessment.vue'
+import Mydiary from '../components/Personal center/Mydiary.vue'
+import Diaryempty from '../components/Personal center/Diaryempty.vue'
+import Occupant from '../components/Personal center/Occupant.vue'
+import Personaldata from '../components/Personal center/Personaldata.vue'
+import Mysave from '../components/Personal center/Mysave.vue'
+import Updatepwd from '../components/Personal center/Updatepwd.vue'
+import Diarydetail from '../components/Personal center/Diarydetail.vue'
+import Successdetail from '../components/Personal center/Successdetail.vue'
+import Waitdetail from '../components/Personal center/Waitdetail.vue'
+import Finishdetail from '../components/Personal center/Finishdetail.vue'
+import Diaryedit from '../components/Personal center/Diaryedit.vue'
+import Assessmentedit from '../components/Personal center/Assessmentedit.vue'
 // 刘铭君开始
 import AllHome from '@/components/home/AllHome.vue'
 import Discount from '@/components/discountpage/Discount.vue'
@@ -58,40 +58,41 @@ Vue.use(Router)
 export default new Router({
   mode:'history',
   routes:[
-    // //卢露路由
-    // {path:'/guide',component:Guide,
-    //   children:[
-    //     {path:'',component:Guidea},
-    //     {path:'/guide/guideb',component:Guideb},
-    //     {path:'/guide/guidec',component:Guidec}
-    //   ]
-    // },
-    // {path:'/center',component:Center,
-    //   children:[
-    //     {path:'',component:Sharediscount},
-    //     {path:'/center/myassessment',component:Myassessment},
-    //     {path:'/center/diaryempty',component:Diaryempty,
-    //       children:[
-    //         {path:'/center/diaryempty',component:Mydiary},
-    //         {path:'/center/diaryempty/1',component:Diarydetail}
-    //       ]
-    //     },
-    //     {path:'/center/occupant',component:Occupant},
-    //     {path:'/center/personaldata',component:Personaldata},
-    //     {path:'/center/mysave',component:Mysave},
-    //     {path:'/center/orderempty',component:Orderempty,
-    //       children:[
-    //         {path:'/center/orderempty',component:Myorder},
-    //         {path:'/center/orderempty/successdetail',component:Successdetail},
-    //         {path:'/center/orderempty/waitdetail',component:Waitdetail},
-    //         {path:'/center/orderempty/finishdetail',component:Finishdetail},
-    //         {path:'/center/orderempty/diaryedit',component:Diaryedit},
-    //         {path:'/center/orderempty/assessmentedit',component:Assessmentedit},
-    //       ]
-    //     },
-    //     {path:'/center/updatepwd',component:Updatepwd}
-    //   ]
-    // },
+    //卢露路由
+    {path:'/guide',component:Guide,
+      children:[
+        {path:'',component:Guidea},
+        {path:'/guide/guideb',component:Guideb},
+        {path:'/guide/guidec',component:Guidec}
+      ]
+    },
+    {path:'/center',component:Center,
+      children:[
+        {path:'',component:Sharediscount},
+        {path:'/center/myassessment',component:Myassessment},
+        {path:'/center/diaryempty',component:Diaryempty,
+          children:[
+            {path:'/center/diaryempty',component:Mydiary},
+            {path:'/center/diaryempty/:did',component:Diarydetail}
+          ]
+        },
+        {path:'/center/occupant',component:Occupant},
+        {path:'/center/personaldata',component:Personaldata},
+        {path:'/center/mysave',component:Mysave},
+        {path:'/center/orderempty',component:Orderempty,
+          children:[
+            {path:'/center/orderempty',component:Myorder},
+            {path:'/center/orderempty/:oIdq',component:Successdetail},
+            {path:'/center/orderempty/:oIdw',component:Waitdetail},
+            {path:'/center/orderempty/:oIde',component:Finishdetail},
+            {path: '/center/orderempty/diary/:oIdr',component:Diaryedit},
+            {path: '/center/orderempty/assessment/:oIdt',component:Assessmentedit},
+          ]
+
+        },
+        {path:'/center/updatepwd',component:Updatepwd}
+      ]
+    },
     //陈文杰路由
     {path: '/fpwd',component: FindPwd},
     {path: 'wd',component: ChangePwd},

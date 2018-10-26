@@ -388,13 +388,13 @@
           callback();
         }
       };
-      var validateInviteNum = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入邀请码'));
-        } else {
-          callback();
-        }
-      };
+      // var validateInviteNum = (rule, value, callback) => {
+      //   if (value === '') {
+      //     callback(new Error('请输入邀请码'));
+      //   } else {
+      //     callback();
+      //   }
+      // };
       return {
         getcode:'',
         ruleForm: {
@@ -421,9 +421,9 @@
           code: [
             { validator: validateCode, trigger: 'blur' }
           ],
-          inviteNum: [
-            { validator: validateInviteNum, trigger: 'blur' }
-          ]
+          // inviteNum: [
+          //   { validator: validateInviteNum, trigger: 'blur' }
+          // ]
         }
       };
     },

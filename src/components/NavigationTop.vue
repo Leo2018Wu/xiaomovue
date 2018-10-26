@@ -1,4 +1,4 @@
-<script src="../router/index.js"></script>
+<!--<script src="../router/index.js"></script>-->
 <template>
   <div class="row">
     <nav class="navbar navbar-fixed-top" style="background-color: white">
