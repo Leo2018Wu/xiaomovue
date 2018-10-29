@@ -2,7 +2,7 @@
   <div>
     <div class="persondate1">
       <span class="title" >基本信息</span>
-      <el-button type="text" @click="centerDialogVisible1 = true" style="float: right">编辑</el-button>
+      <el-button class="person"  type="text" @click="centerDialogVisible1 = true" style="float: right;color: #ff666A">编辑</el-button>
       <el-dialog
         title="提示"
         :visible.sync="centerDialogVisible1"
@@ -31,25 +31,25 @@
           </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible1 = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisible1 = false">取 消</el-button>
     <el-button type="primary" @click="centerDialogVisible1 = false; updatePerfect()">确 定</el-button>
   </span>
       </el-dialog>
       <hr>
       <el-row>
-        <el-col :span="16"><div class="grid-content bg-purple">
+        <el-col :span="20"><div class="grid-content bg-purple">
           <P>用 户 名：:{{ruleForm.name}}</P>
           <P>手机号码：{{ruleForm.phone}}</P>
           <P>邮&nbsp;&nbsp;箱：{{dynamicValidateForm.email}}</P>
         </div></el-col>
-        <el-col :span="8"><div class="grid-content bg-purple-light">
+        <el-col :span="4"><div class="grid-content bg-purple-light">
           <u-headpic></u-headpic>
         </div></el-col>
       </el-row>
     </div>
     <div class="persondate1">
       <span class="title">身份信息</span><br>
-      <el-button type="text" @click="centerDialogVisible2 = true" style="float: right">编辑</el-button>
+      <el-button class="person" type="text" @click="centerDialogVisible2 = true" style="float: right; color: #ff666A">编辑</el-button>
       <el-dialog
         title="提示"
         :visible.sync="centerDialogVisible2"
@@ -72,7 +72,7 @@
           </el-form>
         </div>
         <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible2 = false">取 消</el-button>
+    <el-button  type="primary" @click="centerDialogVisible2 = false">取 消</el-button>
     <el-button type="primary" @click="centerDialogVisible2 = false;updateIdInfo()">确 定</el-button>
   </span>
       </el-dialog>
@@ -188,7 +188,17 @@
     }
   };
 </script>
-<style>
+<style scoped>
+  .el-button--primary {
+    color: #fff;
+    background-color: #ff666A;
+    border-color: #ff666A;
+  }
+  .el-button--primary:focus, .el-button--primary:hover {
+    background: #ff666A;
+    border-color: #ff666A;
+    color: #fff;
+  }
   input{
     border: #ddd solid 1px;
     height: 35px;

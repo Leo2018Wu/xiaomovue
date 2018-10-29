@@ -7,7 +7,7 @@
                       <img src="../../assets/first-center-01.jpg" class="himg"/>
                     </div></el-col>
                     <el-col :span="20":offset="2"><div class="grid-content bg-purple-light">
-                      <div><h5>{{assessment.hName}}</h5>
+                      <div><h4>{{assessment.hName}}</h4>
                       <span class="aDate">{{assessment.aDate}}</span>
                       <el-button style="float: right; padding: 3px 0" type="text">
                         <el-button type="text" @click="centerDialogVisible = true">
@@ -75,6 +75,7 @@
       del(index){
         axios.get(`http://localhost:3000/assessment/details/delAssessment/${this.assessments[index].aId}`).then((result)=> {
           console.log("删除成功")
+          window.location.reload()
         },(err) =>{
           console.log(result.err)
         })
@@ -82,7 +83,7 @@
     },
   }
 </script>
-<style>
+<style scoped>
   img {
     width: 100px;
     height: 100px;

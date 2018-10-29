@@ -3,10 +3,10 @@
     <div >
   <el-card class="box-card" v-for="(diary,index) in diarys">
     <div slot="header" class="clearfix">
-      <span>{{diary.dTitle}}</span><br>
-      <router-link :to="'/center/diaryempty/'+diary.dId"><el-button style="float: right; padding: 3px 0" type="text">详情>></el-button></router-link>
+      <h3 class="dtitle">{{diary.dTitle}}</h3><br>
+      <router-link :to="'/center/diaryempty/'+diary.dId"><el-button style="color:#ff666A;float: right; padding: 3px 0" type="text">详情>></el-button></router-link>
       <span>{{diary.hName}}</span>
-      <h5>2018-11-05</h5>
+      <h5>{{diary.dDate}}</h5>
     </div>
     <div  class="text item">
       <p class="dContent">{{diary.dContent }}</p>
@@ -41,7 +41,11 @@
     },
   }
 </script>
-<style>
+<style scoped>
+  /*.dtitle{*/
+    /*font-size: 17px;*/
+    /*font-weight: bold;*/
+  /*}*/
   .text {
     font-size: 14px;
   }

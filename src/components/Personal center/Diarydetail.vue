@@ -11,14 +11,31 @@
         <el-col :span="24"><div class="grid-content bg-purple-dark"><span style="float: right;cursor: pointer;color: #FF666A" @click = del()>删除</span></div></el-col>
       </el-row>
       <el-row>
-        <el-col :span="4"><div class="grid-content bg-purple-dark"> <img src="../../assets/first-center-01.jpg" /></div></el-col>
+        <el-col :span="4"><div class="grid-content bg-purple-dark">
+          <img src="../../assets/first-center-01.jpg" style="height: 100%;width: 100%"/></div>
+        </el-col>
       </el-row>
-
-
+      <hr>
+      <span>评论</span>
+      <div style="background-color:#eee;"  >
+        <div v-for="assessment in assessments">
+        <el-row style="padding:10px" >
+          <el-col :span="3"><div class="grid-content bg-purple">
+            <img src="../../assets/first-center-01.jpg" style="height: 100%;width: 100%;border-radius: 50%"/>
+          </div></el-col>
+          <el-col :span="20" :offset="1"><div class="grid-content bg-purple-light">
+            <h3>{{assessment.uName}}</h3>
+            <h5>{{assessment.daDate}}</h5>
+            <p>{{assessment.daContent}}</p>
+          </div></el-col>
+        </el-row>
+        </div>
+      </div>
     </div>
   </el-card>
 </template>
-<style>
+<style scoped>
+
   .text {
     font-size: 14px;
   }
@@ -54,7 +71,8 @@
           // {dTitle:'旅游日记 －－包子篇',dContent:'我换了个窗户边的座位，坐在我们一排的是个湖南的阿姨，与yaping开始搭话，原来是女儿带她一起出来旅游的，一提到她女儿她很开心和我们聊开了，女儿是成都某重本的'},
           // {dTitle:'厦门旅游攻略·学生党旅游·旅游日记',dContent:'……[TOC] 厦门，是一座海边很美的旅游城市，值得一去，废话不多说，接下来分享一下去厦门的几点建议和我的行程安排吧。'},
 
-        ]
+        ],
+        assessments:[ ]
       };
     },
     mounted() {
@@ -64,11 +82,17 @@
       }, (err) => {
         console.log(result.err)
       })
+      axios.get(`http://localhost:3000/diarys/ddiarys/getUandAssessments/${dId}`).then((result) => {
+        this.assessments = result.data.data
+      }, (err) => {
+        console.log(result.err)
+      })
     },
     methods: {
       del() {
         axios.get(`http://localhost:3000/diarys/delete/${this.diaryOne[0].dId}`).then((result) => {
           alert("删除成功")
+          window.location.reload()
         }, (err) => {
           console.log(result.err)
         })

@@ -2,11 +2,11 @@
   <div>
     <el-card class="box-card" v-for="(orderInfo,index) in orderInfos">
       <div slot="header" class="clearfix">
-        <el-row :gutter="20">
+        <el-row>
           <el-col :span="10"><div class="grid-content bg-purple"><span>房源概述</span></div></el-col>
-          <el-col :span="9"><div class="grid-content bg-purple"><span style="color: #FF666A;">订单完成</span></div></el-col>
-          <el-col :span="5"><div class="grid-content bg-purple">
-            <el-button class="button" type="danger" @click="centerDialogVisible = true">删除</el-button>
+          <el-col :span="9" :offset="1"><div class="grid-content bg-purple-light"><span style="color: #FF666A;">订单完成</span></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple">
+            <el-button class="button" type="text" @click="centerDialogVisible = true">删除</el-button>
             <el-dialog
               title="删除"
               :visible.sync="centerDialogVisible"
@@ -25,7 +25,7 @@
         <el-row>
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <img class="media-object" :src="orderInfo.hPic1"/>
+              <img class="media-object" :src="'../../../static/images/'+orderInfo.hPic1"/>
             </div>
           </el-col>
           <el-col :span="15" :offset="1">
@@ -39,8 +39,8 @@
           <el-col :span="4">
             <div class="grid-content bg-purple">
               <h4>￥{{orderInfo.hPrice}}</h4>
-              <router-link :to="'/center/orderempty/assessment/'+orderInfo.oId"><el-button type="text" class="button">立即评价</el-button></router-link><br>
-              <router-link :to="'/center/orderempty/diary/'+orderInfo.oId"><el-button type="text" class="button">立即写日记</el-button></router-link><br>
+              <router-link :to="'/center/orderempty/assessment/'+orderInfo.oId"><el-button type="text" class="button">评价</el-button></router-link><br>
+              <router-link :to="'/center/orderempty/diary/'+orderInfo.oId"><el-button type="text" class="button">写日记</el-button></router-link><br>
               <router-link :to="'/center/orderempty/'+orderInfo.oId"><el-button type="text" class="button">详情</el-button></router-link>
             </div>
           </el-col>
@@ -81,18 +81,21 @@
           oId:this.orderInfos[index].oId,
           oStatus:3
         }).then((response)=>{
-          // if(response.data.status==200){
-          // alert('评论成功！')
+          window.location.reload()
         }).catch((err)=>{
           // alert('评论失败')
           console.log(err)
         })
+
       }
     }
   }
 </script>
 
 <style scoped>
+  h4{
+    color: #ff666A;
+  }
   span{
     font-weight: 300;
     font-size: 18px;

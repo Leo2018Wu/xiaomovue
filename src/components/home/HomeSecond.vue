@@ -8,7 +8,7 @@
       <div class="first-row-left col-xs-4 col-sm-4 col-md-4 col-lg-4" v-for="house in houses">
         <div class="first-shadow">
           <router-link :to="`/intorhouse/${house.hId}`">
-          <div class="center-img"><a><img :src ="house.hPic1" alt=""></a></div>
+          <div class="center-img"><a><img :src ="'../../../static/images/'+house.hPic1" alt=""></a></div>
           </router-link>
         </div>
         <div class="first-row-left-tip">
@@ -39,7 +39,7 @@
       },
 //动态加载数据（只能文字）（图片的路径问题）
       mounted:function () {
-        axios.get("http://127.0.0.1:3000/house/styleHouse").then((result)=> {
+        this.$axios.get("/house/styleHouse").then((result)=> {
               this.mydata = result.data.data;
               // console.log(this.mydata)
               for(var i = 0 ; i < 9; i++){

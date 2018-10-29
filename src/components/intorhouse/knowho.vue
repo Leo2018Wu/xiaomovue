@@ -25,7 +25,7 @@
           <el-step title="入住当天14:00前" description="如提前退房，扣除之后的5天定金"></el-step>
           <el-step title="退房当天12:00前" description=" "></el-step>
         </el-steps>
-        <div style="margin-top:20px;margin-left:10%;margin-right:10%;line-height:25px;">根据房东设置的交易规则未早于入住日14：00 5天退订视为有责取消 ，
+        <div style="margin:40px 10%;line-height:25px;">根据房东设置的交易规则未早于入住日14：00 5天退订视为有责取消 ，
         应扣除取消订单时间点后 5天订金作为违约金，剩余钱款将被原路退还 </div>
       </div>
 

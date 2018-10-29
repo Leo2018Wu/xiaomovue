@@ -63,8 +63,8 @@
          margin-top:60px;
          background-color: #f5f5f5;
          padding:20px;
-         margin-left:-10%;
-         margin-right:-10%;
+         margin-left:-5%;
+         margin-right:-5%;
        }
        .p1{
          font-size:20px;

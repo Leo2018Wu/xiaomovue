@@ -25,8 +25,9 @@
         <div class="a1" v-if="isshow == 1"  >
 
           <div style="  width:90%;margin:10px auto;">
-           <img :src="allinfo[0].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
-           <div style="display: inline-block;margin-top:30px;margin-left:20px;">
+
+           <img :src="`../../../static/images/pinglun/`+allinfo[0].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+           <div style="display: inline-block;margin-top:-50px;margin-left:80px;">
              <p><span>{{allinfo[0].uName}}</span>  入住时间:{{allinfo[0].aDate.substring(0,10)}}</p>
               <p>{{allinfo[0].aContent}}</p>
              <p><span>房东回复:</span></p>
@@ -35,8 +36,8 @@
 
        </div>
           <div style=" width:90%;margin:10px auto;">
-            <img :src="allinfo[1].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
-            <div style="display: inline-block;margin-top:30px;margin-left:20px;">
+            <img :src="`../../../static/images/pinglun/`+allinfo[1].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+            <div style="display: inline-block;margin-top:-50px;margin-left:80px;">
               <p><span>{{allinfo[1].uName}}</span>  入住时间:{{allinfo[1].aDate.substring(0,10)}}</p>
               <p>{{allinfo[1].aContent}}</p>
               <p><span>房东回复:</span></p>
@@ -45,8 +46,8 @@
 
           </div>
           <div style=" width:90%;margin:10px auto;">
-            <img :src="allinfo[2].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
-            <div style="display: inline-block;margin-top:30px;margin-left:20px;">
+            <img :src="`../../../static/images/pinglun/`+allinfo[2].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+            <div style="display: inline-block;margin-top:-50px;margin-left:80px;">
               <p><span>{{allinfo[2].uName}}</span>  入住时间:{{allinfo[2].aDate.substring(0,10)}}</p>
               <p>{{allinfo[2].aContent}}</p>
               <p><span>房东回复:</span></p>
@@ -55,8 +56,8 @@
 
           </div>
           <div style=" width:90%;margin:10px auto;">
-            <img :src="allinfo[3].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
-            <div style="display: inline-block;margin-top:30px;margin-left:20px;">
+            <img :src="`../../../static/images/pinglun/`+allinfo[3].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+            <div style="display: inline-block;margin-top:-50px;margin-left:80px;">
               <p><span>{{allinfo[3].uName}}</span>  入住时间:{{allinfo[3].aDate.substring(0,10)}}</p>
               <p>{{allinfo[3].aContent}}</p>
               <p><span>房东回复:</span></p>
@@ -68,8 +69,8 @@
          <div class="a2" v-if="isshow == 2" >
 
            <div style=" width:90%;margin:10px auto;">
-               <img :src="allinfo[4].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
-               <div style="display: inline-block;margin-top:30px;margin-left:20px;">
+               <img :src="`../../../static/images/pinglun/`+allinfo[4].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+               <div style="display: inline-block;margin-top:-50px;margin-left:80px;">
                  <p><span>{{allinfo[4].uName}}</span>  入住时间:{{allinfo[4].aDate.substring(0,10)}}</p>
                  <p>{{allinfo[4].aContent}}</p>
                  <p><span>房东回复:</span></p>
@@ -77,8 +78,8 @@
                </div>
            </div>
            <div style=" width:90%;margin:10px auto;">
-             <img :src="allinfo[5].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
-             <div style="display: inline-block;margin-top:30px;margin-left:20px;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[5].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <div style="display: inline-block;margin-top:-50px;margin-left:80px;">
                <p><span>{{allinfo[5].uName}}</span>  入住时间:{{allinfo[5].aDate.substring(0,10)}}</p>
                <p>{{allinfo[5].aContent}}</p>
                <p><span>房东回复:</span></p>
@@ -86,7 +87,7 @@
              </div>
            </div>
            <div style=" width:90%;margin:10px auto;">
-           <img :src="allinfo[6].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+           <img :src="`../../../static/images/pinglun/`+allinfo[6].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
            <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[6].uName}}</span>  入住时间:{{allinfo[6].aDate.substring(0,10)}}</p>
                <p>{{allinfo[6].aContent}}</p>
@@ -95,7 +96,7 @@
              </div>
          </div>
            <div style=" width:90%;margin:10px auto;">
-             <img :src="allinfo[7].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[7].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[7].uName}}</span>  入住时间:{{allinfo[7].aDate.substring(0,10)}}</p>
                <p>{{allinfo[7].aContent}}</p>
@@ -106,7 +107,7 @@
          </div>
          <div class="a3" v-if="isshow == 3">
            <div style="width:90%;margin:10px auto;">
-             <img :src="allinfo[8].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[8].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[8].uName}}</span>  入住时间:{{allinfo[8].aDate.substring(0,10)}}</p>
                <p>{{allinfo[8].aContent}}</p>
@@ -117,7 +118,7 @@
 
            </div>
            <div style=" width:90%;margin:10px auto;">
-             <img :src="allinfo[9].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[9].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[9].uname}}</span>  入住时间:{{allinfo[9].aDate.substring(0,10)}}</p>
                <p>{{allinfo[9].aContent}}</p>
@@ -128,7 +129,7 @@
 
            </div>
            <div style=" width:90%;margin:10px auto;">
-             <img :src="allinfo[10].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[10].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[10].uName}}</span>  入住时间:{{allinfo[10].aDate.substring(0,10)}}</p>
                <p>{{allinfo[10].aContent}}</p>
@@ -139,7 +140,7 @@
 
            </div>
              <div style=" width:90%;margin:10px auto;">
-               <img :src="allinfo[11].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+               <img :src="`../../../static/images/pinglun/`+allinfo[11].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
                <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                  <p><span>{{allinfo[11].uName}}</span>  入住时间:{{allinfo[11].aDate.substring(0,10)}}</p>
                  <p>{{allinfo[11].aContent}}</p>
@@ -152,7 +153,7 @@
          </div>
          <div class="a4" v-if="isshow == 4">
            <div style="width:90%;margin:10px auto;">
-             <img :src="allinfo[12].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[12].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[12].uName}}</span>  入住时间:{{allinfo[12].aDate.substring(0,10)}}</p>
                <p>{{allinfo[12].aContent}}</p>
@@ -163,7 +164,7 @@
 
            </div>
            <div style=" width:90%;margin:10px auto;">
-             <img :src="allinfo[13].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[13].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[13].uName}}</span>  入住时间:{{allinfo[13].aDate.substring(0,10)}}</p>
                <p>{{allinfo[13].aContent}}</p>
@@ -174,7 +175,7 @@
 
            </div>
            <div style="width:90%;margin:10px auto;">
-             <img :src="allinfo[14].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+             <img :src="`../../../static/images/pinglun/`+allinfo[14].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
              <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                <p><span>{{allinfo[14].uName}}</span>  入住时间:{{allinfo[14].aDate.substring(0,10)}}</p>
                <p>{{allinfo[14].aContent}}</p>
@@ -185,7 +186,7 @@
 
            </div>
              <div style=" width:90%;margin:10px auto;">
-               <img :src="allinfo[15].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+               <img :src="`../../../static/images/pinglun/`+allinfo[15].aImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
                <div style="display: inline-block;margin-top:30px;margin-left:20px;">
                  <p><span>{{allinfo[15].uName}}</span>  入住时间:{{allinfo[15].aDate.substring(0,10)}}</p>
                  <p>{{allinfo[15].aContent}}</p>
@@ -261,7 +262,7 @@
 <style scoped>
 .a1,.a2,.a3,.a4{
   width:100%;
-  height:800px;
+  height:1050px;
 }
 button,input{
   border:1px solid #fff;

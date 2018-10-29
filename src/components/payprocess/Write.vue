@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="to">
     <div class="row">
       <div class="writepage">
         <!--顶部步骤条-->
@@ -13,30 +13,26 @@
           <div class="basicf">
             <el-form class="demo-ruleForm">
               <el-form-item label="房源信息：">
-                <label for="">{{this.$store.state.hname}} - 整套出租</label>
-              </el-form-item>
-              <el-form-item label="房东用户名：">
-                <label for="">{{this.$store.state.pname}}</label>&nbsp;&nbsp;
-                <el-button type="info" round @click="open"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;离线留言</el-button>
+                <label for="">{{$store.state.hName}} - 整套出租</label>
               </el-form-item>
               <el-form-item label="入住时段：">
                 <el-date-picker
                   v-model="create_start_date"
                   type="date"
                   :picker-options="pickerBeginDateBefore"
-                  format="yyyy-MM-dd"
+                  format="yyyy 年 MM 月 dd 日"
+                  value-format="yyyy-MM-dd"
                   placeholder="开始日期"
-                  value-format="timestamp"
                   style="width: 25%">
                 </el-date-picker>
-                  &nbsp;&nbsp;至&nbsp;&nbsp;
+                &nbsp;&nbsp;至&nbsp;&nbsp;
                 <el-date-picker
                   v-model="create_end_date"
                   type="date"
-                  format="yyyy-MM-dd"
+                  format="yyyy 年 MM 月 dd 日"
+                  value-format="yyyy-MM-dd"
                   :picker-options="pickerBeginDateAfter"
                   placeholder="结束日期"
-                  value-format="timestamp"
                   style="width: 25%">
                 </el-date-picker>
               </el-form-item>
@@ -64,7 +60,7 @@
           </div>
           <div class="occf">
             <el-form class="demo-ruleForm">
-              <el-form-item label="真实姓名">
+              <el-form-item label="真实姓名" required>
                 <el-input v-model="name"placeholder="请输入真实的信息" style="width: 50%"></el-input>
               </el-form-item>
               <el-form-item label="身份证号" required>
@@ -72,7 +68,7 @@
                   <el-input v-model="identity"placeholder="请输入真实的信息" style="width: 50%"></el-input>
                 </el-form-item>
               </el-form-item>
-              <el-form-item label="手机号">
+              <el-form-item label=" 手 机 号" required>
                 <el-input v-model="phone" placeholder="请输入真实的信息" style="width: 50%"></el-input>
               </el-form-item>
             </el-form>
@@ -86,17 +82,17 @@
           &nbsp;&nbsp;<span class="label label-info">预定人信息</span>
           <br><br><br>
           <div class="res">
-            昵称：{{$store.state.resname}}&nbsp;&nbsp;
-            手机：+86 {{$store.state.resphone}}
+            昵称：{{sname}}&nbsp;&nbsp;
+            手机：+86 {{sphone}}
             <br><br>
           </div>
         </div>
         <br>
         <!--定单费用信息-->
         <div class="Costs">
-        <br>
-        &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
-        <br><br><br>
+          <br>
+          &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
+          <br><br><br>
           <div class="paytable">
             <table class="table table-bordered" style="width: 95%;background: white">
               <tbody>
@@ -110,16 +106,16 @@
               </tr>
               <tr>
                 <th style="width: 25%">{{title}}</th>
-                <td style="width: 15%">￥{{$store.state.price}}</td>
+                <td style="width: 15%">￥{{$store.state.houseprice}}</td>
                 <td style="width: 15%">{{$store.state.number}}</td>
-                <td style="width: 15%">{{($store.state.create_end_date-$store.state.create_start_date)/(60*60*24*1000)}}天</td>
-                <td style="width: 15%">{{discount}}</td>
-                <td style="width: 15%">￥{{(($store.state.create_end_date-$store.state.create_start_date)/(60*60*24*1000))*$store.state.price}}</td>
+                <td style="width: 15%">{{(Date.parse(create_end_date)-Date.parse(create_start_date))/1000/60/60/24}}天</td>
+                <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
+                <td style="width: 15%">￥{{(Date.parse(create_end_date)-Date.parse(create_start_date))/1000/60/60/24*$store.state.houseprice}}</td>
               </tr>
               </tbody>
             </table>
           </div>
-      </div>
+        </div>
         <br>
         <!--房东要求-->
         <div class="requires">
@@ -179,188 +175,168 @@
         <center><a><el-button type="danger" @click="submits" round>提交订单</el-button></a></center>
       </div>
     </div>
+    <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
+      <div style="width: 100px;height: 100px;"><img src="../../assets/rocket.png" alt="" style="max-width:100%;max-height:100%"></div>
+    </a>
   </div>
 </template>
 
 <script>
   import Steps1 from '../steps/Steps1.vue'
   import axios from 'axios'
-    export default {
-        name: "Write",
-      data() {
-        return {
-          input1: '1',
-          radio: '您可在入住完成10天内在App上填写开票信息',
-          box: false,
-          title: '房租',
-          discount: '备注：入住当天凭有效证件返现',
+  export default {
+    name: "Write",
+    data() {
+      return {
+        uLocation:"",
+        price:'',
+        input1: '1',
+        radio: '您可在入住完成10天内在App上填写开票信息',
+        box: false,
+        title: '房租',
+        sname:sessionStorage.getItem('sname'),
+        sphone:sessionStorage.getItem('sphone'),
 
 
-          pickerBeginDateBefore: {
-            disabledDate: (time) => {
-              if (this.$store.state.create_end_date === '') {
-                return time.getTime() < Date.now() - 8.64e7
-              } else {
-                let beginDateVal = this.$store.state.create_end_date;
-                if (beginDateVal) {
-                  return time.getTime() > beginDateVal || time.getTime() < Date.now() - 8.64e7;
-                }
+        pickerBeginDateBefore: {
+          disabledDate: (time) => {
+            if (this.$store.state.create_end_date === '') {
+              return time.getTime() < Date.now() - 8.64e7
+            } else {
+              let beginDateVal = this.$store.state.create_end_date;
+              if (beginDateVal) {
+                return time.getTime() > beginDateVal || time.getTime() < Date.now() - 8.64e7;
               }
             }
-          },
-          pickerBeginDateAfter: {
-            disabledDate: (time) => {
-              if (this.$store.state.create_start_date === '') {
-                this.flag = true
-                return time.getTime() < Date.now() - 8.64e7
-              } else {
-                let beginDateVal = this.$store.state.create_start_date;
-                if (beginDateVal) {
-                  return time.getTime() < beginDateVal || time.getTime() < Date.now() - 8.64e7;
-                }
+          }
+        },
+        pickerBeginDateAfter: {
+          disabledDate: (time) => {
+            if (this.$store.state.create_start_date === '') {
+              this.flag = true
+              return time.getTime() < Date.now() - 8.64e7
+            } else {
+              let beginDateVal = this.$store.state.create_start_date;
+              if (beginDateVal) {
+                return time.getTime() < beginDateVal || time.getTime() < Date.now() - 8.64e7;
               }
             }
-          },
-        };
-      },
-      computed: {
-        create_start_date: {
-          get:function() {
-            console.log('get!!!')
-            return this.$store.state.create_start_date
-          },
-          set(value) {
-            console.log('set');
-            this.$store.state.create_start_date = value
           }
         },
-        create_end_date: {
-          get:function() {
-            console.log('get!!!')
-            return this.$store.state.create_end_date
-          },
-          set(value) {
-            console.log('set');
-            this.$store.state.create_end_date = value
-          }
+      };
+    },
+    computed: {
+      create_start_date: {
+        get:function() {
+          console.log('get!!!')
+          return this.$store.state.create_start_date
         },
-        // 添加入住人的姓名身份证手机
-        name: {
-          get:function() {
-            console.log('get!!!')
-            return this.$store.state.name1
-          },
-          set(value) {
-            console.log('set');
-            this.$store.state.name1 = value
-          }
-        },
-        identity: {
-          get:function() {
-            console.log('get!!!')
-            return this.$store.state.identity1
-          },
-          set(value) {
-            console.log('set');
-            this.$store.state.identity1 = value
-          }
-        },
-        phone: {
-          get:function() {
-            console.log('get!!!')
-            return this.$store.state.phone1
-          },
-          set(value) {
-            console.log('set');
-            this.$store.state.phone1 = value
-          }
-        },
-      },
-
-      methods:{
-        open(){
-          this.$prompt('请输入需要留言的内容', '请留言', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            inputPattern: '',
-          }).then(({ value }) => {
-            this.$message({
-              type: 'success',
-              message: '您的留言已发送 '
-            });
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '取消'
-            });
-          });
-        },
-        // submitForm() {
-        //   // 将入住人的信息添加到数据库
-        //   if(this.$store.state.name1==''||this.$store.state.phone1==''||this.$store.state.date1==''){
-        //     alert('请确认信息内容不能为空')
-        //   }else {
-        //     axios.post("http://localhost:3000/occupant/addOccupant", {
-        //       occName: this.$store.state.name1,
-        //       occPhone: this.$store.state.phone1,
-        //       occBirthDate: this.$store.state.date1,
-        //
-        //
-        //     }).then(function (result) {
-        //       console.log(result.data)
-        //     })
-        //     alert('添加成功!');
-        //     this.$store.state.name1 = '',
-        //     this.$store.state.phone1 = '',
-        //     this.$store.state.date1 = ''
-        //   }
-        // },
-        submits(){
-          console.log(this.box)
-          if(this.$store.state.name1==''||this.$store.state.phone1==''||this.$store.state.date1==''||this.box==false){
-            alert('请确认信息不为空')
-          }else{
-            let _this=this
-            var date = new Date();
-            var seperator1 = "-";
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var strDate = date.getDate();
-            if (month >= 1 && month <= 9) {
-              month = "0" + month;
-            }
-            if (strDate >= 0 && strDate <= 9) {
-              strDate = "0" + strDate;
-            }
-            var currentdate = year + seperator1 + month + seperator1 + strDate;
-            _this.$store.state.newdate=currentdate
-            console.log('当前时间'+_this.$store.state.newdate)
-            axios.post("http://localhost:3000/order", {
-              arrvialDate: '2018-10-25',
-              leaveDate: '2018-10-27',
-              hPrice: _this.$store.state.price,
-              oDate: _this.$store.state.newdate,
-              oStatus: 0,
-              uId: _this.$store.state.uId,
-              hId: _this.$store.state.hId,
-              occName: _this.$store.state.name1,
-              occCordId: _this.$store.state.identity1,
-              occPhone: _this.$store.state.phone1,
-            }).then(function (result) {
-              console.log(result.data)
-            })
-            alert('添加成功,即将跳转支付页面！');
-              this.$router.push({path: '/pay'})
-              // this.$store.state.name1 = '',
-              // this.$store.state.phone1 = '',
-              // this.$store.state.identity1 = ''
-          }
+        set(value) {
+          console.log('set');
+          this.$store.state.create_start_date = value
         }
       },
-      components:{
-          'app-steps1':Steps1
+      create_end_date: {
+        get:function() {
+          console.log('get!!!')
+          return this.$store.state.create_end_date
+        },
+        set(value) {
+          console.log('set');
+          this.$store.state.create_end_date = value
+        }
+      },
+      // 添加入住人的姓名身份证手机
+      name: {
+        get:function() {
+          console.log('get!!!')
+          return this.$store.state.name1
+        },
+        set(value) {
+          console.log('set');
+          this.$store.state.name1 = value
+        }
+      },
+      identity: {
+        get:function() {
+          console.log('get!!!')
+          return this.$store.state.identity1
+        },
+        set(value) {
+          console.log('set');
+          this.$store.state.identity1 = value
+        }
+      },
+      phone: {
+        get:function() {
+          console.log('get!!!')
+          return this.$store.state.phone1
+        },
+        set(value) {
+          console.log('set');
+          this.$store.state.phone1 = value
+        }
+      },
+    },
+
+    methods:{
+      submits(){
+        console.log(this.box)
+        if(this.$store.state.name1==''||this.$store.state.phone1==''||this.$store.state.date1==''||this.box==false){
+          alert('请确认信息不为空')
+        }else{
+          let _this=this
+          var date = new Date();
+          var seperator1 = "-";
+          var year = date.getFullYear();
+          var month = date.getMonth() + 1;
+          var strDate = date.getDate();
+          let house = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
+          let minute = date.getMinutes()  < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
+          let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+          if (month >= 1 && month <= 9) {
+            month = "0" + month;
+          }
+          if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+          }
+          var currentdate = year + seperator1 + month + seperator1 + strDate+' '+house+minute+seconds;
+          _this.$store.state.newdate=currentdate
+          console.log('当前时间'+_this.$store.state.newdate)
+          axios.post("http://localhost:3000/order", {
+            arrvialDate: _this.$store.state.create_start_date,
+            leaveDate: _this.$store.state.create_start_date,
+            hPrice: _this.$store.state.houseprice,
+            oDate: _this.$store.state.newdate,
+            oStatus: 0,
+            uId: sessionStorage.getItem('suId'),
+            hId: _this.$store.state.househId,
+            occName: _this.$store.state.name1,
+            occCordId: _this.$store.state.identity1,
+            occPhone: _this.$store.state.phone1,
+          }).then(function (result) {
+            console.log(result.data)
+          })
+          alert('提交订单成功,即将跳转支付页面！');
+          this.$router.push({path: '/pay'})
+          // this.$store.state.name1 = '',
+          // this.$store.state.phone1 = '',
+          // this.$store.state.identity1 = ''
+
+          sessionStorage.setItem('start_date',_this.$store.state.create_start_date)
+          sessionStorage.setItem('end_date',_this.$store.state.create_end_date)
+          sessionStorage.setItem('shouseprice',_this.$store.state.houseprice)
+          sessionStorage.setItem('susername',_this.$store.state.name1)
+          sessionStorage.setItem('sidentity',_this.$store.state.identity1)
+          sessionStorage.setItem('suserphone',_this.$store.state.phone1)
+          sessionStorage.setItem('shName',_this.$store.state.hName)
+        }
       }
+    },
+    components:{
+      'app-steps1':Steps1
     }
+  }
 </script>
 
 <style scoped>

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="block">
+      <span class="demonstration">请先评分</span>
+      <el-rate v-model="value1"></el-rate>
+    </div>
     <textarea v-model="message" cols="120" rows="13"></textarea>
     <button type="submit" style="float: right" @click = addComment() >提交</button>
     <el-upload
@@ -22,6 +26,7 @@
     name: "Assessmentedit",
     data() {
       return {
+        value1: '',
         dialogImageUrl: '',
         dialogVisible: false,
         message:'',
@@ -57,10 +62,12 @@
             uId:this.oneOrder[0].uId,
             hId:this.oneOrder[0].hId,
             oId:this.oneOrder[0].oId,
+            aScore:this.value1
           }).then((response)=>{
             // if(response.data.status==200){
             alert('评论成功！')
             this.message = ''
+            this.value1 = ''
             // }
             // else alert('评论失败')
           }).catch((err)=>{

@@ -3,25 +3,25 @@
     <h3 style="position: relative">房客点评</h3>
     <div class="all-info">
       <div v-if="isshow==1">
-        <img class="radius-img" :src="assessments[0].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+assessments[0].uHeadPic" alt="">
         <p>{{assessments[0].uName}}</p>
         <p>{{assessments[0].aDate}}</p>
         <div class="content">{{assessments[0].aContent}}</div>
       </div>
       <div v-else-if="isshow==2">
-        <img class="radius-img" :src="assessments[1].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+assessments[1].uHeadPic" alt="">
         <p>{{assessments[1].uName}}</p>
         <p>{{assessments[1].aDate}}</p>
         <div class="content">{{assessments[1].aContent}}</div>
       </div>
       <div v-else-if="isshow==3">
-        <img class="radius-img" :src="assessments[2].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+assessments[2].uHeadPic" alt="">
         <p>{{assessments[2].uName}}</p>
         <p>{{assessments[2].aDate}}</p>
         <div class="content">{{assessments[2].aContent}}</div>
       </div>
       <div v-else="isshow==4">
-        <img class="radius-img" :src="assessments[3].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+assessments[3].uHeadPic" alt="">
         <p>{{assessments[3].uName}}</p>
         <p>{{assessments[3].aDate}}</p>
         <div class="content">{{assessments[3].aContent}}</div>
@@ -59,10 +59,10 @@
       },
     },
     mounted() {
-      axios.get(`http://127.0.0.1:3000/assessment/details/recommend/${this.recommend}`).then((result) => {
+      this.$axios.get(`/assessment/details/recommend/${this.recommend}`).then((result) => {
         // this.mydata = result.data.data[0].uName;
         this.mydata = result.data.data
-        console.log(this.mydata)
+        // console.log(this.mydata)
         for (var i = 0; i < 4; i++) {
           this.assessments.push(this.mydata[i])
           // console.log(this.assessments[0])

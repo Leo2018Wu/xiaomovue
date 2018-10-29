@@ -22,7 +22,8 @@
       // }
       data() {
         return {
-          options2: [{
+          options2: [
+          {
             label: '江苏',
             cities: []
           }, {

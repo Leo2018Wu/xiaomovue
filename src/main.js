@@ -6,16 +6,18 @@ import './style.css'
 import store from './store.js'
 import router from './router'
 import './assets/style.css'
-import axios from "axios"
+import Axios from "axios"
 import lodash from 'lodash'
 import clipbord from "vue-clipboard2"
+Axios.defaults.baseURL='http://127.0.0.1:3000'
+Vue.prototype.$axios = Axios;
 Vue.config.productionTip = false
 Vue.use(clipbord)
 Vue.use(Element)
 Vue.use(lodash)
 // Vue.use(axios)
-
-Vue.prototype.$http = axios
+// Vue.use(Axios)
+Vue.prototype.$http = Axios
 
 // const router = new Router({
 //   routes:routes,

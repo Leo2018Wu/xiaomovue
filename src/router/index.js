@@ -28,16 +28,12 @@ import Diarydetail from '../components/Personal center/Diarydetail.vue'
 import Successdetail from '../components/Personal center/Successdetail.vue'
 import Waitdetail from '../components/Personal center/Waitdetail.vue'
 import Finishdetail from '../components/Personal center/Finishdetail.vue'
+import Cancledetail from '../components/Personal center/Cancledetail.vue'
 import Diaryedit from '../components/Personal center/Diaryedit.vue'
 import Assessmentedit from '../components/Personal center/Assessmentedit.vue'
 // 刘铭君开始
 import AllHome from '@/components/home/AllHome.vue'
-import Discount from '@/components/discountpage/Discount.vue'
-import DiscountDefault from '@/components/discountpage/DiscountDefault.vue'
-import DiscountFirst from '@/components/discountpage/DiscountFirst.vue'
-import DiscountSecond from '@/components/discountpage/DiscountSecond.vue'
-import DiscountThird from '@/components/discountpage/DiscountThird.vue'
-import Choose from '@/components/home/Choose.vue'
+import Discounts from '@/components/discountpage/Discounts.vue'
 //许颖路由
 import RightNav from '@/components/navdetails/RightNav.vue'
 import AboutUs from '@/components/navdetails/AboutUs.vue'
@@ -58,6 +54,7 @@ Vue.use(Router)
 export default new Router({
   mode:'history',
   routes:[
+
     //卢露路由
     {path:'/guide',component:Guide,
       children:[
@@ -82,21 +79,24 @@ export default new Router({
         {path:'/center/orderempty',component:Orderempty,
           children:[
             {path:'/center/orderempty',component:Myorder},
-            {path:'/center/orderempty/:oIdq',component:Successdetail},
+            {path:'/center/orderempty/Successdetail/:oIdq',component:Successdetail},
             {path:'/center/orderempty/:oIdw',component:Waitdetail},
             {path:'/center/orderempty/:oIde',component:Finishdetail},
             {path: '/center/orderempty/diary/:oIdr',component:Diaryedit},
             {path: '/center/orderempty/assessment/:oIdt',component:Assessmentedit},
+            {path:'/center/orderempty/Cancledetail/:oIdy',component:Cancledetail},
           ]
 
         },
         {path:'/center/updatepwd',component:Updatepwd}
       ]
     },
+
     //陈文杰路由
     {path: '/fpwd',component: FindPwd},
-    {path: 'wd',component: ChangePwd},
+    {path: '/cpwd',component: ChangePwd},
     {path: '/intorhouse/:hId',component: IntorHouse},
+
     //许颖路由
     {path:'/rightnav',component:RightNav,children:[
         {path:'/rightnav/about',component:AboutUs},
@@ -110,12 +110,13 @@ export default new Router({
     {path:'/finish',component:Finish},
     // 刘铭君开始
         {path: '/', component: AllHome},
-        {path: '/discount', component: Discount,children:[
-        {path: '/discount', component: DiscountDefault},
-        {path: '/discount/discountfirst', component: DiscountFirst},
-        {path: '/discount/discountsecond', component: DiscountSecond},
-        {path: '/discount/discountthird', component: DiscountThird},
-      ]},
+        {path: '/discounts', component: Discounts},
+    //   {path: '/discount', component: Discount,children:[
+      //   {path: '/discount', component: DiscountDefault},
+      //   {path: '/discount/discountfirst', component: DiscountFirst},
+      //   {path: '/discount/discountsecond', component: DiscountSecond},
+      //   {path: '/discount/discountthird', component: DiscountThird},
+      // ]},
     //  吴志斌路由
     // {path:'/home',component: Home},
     {path:'/house/:choose',component:HouseChoose},

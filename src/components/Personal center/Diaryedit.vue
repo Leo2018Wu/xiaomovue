@@ -59,7 +59,7 @@
               dContent:this.message,
               dDate:new Date().toLocaleString(),
               recommend:1,
-              uId:this.oneOrder[0].uId,
+              uId:1,
               hId:this.oneOrder[0].hId,
               dTitle:this.title,
                oId:this.oneOrder[0].hId,

@@ -14,34 +14,34 @@
             center>
             <span>你确定要删除此入住人？</span>
             <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
   </span>
           </el-dialog>
         </el-button>
       </div>
       <div  class="text item">
-        <h4>手机号码：{{person.occPhone}}</h4><br>
-        <h4>身份证号：{{person.occCordId}}</h4>
+        <p>手机号码：{{person.occPhone}}</p><br>
+        <p>身份证号：{{person.occCordId}}</p>
       </div>
     </el-card>
     <el-button type="text" @click="dialogFormVisible2 = true" class="addOccupant">
       <div class="addboder"><i class="el-icon-plus" ></i>添加入住人</div>
     </el-button>
-    <el-dialog title="添加入住人" :visible.sync="dialogFormVisible2">
-      <el-form :model="form">
-        <el-form-item label="真实姓名" :label-width="formLabelWidth" autofocus="autofocus" placeholder="7-15位大写字母或者数字">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+    <el-dialog title="添加入住人" :visible.sync="dialogFormVisible2" >
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"style="width: 60%">
+        <el-form-item label="真实姓名" prop="tureName">
+          <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="身份证号" :label-width="formLabelWidth">
-          <el-input v-model="form.idCard" autocomplete="off" ></el-input>
+        <el-form-item label="身份证号" prop="idCard">
+          <el-input v-model.number="ruleForm.idCard"/>
         </el-form-item>
-        <el-form-item label="手机号" :label-width="formLabelWidth">
-          <el-input    v-model="form.phone" ></el-input>
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model.number="ruleForm.phone"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible2 = false">取 消</el-button>
         <el-button type="primary" @click="dialogFormVisible2 = false;addOccupant()">确 定</el-button>
       </div>
     </el-dialog>
@@ -52,6 +52,19 @@
   import axios from 'axios'
   export default {
     data() {
+      var checkPhone = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('手机号不能为空'));
+        } else {
+          const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
+          console.log(reg.test(value));
+          if (reg.test(value)) {
+            callback();
+          } else {
+            return callback(new Error('请输入正确的手机号'));
+          }
+        }
+      };
       return {
         centerDialogVisible: false,
         persons:[
@@ -60,33 +73,52 @@
         ],
         dialogFormVisible1: false,
         dialogFormVisible2: false,
-        form: {
-          name: ' ',
+        ruleForm: {
           phone: '',
-          idCard: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          name:'',
+          idCard:'',
         },
-        occInfos: {
-          name: '1111111',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px'
+        rules: {
+          phone: [
+            {validator: checkPhone, required: true, message: '请输入手机号',trigger: 'blur'}
+          ],
+          name:[
+            { required: true, message: '请输入真实名', trigger: 'blur' },
+            { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+          ],
+          idCard:[
+            { required: true, message: '请输入身份证号', trigger: 'blur' },
+            { pattern:/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,message: '长度是18位数字', trigger: 'blur' }
+          ],
+        }
+        // form: {
+        //   name: ' ',
+        //   phone: '',
+        //   idCard: '',
+        //   date2: '',
+        //   delivery: false,
+        //   type: [],
+        //   resource: '',
+        //   desc: ''
+        // },
+        // occInfos: {
+        //   name: '1111111',
+        //   region: '',
+        //   date1: '',
+        //   date2: '',
+        //   delivery: false,
+        //   type: [],
+        //   resource: '',
+        //   desc: ''
+        // },
+        // formLabelWidth: '120px'
       };
     },
     methods: {
       del(index){
         axios.get(`http://localhost:3000/occupant/deleteOccupant/${this.persons[index].occId}`).then((result)=> {
           alert('删除成功')
+          window.location.reload()
         },(err) =>{
           alert(result.err)
         })
@@ -94,12 +126,12 @@
       addOccupant(){
         axios.post('http://localhost:3000/occupant/addOccupant',{
           // activityCommentId:12,
-          occName:this.form.name,
-          occCordId:this.form.idCard,
-          occPhone:this.form.phone,
+          occName:this.ruleForm.name,
+          occCordId:this.ruleForm.idCard,
+          occPhone:this.ruleForm.phone,
           uId:1
         }).then((response)=>{
-
+          window.location.reload()
         }).catch((err)=>{
           console.log(err)
         })
@@ -117,13 +149,27 @@
     },
   };
 </script>
-<style>
+<style scoped>
+  .el-icon-delete{
+    color: #ff666A;
+  }
+  .el-button--primary {
+    color: #fff;
+    background-color: #ff666A;
+    border-color: #ff666A;
+  }
+  .el-button--primary:focus, .el-button--primary:hover {
+    background: #ff666A;
+    border-color: #ff666A;
+    color: #fff;
+  }
   h4{
     display: inline-block;
     margin-bottom: 10px;
   }
   .text {
-    font-size: 14px;
+    color: #999;;
+
   }
 
   .item {

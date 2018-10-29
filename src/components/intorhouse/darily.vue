@@ -16,7 +16,7 @@
     <div class="a1" v-if="isshow == 1">
       <div style="width:90%;margin:0 auto; ">
         <div>
-        <img :src="info[0].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+        <img :src="`../../../static/images/pinglun/`+info[0].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
         <div >
           <p style="color:#ff666a;font-weight:bold;margin-top:35px;position:absolute;letter-spacing:5px;font-size:18px;margin-left:70px;   ">{{info[0].uTrueName}} </p>
              <p style="font-size:15px; margin-left:70px;margin-top:65px;position:absolute;">{{info[0].dDate.substring(0,10)}}</p>
@@ -32,13 +32,13 @@
     <div class="a2" v-if="isshow == 2">
       <div style="width:90%;margin:0 auto; ">
         <div>
-          <img :src="info[1].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+          <img :src="`../../../static/images/pinglun/`+info[1].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
           <div >
             <p style="color:#ff666a;font-weight:bold;margin-top:35px;position:absolute;letter-spacing:5px;font-size:18px;margin-left:70px;   ">{{info[1].uTrueName}} </p>
             <p style="font-size:15px; margin-left:70px;margin-top:65px;position:absolute;">{{info[1].dDate.substring(0,10)}}</p>
             <p style=" font-size:30px;font-weight: bold;margin-top:35px;position:absolute;margin-left:40%;color:#ff666a;  ">{{info[1].dTitle}}</p>
           </div>
-          <div style="clear:both;font-size:18px;margin-top:100px;position:absolute; line-height: 28px;margin-right:40px;    ">
+          <div style="clear:both;margin-top:100px;position:absolute; line-height: 28px;margin-right:40px;    ">
             {{info[1].dContent}}
           </div>
         </div>
@@ -48,13 +48,13 @@
     <div class="a3" v-if="isshow == 3">
       <div style="width:90%;margin:0 auto; ">
         <div>
-          <img :src="info[2].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+          <img :src="`../../../static/images/pinglun/`+info[2].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
           <div >
             <p style="color:#ff666a;font-weight:bold;margin-top:35px;position:absolute;letter-spacing:5px;font-size:18px;margin-left:70px;   ">{{info[2].uTrueName}}  </p>
             <p style="font-size:15px; margin-left:70px;margin-top:65px;position:absolute;">{{info[2].dDate.substring(0,10)}}</p>
             <p style=" font-size:30px;font-weight: bold;margin-top:35px;position:absolute;margin-left:40%;color:#ff666a;  ">{{info[2].dTitle}}</p>
           </div>
-          <div style="clear:both;font-size:18px;margin-top:100px;position:absolute; line-height: 28px;margin-right:40px;   ">
+          <div style="clear:both;margin-top:100px;position:absolute; line-height: 28px;margin-right:40px;   ">
             {{info[2].dContent}}
           </div>
         </div>
@@ -64,13 +64,13 @@
     <div class="a4" v-if="isshow == 4">
       <div style="width:90%;margin:0 auto; ">
         <div>
-          <img :src="info[3].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
+          <img :src="`../../../static/images/pinglun/`+info[3].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
           <div >
             <p style="color:#ff666a;font-weight:bold;margin-top:35px;position:absolute;letter-spacing:5px;font-size:18px;margin-left:70px;   ">{{info[3].uTrueName}}  </p>
             <p style="font-size:15px; margin-left:70px;margin-top:65px;position:absolute;">{{info[3].dDate.substring(0,10)}}</p>
             <p style=" font-size:30px;font-weight: bold;margin-top:35px;position:absolute;margin-left:40%;color:#ff666a  ">{{info[3].dTitle}}</p>
           </div>
-          <div style="clear:both;font-size:18px;margin-top:100px;position:absolute; line-height: 28px;margin-right:40px;   ">
+          <div style="clear:both;margin-top:100px;position:absolute; line-height: 28px;margin-right:40px;   ">
             {{info[3].dContent}}
           </div>
         </div>

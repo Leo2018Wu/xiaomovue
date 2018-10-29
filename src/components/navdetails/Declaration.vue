@@ -32,9 +32,18 @@
   .article_title{
     color:#FF666A;
   }
+  @media (max-width: 768px) {
+    .article_title{
+      font-size:15px;
+    }
+    p{
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
   @media (min-width: 768px) {
     .article_title{
-      font-size:20px;
+      font-size:16px;
     }
     ol{
       font-size: 14px;
@@ -43,19 +52,19 @@
   }
   @media (min-width: 992px) {
     .article_title{
-      font-size:22px;
+      font-size:17px;
     }
     ol{
-      font-size: 16px;
+      font-size: 15px;
       line-height: 30px;
     }
   }
   @media (min-width: 1280px) {
     .article_title{
-      font-size:24px;
+      font-size:18px;
     }
     ol{
-      font-size: 18px;
+      font-size: 16px;
       line-height: 35px;
     }
   }

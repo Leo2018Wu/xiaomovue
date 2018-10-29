@@ -29,37 +29,32 @@
         <div class="Costs">
           <br>
           &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
-          <br>{{mydatas[0].hPrice}}<br><br>
-          <div class="eltable">
-            <el-table style="width: 95%">
-              <el-table-column prop="title" label="" style="width: 25%"></el-table-column>
-              <el-table-column prop="price" label="日均价" style="width: 15%"></el-table-column>
-              <el-table-column  prop="number0" label="预定数量" style="width: 15%"></el-table-column>
-              <el-table-column prop="dates" label="天数" style="width: 15%"></el-table-column>
-              <el-table-column prop="discount" label="优惠" style="width: 15%"></el-table-column>
-              <el-table-column  prop="prices" label="总价" style="width: 15%"></el-table-column>
-            </el-table>
+          <div class="table">
+            <table class="table table-bordered" style="width: 95%;background: white">
+              <tbody>
+              <tr>
+                <th style="width: 25%"></th>
+                <td style="width: 15%">日均价</td>
+                <td style="width: 15%">预定数量</td>
+                <td style="width: 15%">天数</td>
+                <td style="width: 15%">优惠</td>
+                <td style="width: 15%">总价</td>
+              </tr>
+              <tr>
+                <th style="width: 25%">房租</th>
+                <td style="width: 15%">￥{{mydatas[0].hPrice}}</td>
+                <td style="width: 15%">1</td>
+                <td style="width: 15%">{{mydatas[0].uPhone}}天</td>
+                <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
+                <td style="width: 15%">￥{{mydatas[0].uPhone}}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
     <br>
-    <!--底部规则-->
-    <div class="unsubscribe">
-      <br>
-      &nbsp;&nbsp;<span class="label label-info">退订规则</span>
-      <br><br>
-      <div class="unsub">
-        <h5>交易规则</h5>
-        <p>
-          根据房东设置的交易规则未早于10月31日退订视为有责取消，应扣除取消订单时间点后1天订金作为违约金，剩余钱款将被原路退还 取消订单和提前退房时间以小沫系统中记录的时间为准。如与房东产生争议，请致电小沫客服电话：400 010 7890
-        </p>
-        <h5>友情提示</h5>
-        <p>
-          入住后如您认为照片与房间实际情况有较大差异时，可将能够证明存在较大差异的材料（如带有拍摄日期水印的实地拍摄照片、短视频等）提供给客服进行审核；如小沫工作人员核查认为材料真实、有效，小沫将安排专门的客服人员与您联系，并尽最大可能为您解决问题。因自然灾害及其他不可抗力因素导致的退订需求，由您和房东协商解决。 已支付押金将在您入住完成后原路退还，该钱款不包含在订单总金额内。
-        </p>
-      </div>
-    </div>
     <br>
     <br>
   </div>
@@ -67,7 +62,6 @@
 
 <script>
   import axios from 'axios'
-  // let oId = this.$route.params.oIdq
   export default {
     name: "Pay",
     data(){
@@ -82,7 +76,7 @@
       }
     },
     mounted(){
-      axios.get('http://localhost:3000/order/getOrderDetail/1').then((result)=> {
+      axios.get(`http://localhost:3000/order/getOrderDetail/${this.oId}`).then((result)=> {
         this.mydatas = result.data.data
       },(err) =>{
         console.log(result.err)

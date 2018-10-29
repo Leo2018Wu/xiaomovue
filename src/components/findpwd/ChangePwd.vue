@@ -1,53 +1,107 @@
 <template>
-  <div id="center" class="row">
-    <img src="../../../static/images/h2.jpg" class="img1"/>
-    <div id="centform">
-      <p  class="she">设置新密码</p>
-      <div class="infom">
-        <img src="../../../static/images/gouzi.jpeg" class="img2">
-        <p style="margin-left:-30px;">验证短信已发送至手机号码</p>
-        <p class="phone">+86 {{phone}}</p>
-      </div>
-
-      <form action=""  >
-        <div>
-          <div class="input-group col-xs-5 col-xs-push-2" style="margin-top:15px;">
-            <input type="text" class="form-control input-lg" id="form3" placeholder="手机验证码" style="text-align:center;border-radius:7px;">
-          </div>
-          <button type="button" class="btn btn-default" style="margin-left:62%;margin-top:-15%;height:42px;width:22%;font-family:'Times New Roman',Times,serif;">重新发送</button>
-        </div>
-        <div class="input-group col-xs-8 col-xs-push-2">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-lock" style="padding:8px;"></i></span>
-          <input type="text" class="form-control input-lg" id="form1" placeholder="新密码" style="text-align:center">
-        </div>
-        <div class="input-group col-xs-8 col-xs-push-2" style="margin-top:20px;padding-bottom: 20px;">
-          <router-link to="/center">
-          <button type="submit" class="btn btn-danger" style="width:100%;height:42px;border-radius:7px;font-family:'Times New Roman',Times,serif;"
-              @suce="sucess">完成</button>
-          </router-link>
-        </div>
-      </form>
+  <div style="width:100%; ">
+    <div>
+      <img src="../../../static/images/housedetail/2.jpg" style="width:100%;float:left;">
     </div>
+  <div style="margin-top:150px;position:absolute;z-index:99;" class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-4">
+    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="新密码" prop="pass">
+        <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="确认新密码" prop="checkPass" style="margin-top:30px;">
+        <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="验证码" prop="yan"  style="margin-top:30px;">
+        <el-input v-model.number="ruleForm2.age"></el-input>
+      </el-form-item>
+      <el-form-item  style="margin-top:30px;">
+
+        <el-button @click="getMessage">获取验证码</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm2')">登录</el-button>
+      </el-form-item>
+    </el-form>
   </div>
-
-
+  </div>
 </template>
 
 <script>
     export default {
         name: "changepwd",
-        data:function () {
-          return{
-            phone:1234567811
+      data() {
+        var checkAge = (rule, value, callback) => {
+          if (!value) {
+            return callback(new Error('年龄不能为空'));
           }
+          setTimeout(() => {
+            if (!Number.isInteger(value)) {
+              callback(new Error('请输入数字值'));
+            } else {
+              if (value < 18) {
+                callback(new Error('必须年满18岁'));
+              } else {
+                callback();
+              }
+            }
+          }, 1000);
+        };
+        var validatePass = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请输入密码'));
+          } else {
+            if (this.ruleForm2.checkPass !== '') {
+              this.$refs.ruleForm2.validateField('checkPass');
+            }
+            callback();
+          }
+        };
+        var validatePass2 = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请再次输入密码'));
+          } else if (value !== this.ruleForm2.pass) {
+            callback(new Error('两次输入密码不一致!'));
+          } else {
+            callback();
+          }
+        };
+        return {
+          ruleForm2: {
+            pass: '',
+            checkPass: '',
+            yan: ''
+          },
+          rules2: {
+            pass: [
+              { validator: validatePass, trigger: 'blur' }
+            ],
+            checkPass: [
+              { validator: validatePass2, trigger: 'blur' }
+            ],
+            yan: [
+              { validator: checkAge, trigger: 'blur' }
+            ]
+          }
+        };
       },
-      methods:{
-          sucess(){
-            //设置新密码成功后进入首页
-            this.$router.push("/intorhouse")
+      methods: {
+        submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              alert('submit!');
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
+        },
+        getMessage(){
+          let _this = this;
+          _this.getcode='';
+          for(let i = 0;i < 6;i++){
+            _this.getcode+= Math.floor(Math.random()*10);
           }
+          alert(_this.getcode);
+        },
       }
-
     }
 </script>
 
@@ -57,40 +111,5 @@
     padding: 0;
   }
 
-  .img1{
-    width: 100%;
-    height: 100%;
-    opacity: 0.7;
-  }
-  .img2{
-    width:50px;
-    height:50px;
-    float:left;
-    margin-left:15%;
-
-  }
-  .infom{
-    margin-top:-25px;
-  }
-  .she{
-    text-align:center;
-  }
-  .phone{
-    margin-top:-35px;
-    text-align:center;
-  }
-
-  #centform {
-    width: 36%;
-    background-color: #ffffff;
-    position: relative;
-    margin-top: -40%;
-    margin-left: 32%;
-  }
-  p {
-    padding: 15px;
-    font-size:23px;
-    margin-bottom: 20px;
-  }
 
 </style>

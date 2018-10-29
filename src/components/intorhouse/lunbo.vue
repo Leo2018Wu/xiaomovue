@@ -20,7 +20,6 @@
       data(){
         return{
           imglist:[],
-          oId:2,
           hId:this.$route.params.hId,
           people:4,
           bed:"",
@@ -28,10 +27,9 @@
       },
       mounted(){
         let _this=this
-
-        axios.get(  `http://localhost:3000/house/details/`+this.hId).then(function (result) {
+        axios.get(`http://localhost:3000/house/details/`+this.hId).then(function (result) {
           _this.imglist.push(result.data.data[0].hPic1,result.data.data[0].hPic2,result.data.data[0].hPic3,result.data.data[0].hPic4);
-
+             console.log(_this.imglist)
         })
           .catch(function (error) {
             console.log(error);

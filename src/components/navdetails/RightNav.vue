@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="to">
     <div class="row">
       <div class="content">
       <app-picture></app-picture>
@@ -34,6 +34,9 @@
       </div>
     </div>
   </div>
+    <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
+      <div style="width: 100px;height: 100px;"><img src="../../assets/rocket.png" alt="" style="max-width:100%;max-height:100%"></div>
+    </a>
   </div>
 </template>
 
@@ -56,29 +59,29 @@
   }
   @media (min-width: 768px) {
     dt{
-      font-size:16px;
+      font-size:14px;
     }
     dl{
       font-size: 12px;
-      line-height: 20px;
+      line-height: 15px;
     }
   }
   @media (min-width: 992px) {
     dt{
-      font-size:18px;
+      font-size:15px;
     }
     dl{
-      font-size: 14px;
-      line-height: 25px;
+      font-size: 13px;
+      line-height: 20px;
     }
   }
   @media (min-width: 1280px) {
     dt{
-      font-size:20px;
+      font-size:16px;
     }
     dl{
-      font-size: 16px;
-      line-height: 30px;
+      font-size: 14px;
+      line-height: 25px;
     }
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="to">
     <div class="row">
       <div class="paypage">
         <!--顶部步骤条-->
@@ -20,26 +20,28 @@
           <div class="infornums">
             <div class="t1">
               <span class="label label-info">入住信息</span><br><br>
-              房源信息：{{$store.state.hname}}<br><br>
-              入住时段：{{$store.state.create_start_date}}&nbsp;&nbsp;{{$store.state.create_end_date}}<br>
+              房源信息：<span style="font-weight: bold">{{shName}}</span><br><br>
+              入住时段：<span style="font-weight: bold">{{start_date}}</span>&nbsp;&nbsp;
+              14:00入住&nbsp;&nbsp;<span style="font-weight: bold">{{end_date}}</span>&nbsp;&nbsp;12:00退房&nbsp;&nbsp;
+              共&nbsp;<span style="font-weight: bold">{{(Date.parse(end_date)-Date.parse(start_date))/1000/60/60/24}}</span>&nbsp;晚<br>
             </div>
             <br>
             <div class="t2">
               <span class="label label-info">入住人信息</span><br><br>
-              姓名：{{$store.state.name1}}<br><br>
-              身份证号：{{$store.state.identity1}}<br><br>
-              手机号：{{$store.state.phone1}}<br>
+              姓名：{{susername}}<br><br>
+              身份证号：{{sidentity}}<br><br>
+              手机号：{{suserphone}}<br>
             </div>
             <br>
             <div class="t3">
               <span class="label label-info">预定人信息</span><br><br>
-              姓名：{{$store.state.resname}}<br><br>
-              手机：{{$store.state.resphone}}<br>
+              姓名：{{sname}}<br><br>
+              手机：{{sphone}}<br>
             </div>
             <br>
             <div class="t4">
               <span class="label label-info">订单费用信息</span><br><br>
-              房租：{{(($store.state.create_end_date-$store.state.create_start_date)/(60*60*24*1000))*$store.state.price}}&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+              房租：￥{{((Date.parse(end_date)-Date.parse(start_date))/1000/60/60/24)*shouseprice}}&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
             </div>
           </div>
         </div>
@@ -102,53 +104,77 @@
         <br>
       </div>
     </div>
+    <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
+      <div style="width: 100px;height: 100px;"><img src="../../assets/rocket.png" alt="" style="max-width:100%;max-height:100%"></div>
+    </a>
   </div>
 </template>
 
 <script>
   import Steps2 from '../steps/Steps2.vue'
   import axios from 'axios'
-    export default {
-        name: "Pay",
-      data(){
-        return {
-          radio1: false,
-          radio2: false,
-          radio3: false,
-          radio4: false,
-          activeNames: ['1'],
-        }
+  export default {
+    name: "Pay",
+    data(){
+      return {
+        radio1: false,
+        radio2: false,
+        radio3: false,
+        radio4: false,
+        activeNames: ['1'],
+        maxId:'',
+        sname:sessionStorage.getItem('sname'),
+        sphone:sessionStorage.getItem('sphone'),
+
+        susername:sessionStorage.getItem('susername'),
+        suserphone:sessionStorage.getItem('suserphone'),
+        sidentity:sessionStorage.getItem('sidentity'),
+        shouseprice:sessionStorage.getItem('shouseprice'),
+        start_date:sessionStorage.getItem('start_date'),
+        end_date:sessionStorage.getItem('end_date'),
+        shName:sessionStorage.getItem('shName'),
+      }
+    },
+    components:{
+      'app-steps2':Steps2,
+    },
+    mounted(){
+      //获取刚输入的订单号也就是最大的订单id
+      axios.get("http://127.0.0.1:3000/order/getMaxOrder").then((result)=> {
+        this.maxId = result.data.data[0].oId;
+
+      },(err) =>{
+        console.log(result.err)
+      })
+    },
+    methods: {
+      pays(index) {
+        let _this = this
+        if (this.radio1 == false && this.radio2 == false && this.radio3 == false && this.radio4 == false)
+          alert('请选择支付方式!')
+        else
+          this.$router.push({path: '/finish'})
+        // 修改获取到的订单号的订单状态
+        console.log(this.maxId+1)
+        axios.post('http://127.0.0.1:3000/order/updateorder', {
+          oId:this.maxId+1,
+          oStatus: 1,
+        })
+        // sessionStorage.removeItem('sname')
+        // sessionStorage.removeItem('sphone')
+        this.$store.state.hName=''
+        this.$store.state.create_start_date=''
+        this.$store.state.create_end_date=''
+        this.$store.state.name1=''
+        this.$store.state.identity1=''
+        this.$store.state.phone1=''
+        // ((Date.parse($store.state.create_end_date)-Date.parse($store.state.create_start_date))/1000/60/60/24)*$store.state.houseprice=''
       },
-      components:{
-        'app-steps2':Steps2,
-      },
-      // mounted(){
-      //   // 获取某一订单号oId
-      //   axios.get(`http://localhost:3000/order/getoneorder/8`).then((result)=>{
-      //   this.orderInfos=result.data.data
-      //   console.log(this.orderInfos);
-      // },(err)=>{
-      //   console.log(result.err)
-      // })
-      // },
-      methods: {
-        pays(index) {
-          let _this=this
-          if (this.radio1 == false && this.radio2 == false && this.radio3 == false && this.radio4 == false)
-            alert('请选择支付方式!')
-          else
-          // 修改获取到的订单号的订单状态
-            axios.post(`http://localhost:3000/order/updateorder`, {
-              // oId:_this.orderInfos[index].oId,
-              oStatus: 1,
-            })
-            this.$router.push({path: '/finish'})
-        },
-        handleChange(val) {
-          console.log(val);
-        }
+      handleChange(val) {
+        console.log(val);
       }
     }
+  }
 </script>
 
 <style scoped>
@@ -162,10 +188,10 @@
     background-color: #F5F5F5;
   }
   /*.help{*/
-    /*border: 1px solid gainsboro;*/
-    /*box-shadow: 4px 4px 8px grey;*/
-    /*border-radius: 10px;*/
-    /*background-color:#F5F5F5 ;*/
+  /*border: 1px solid gainsboro;*/
+  /*box-shadow: 4px 4px 8px grey;*/
+  /*border-radius: 10px;*/
+  /*background-color:#F5F5F5 ;*/
   /*}*/
   .Ph3{
     color:#FF666A

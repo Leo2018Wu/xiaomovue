@@ -8,9 +8,7 @@
             <span>{{save.hName}}</span>
             <div class="bottom clearfix">
               <time class="time">{{save.hLocation}}</time><br>
-              <!--<el-button type="text" class="button" @click = del(index)>删除</el-button>-->
-              <el-button type="text" @click="centerDialogVisible = true">删除</el-button>
-
+              <el-button style="color: #ff666A" type="text" @click="centerDialogVisible = true;">删除</el-button>
               <el-dialog
                 title="删除"
                 :visible.sync="centerDialogVisible"
@@ -18,11 +16,11 @@
                 center>
                 <span>确定将此收藏的房源删除</span>
                 <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
   </span>
               </el-dialog>
-              <el-button type="text" class="button">详情</el-button>
+              <el-button type="text" style="color: #ff666A;float: right">详情</el-button>
             </div>
           </div>
         </el-card>
@@ -31,14 +29,26 @@
   </div>
 
 </template>
-<style>
+<style scoped>
+  span{
+    font-size: 17px;
+  }
+  .el-icon-delete{
+    color: #ff666A;
+  }
+  .el-button--primary {
+    color: #fff;
+    background-color: #ff666A;
+    border-color: #ff666A;
+  }
+  .el-button--primary:focus, .el-button--primary:hover {
+    background: #ff666A;
+    border-color: #ff666A;
+    color: #fff;
+  }
   .time {
     font-size: 13px;
     color: #999;
-  }
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
   }
 
   .button {
@@ -83,11 +93,8 @@
 
     mounted(){
       axios.get('http://localhost:3000/save/uSave/1').then((result)=> {
-        // this.mydata = result.data.data[0].uName;
         this.mydata = result.data.data
-        // console.log(this.mydata)
         this.saves.push(this.mydata)
-        // console.log(this.saves)
       },(err) =>{
         console.log(result.err)
       })
@@ -97,6 +104,7 @@
       del(index){
         axios.get(`http://localhost:3000/save/delete/${this.saves[0][index].sId}`).then((result)=> {
           console.log("删除成功")
+          window.location.reload()
         },(err) =>{
           console.log(result.err)
         })

@@ -66,7 +66,7 @@
         // }
       },
       mounted(){
-        axios.get("http://localhost:3000/userorderdis/getUserInfos/1").then((result)=> {
+        axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result)=> {
           // this.mydata = result.data.data[0].uName;
           this.mydata = result.data.data[0]
           // console.log(this.mydata)

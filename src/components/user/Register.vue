@@ -352,7 +352,7 @@
         if (value === '') {
           callback(new Error('请输入用户名'));
         } else if (!pattern.test(value)) {
-          cb(new Error('请输入3-10个字母/汉字/数字/下划线'))
+          callback(new Error('请输入3-10个字母/汉字/数字/下划线'))
         } else {
           callback()
         }
@@ -389,14 +389,16 @@
         }
       };
       // var validateInviteNum = (rule, value, callback) => {
-      //   if (value === '') {
-      //     callback(new Error('请输入邀请码'));
+      //   if (value == '') {
+      //     alert("请输入好友的邀请码,帮助好友获得优惠哦!没有邀请码,请继续")
+      //     callback();
       //   } else {
       //     callback();
       //   }
       // };
       return {
         getcode:'',
+        mydata:'',
         ruleForm: {
           phoneNum:'',
           userName:'',
@@ -430,11 +432,61 @@
     methods: {
       getMessage(){
         let _this = this
+        axios.get(`http://127.0.0.1:3000/userorderdis/getallphone/${_this.ruleForm.phoneNum}`,).then((result)=> {
+          let info = eval("(" + result.request.response + ")");
+          if(info.data.length != 0){
+            alert("该用户已经注册,请直接登录!")
+          }
+        },(err) =>{
+          console.log(result.err)
+        })
+        this.getcode='';
         for(let i = 0;i < 6;i++){
           _this.getcode += Math.floor(Math.random()*10);
         }
         alert(_this.getcode);
+
       },
+      // checkRegister(formName){
+      //   let _this = this
+      //   axios.get(`http://127.0.0.1:3000/userorderdis/getallphone/${_this.ruleForm.phoneNum}`).then((result)=> {
+      //     this.mydata = result.data.data;
+      //     for(var i = 0 ; i < this.mydata.length; i++){
+      //       if(this.mydata[i]==_this.ruleForm.phoneNum){
+      //         alert('该用户已注册，请直接登录！')
+      //         break;
+      //       }else{
+      //         submitForm(formName){
+      //           _this.$refs[formName].validate((valid) => {
+      //             if (valid) {
+      //               alert('注册成功！即将跳转到登陆页面…');
+      //               let _this = this
+      //               _this.$router.push({path: '/login'})
+      //               axios.post("http://127.0.0.1:3000/userorderdis/register", {
+      //                 uphone: _this.ruleForm.phoneNum,
+      //                 uinvitecode: _this.ruleForm.inviteNum,
+      //                 upwd: _this.ruleForm.pass,
+      //                 uname: _this.ruleForm.userName
+      //               }).then((result)=> {
+      //                 console.log(result.data)
+      //               },(err) =>{
+      //                 console.log(result.err)
+      //               })
+      //             } else {
+      //               console.log('error submit!!');
+      //               return false;
+      //             }
+      //           });
+      //         }
+      //         resetForm(formName){
+      //           _this.$refs[formName].resetFields();
+      //         }
+      //       }
+      //     }
+      //   },(err) =>{
+      //     // console.log(result.err)
+      //   })
+      // },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -447,7 +499,6 @@
               upwd: _this.ruleForm.pass,
               uname: _this.ruleForm.userName
             }).then((result)=> {
-
               console.log(result.data)
             },(err) =>{
               console.log(result.err)
@@ -457,7 +508,6 @@
             return false;
           }
         });
-
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

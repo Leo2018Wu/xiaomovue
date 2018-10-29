@@ -18,9 +18,10 @@
           <div class="col-xs-4 col-sm-4 col-sm-push-4 col-xs-push-4" style="text-align: center">
             <button type="submit" class="btn btn-primary" style="height: 60px;width: 100px;margin-top:30px" v-on:click="UserButton()">登录</button>
           </div>
+          <router-link to="/fpwd">
+          <p style="color:#fff;margin-top:10px;">找回密码？</p>
+          </router-link>
         </div>
-
-
       </div>
     </form>
   </div>
@@ -51,24 +52,21 @@
               uPwd: _this.password
             }).then(function (result) {
             let info = eval("(" + result.request.response + ")");
+            console.log(info)
             _this.$store.state.uId = info.data.uId
-            _this.$store.state.username= info.data.uName
-            console.log(_this.uid)
+            // _this.$store.state.username= info.data.uName
             if (info.code == 200) {
               alert('登录成功，即将跳转到首页');
               setTimeout(function () {
-                _this.$router.push('/')
+                _this.$router.replace({path:'/'})
               }.bind(this), 1000);
               _this.$store.state.phone =_this.phonenum;
               _this.uid =_this.phonenum;
-              sessionStorage.setItem('sphone',_this.$store.state.phone);
-              sessionStorage.setItem('sname',_this.$store.state.username);
-              sessionStorage.setItem('suId',_this.$store.state.uId);
-              sessionStorage.setItem('spassword',_this.$store.state.pwd);
-              _this.$store.state.type = 1;
-              _this.$router.push({path: '/'})
-
-
+              sessionStorage.setItem('sphone',info.data.uPhone);
+              sessionStorage.setItem('sname',info.data.uName);
+              sessionStorage.setItem('suId',info.data.uId);
+              // _this.$router.push({path: '/'})
+              window.location.href='http://localhost:8080'
             }
             else {
               alert('用户名或密码错误')

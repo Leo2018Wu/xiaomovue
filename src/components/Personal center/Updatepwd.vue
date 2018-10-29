@@ -10,10 +10,14 @@
   <el-form-item label="确认密码" prop="checkPass">
     <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
   </el-form-item>
-  <el-form-item label="验证码" prop="Code">
-    <el-input v-model="ruleForm2.Code"></el-input>
-    <el-button @click="sendCode" style="margin-top: 15px">发送验证码</el-button>
-  </el-form-item>
+      <el-form-item label="短信验证" prop="Code" >
+        <el-input v-model="ruleForm2.Code" placeholder="请输入短信验证码"></el-input>
+        <el-button  @click="sendCode"  style="margin-top: 15px">获取验证码</el-button>
+      </el-form-item>
+    <!--</el-col>-->
+    <el-col :span="12">
+
+    </el-col>
   <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
     <el-button @click="resetForm('ruleForm2')">重置</el-button>
@@ -26,20 +30,6 @@
   import  axios from 'axios'
   export default {
     data() {
-      // var checkCode = (rule, value, callback) => {
-      //   if (!value) {
-      //     return callback(new Error('验证码不能为空'));
-      //   }
-      //   setTimeout(() => {
-      //     if (!Number.isInteger(value)) {
-      //       callback(new Error('请输入数字值'));
-      //     } else if(value !==this.checkCode){
-      //         callback(new Error('验证码不正确,请重新输入!'));
-      //     }else{
-      //       callback();
-      //     }
-      //   }, 1000);
-      // };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
@@ -59,24 +49,13 @@
           callback();
         }
       };
-      var validateCode = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请获取验证码'));
-        } else if (value !== this.checkCode) {
-          callback(new Error('验证码有误，请重新输入!'));
-        } else {
-          callback();
-        }
-      };
       return {
         ruleForm2: {
           pass: '',
           checkPass: '',
-
-
-
+          checkCode:'',
+          Code:''
         },
-        checkCode:'',
         rules2: {
           pass: [
             { validator: validatePass, trigger: 'blur' }
@@ -84,9 +63,6 @@
           checkPass: [
             { validator: validatePass2, trigger: 'blur' }
           ],
-          Code: [
-            { validator: validateCode, trigger: 'blur' }
-          ]
         },
         userInfo:[]
       };
@@ -100,56 +76,44 @@
     },
     methods: {
       submitForm(formName) {
-        // var checkCode = (rule, value, callback) => {
-        //   if (!value) {
-        //     return callback(new Error('验证码不能为空'));
-        //   }
-        //   setTimeout(() => {
-        //     if (!Number.isInteger(value)) {
-        //       callback(new Error('请输入数字值'));
-        //     } else if(value !==this.checkCode){
-        //       callback(new Error('验证码不正确,请重新输入!'));
-        //     }else{
-        //       callback();
-        //     }
-        //   }, 1000);
-        // };
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            let _this = this;
 
-            axios.post("http://localhost:3000/userorderdis/perfect/password",{
+        this.$refs[formName].validate((valid) => {
+          let _this = this;
+          if (this.ruleForm2.Code == this.ruleForm2.checkCode) {
+            alert('身份验证成功')
+            axios.post("http://localhost:3000/userorderdis/perfect/idchangpwd",{
               uid:1,
               upwd:_this.ruleForm2.checkPass
             }).then((result)=>{
-              console.log(_this.ruleForm2.checkPass)
+              _this.ruleForm2.pass="",
+                _this.ruleForm2.checkPass="",
+                _this.ruleForm2.Code="",
+
+
               alert('修改成功')
             }),(err)=>{
               alert('修改失败')
               console.log(err)
             }
-            alert('submit!');
+
           } else {
-            console.log('error submit!!');
+            alert('验证码有误')
             return false;
           }
+
         });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
       sendCode(){
-        let _this = this
-        // alert('发送短信验证码！')
-        for(var i=0; i<6;i++ ){
-          _this.checkCode += Math.floor(Math.random()*10);
+        let _this=this;
+        _this.ruleForm2.checkCode=''
+        for(let i =0;i<6;i++){
+          this.ruleForm2.checkCode += Math.floor(Math.random()*10);
         }
-        alert(this.checkCode)
-        this.checkCode = ''
-        // console.log(code);
-        // let data = {valicode:'1234',to:this.userInfo[0].uPhone,key:'548f9475958d94a62f501ca54ec06aa7'}
-        // alert(this.userInfo[0].uPhone)
-        // axios.get(`/proxy?mobile=${this.userInfo[0].uPhone}&tpl_id=109732&tpl_value=%23code%23%3dcode${this.code}&key=548f9475958d94a62f501ca54ec06aa7`).then((res)=>{
+        alert(_this.ruleForm2.checkCode);
+        // axios.get(`/proxy?mobile=13137794602&tpl_id=109732&tpl_value=%23code%23%3d${_this.ruleForm2.checkCode}&key=548f9475958d94a62f501ca54ec06aa7`).then((res)=>{
         //
         //   console.log(res)
         // }).catch(err=>{console.log(err)})

@@ -169,12 +169,24 @@
   .second_title{
     color: #FF9966;
   }
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
     .article_title{
-      font-size:20px;
+      font-size:15px;
     }
     .second_title{
-      font-size:18px;
+      font-size:14px;
+    }
+    p,ol{
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+  @media (min-width: 768px) {
+    .article_title{
+      font-size:16px;
+    }
+    .second_title{
+      font-size:15px;
     }
     p,ol{
       font-size: 14px;
@@ -183,25 +195,25 @@
   }
   @media (min-width: 992px) {
     .article_title{
-      font-size:22px;
+      font-size:17px;
     }
     .second_title{
-      font-size:20px;
+      font-size:16px;
     }
     p,ol{
-      font-size: 16px;
+      font-size: 15px;
       line-height: 30px;
     }
   }
   @media (min-width: 1280px) {
     .article_title{
-      font-size:24px;
+      font-size:18px;
     }
     .second_title{
-      font-size:22px;
+      font-size:17px;
     }
     p,ol{
-      font-size: 18px;
+      font-size: 16px;
       line-height: 35px;
     }
   }

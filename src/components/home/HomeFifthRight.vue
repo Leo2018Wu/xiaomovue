@@ -3,25 +3,25 @@
     <h3>房客日记</h3>
     <div class="all-info">
       <div v-if="isshow==1">
-        <img class="radius-img" :src="diarys[0].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+diarys[0].uHeadPic" alt="">
         <p>{{diarys[0].uName}}</p>
         <p>{{diarys[0].dDate}}</p>
         <div class="content">{{diarys[0].dContent}}</div>
       </div>
       <div v-else-if="isshow==2">
-        <img class="radius-img" :src="diarys[1].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+diarys[1].uHeadPic" alt="">
         <p>{{diarys[1].uName}}</p>
         <p>{{diarys[1].dDate}}</p>
         <div class="content">{{diarys[1].dContent}}</div>
       </div>
       <div v-else-if="isshow==3">
-        <img class="radius-img" :src="diarys[2].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+diarys[2].uHeadPic" alt="">
         <p>{{diarys[2].uName}}</p>
         <p>{{diarys[2].dDate}}</p>
         <div class="content">{{diarys[2].dContent}}</div>
       </div>
       <div v-else="isshow==4">
-        <img class="radius-img" :src="diarys[3].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+diarys[3].uHeadPic" alt="">
         <p>{{diarys[3].uName}}</p>
         <p>{{diarys[3].dDate}}</p>
         <div class="content">{{diarys[3].dContent}}</div>
@@ -61,10 +61,10 @@
           $(this).html($(this).text().replace(/\s+/g, "").substr(0, 70) + "...")
         }
       }),
-        axios.get(`http://127.0.0.1:3000/diarys/${this.aCommend}`).then((result)=> {
+        this.$axios.get(`/diarys/${this.aCommend}`).then((result)=> {
           // this.mydata = result.data.data[0].uName;
           this.mydata = result.data.data
-          console.log(this.mydata)
+          // console.log(this.mydata)
           for(var i = 0 ; i < 4; i++){
             this.diarys.push(this.mydata[i])
             // console.log(this.diarys[0])

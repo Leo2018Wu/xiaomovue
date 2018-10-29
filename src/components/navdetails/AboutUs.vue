@@ -65,9 +65,18 @@
   .aboutp,span{
     color:#39F
   }
+  @media (max-width: 768px) {
+    .article_title{
+      font-size:15px;
+    }
+    p{
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
   @media (min-width: 768px) {
     .article_title{
-      font-size:20px;
+      font-size:16px;
     }
     p{
       font-size: 14px;
@@ -76,19 +85,19 @@
   }
   @media (min-width: 992px) {
     .article_title{
-      font-size:22px;
+      font-size:17px;
     }
     p{
-      font-size: 16px;
+      font-size: 15px;
       line-height: 30px;
     }
   }
   @media (min-width: 1280px) {
     .article_title{
-      font-size:24px;
+      font-size:18px;
     }
     p{
-      font-size: 18px;
+      font-size: 16px;
       line-height: 35px;
     }
   }
