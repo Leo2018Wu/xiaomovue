@@ -41,6 +41,7 @@ import Service from '@/components/navdetails/Service.vue'
 import ContactUs from '@/components/navdetails/ContactUs.vue'
 import Declaration from '@/components/navdetails/Declaration.vue'
 import Rules from '@/components/navdetails/Rules.vue'
+import Reviews from '@/components/navdetails/Reviews.vue'
 import Write from '@/components/payprocess/Write.vue'
 import Pay from '@/components/payprocess/Pay.vue'
 import Finish from '@/components/payprocess/Finish.vue'
@@ -105,6 +106,7 @@ export default new Router({
         {path:'/rightnav/contact',component:ContactUs},
         {path:'/rightnav/declaration',component:Declaration},
         {path:'/rightnav/rules',component:Rules},
+        {path:'/rightnav/reviews',component:Reviews},
       ]},
     {path: '/write', component: Write},
     {path: '/pay', component: Pay},

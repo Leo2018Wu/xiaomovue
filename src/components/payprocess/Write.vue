@@ -165,7 +165,7 @@
               退房后会有保洁阿姨检查电量，如发现超出正常用电量，将会从住宿押金中扣除超出的部分费用
             </p>
             <center><p class="bottomP"><input type="checkbox" v-model="box">&nbsp;我同意
-              <router-link to="/rightnav/service">&nbsp;<a>《小猪服务协议》</a></router-link>
+              <router-link to="/rightnav/service">&nbsp;<a style="text-decoration: none">《小猪服务协议》</a></router-link>
               及该房东制定的退订规则及入住规定</p></center>
           </div>
         </div>

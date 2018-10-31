@@ -12,23 +12,15 @@
           <dt>网站介绍</dt>
           <dd><router-link to="/rightnav/about">&nbsp;<a>关于我们</a></router-link></dd>
           <dd><router-link to="/rightnav/contact">&nbsp;<a>联系我们</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>网站地图</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>友情链接</a></router-link></dd>
-        </dl>
-        <dl class="about_sider">
+        <!--</dl>-->
+        <!--<dl class="about_sider">-->
           <dt>法律协议</dt>
-          <dd><router-link to="">&nbsp;<a>隐私保护声明</a></router-link></dd>
           <dd><router-link to="/rightnav/declaration">&nbsp;<a>版权声明</a></router-link></dd>
           <dd><router-link to="/rightnav/service">&nbsp;<a>服务协议</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>免责声明</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>知识产权声明</a></router-link></dd>
-        </dl>
-        <dl class="about_sider"><span></span>
+        <!--</dl>-->
+        <!--<dl class="about_sider"><span></span>-->
           <dt>服务规则</dt>
-          <dd><router-link to="">&nbsp;<a>房东规则</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>房客规则</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>房源上线标准</a></router-link></dd>
-          <dd><router-link to="">&nbsp;<a>点评发布规则</a></router-link></dd>
+          <dd><router-link to="/rightnav/reviews">&nbsp;<a>点评发布规则</a></router-link></dd>
           <dd><router-link to="/rightnav/rules">&nbsp;<a>未成年人入住规则</a></router-link></dd>
         </dl>
       </div>
@@ -53,6 +45,14 @@
   a:hover{
     color:#FF6666;
     text-decoration: none;
+  }
+  a{
+    text-decoration: none;
+    line-height: 25px;
+  }
+  dt{
+    font-weight: 500;
+    line-height: 30px;
   }
   .content{
     margin-top: 60px;
