@@ -1,38 +1,38 @@
-<!--<script src="../router/index.js"></script>-->
 <template>
   <div class="row">
     <nav class="navbar navbar-fixed-top" style="background-color: white">
-        <div class="navbar-header">
-          <ul class="navbar-brand logo" href="#">
-            <router-link to="/" tag="li"><img src="../assets/logo.jpg">&nbsp;&nbsp;小沫</router-link>
-            <router-link to="/" tag="li"><span>居住极简主义</span></router-link>
-          </ul>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-           <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <router-link to="/login" v-if="getName == null" tag="li"><span class="glyphicon glyphicon-log-in"></span>&nbsp;登录</router-link>
-            <router-link to="/register" v-if="getName == null" tag="li"><span class="glyphicon glyphicon-edit"></span>&nbsp;注册</router-link>
-            <router-link to="/guide" tag="li"><span class="glyphicon glyphicon-fire"></span>&nbsp;房客指南</router-link>
-            <router-link to="/center" tag="li"><span class="glyphicon glyphicon-phone"></span>&nbsp;手机小沫
-            <!--<ul class="inner-ul">-->
-              <!--<li><img src="../assets/code_pic.png" alt="" style="width: 80%;height: 80%"></li>-->
-            <!--</ul>-->
-            </router-link>
-            <router-link to="/discounts" tag="li"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;优惠政策</router-link>
-            <router-link to="/center" v-if="getName != null" tag="li"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</router-link>
-            <router-link to="" v-if="getName != null" tag="span" class="hello-user" style="color: #FF666A">欢迎&nbsp;&nbsp;{{getName}}</router-link>
-           <a v-if="getName != null" tag="span"  @click="cleanUser" class="hello-user" style="color:rgba(0, 0, 0, 0.7)"><span class="glyphicon glyphicon-log-out"></span>&nbsp;退出</a>
-</ul>
-</div>
-<!--</div>-->
-</nav>
-</div>
+      <div class="navbar-header">
+        <ul class="navbar-brand logo" href="#">
+          <router-link to="/" tag="li" style="margin-top:-6px;"><img src="../assets/logo.png">
+            <span style="margin-top:6px;margin-left:9px;position:absolute;">小沫</span>
+          </router-link>
+          <router-link to="/" tag="li"><span style="margin-left:6px ">居住极简主义</span></router-link>
+        </ul>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <router-link to="/login" v-if="getName == null" tag="li"><span class="glyphicon glyphicon-log-in"></span>&nbsp;登录</router-link>
+          <router-link to="/register" v-if="getName == null" tag="li"><span class="glyphicon glyphicon-edit"></span>&nbsp;注册</router-link>
+          <router-link to="/guide" tag="li"><span class="glyphicon glyphicon-fire"></span>&nbsp;房客指南</router-link>
+          <router-link to="" tag="li" class="inner"><span class="glyphicon glyphicon-phone"></span>&nbsp;手机小沫
+            <ul class="inner-ul">
+              <li id="inner-ul-li"><img src="../assets/code_pic.png" alt="" style="width: 100px;height: 100px;"></li>
+            </ul>
+          </router-link>
+          <router-link to="/discounts" tag="li"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;优惠政策</router-link>
+          <router-link to="/center" v-if="getName != null" tag="li"><span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</router-link>
+          <router-link to="" v-if="getName != null" tag="span" class="hello-user" style="color: #FF666A">欢迎&nbsp;&nbsp;{{getName}}</router-link>
+          <a v-if="getName != null" tag="span"  @click="cleanUser" class="hello-user" style="margin-left: 10px"><span class="glyphicon glyphicon-log-out"></span>&nbsp;退出</a>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -47,21 +47,32 @@
       cleanUser(){
         sessionStorage.clear();
         // this.$router.push({path:'/login'})
-        window.location.href='http://localhost:8080/login'
+        window.location.href='http://localhost:8080/login';
       }
     },
-    // watch: {
-    //   '$route' (to, from) {
-    //     this.$router.go(0);
-    //   }},
   }
 </script>
 
 <style scoped>
   *{margin: 0;padding: 0;}
   img{
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
+  }
+  #inner-ul-li{
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    float: right;
+    text-align:center;
+    display: none;
+  }
+  #inner-ul-li:hover{
+    background-color: rgba(0,0,0,0.5);
+  }
+  .inner:hover #inner-ul-li{
+    display: block;
+    background-color: rgba(0,0,0,0.5);
   }
   .logo li{
     cursor: pointer;
@@ -87,15 +98,7 @@
     color: #FF666A;
   }
   .navbar-right li:hover{
-    background-color: #ffa297;
-    color:white;
-  }
-  .inner-ul li{
-    width: 100px;
-    height: 100px;
-  }
-  .navbar-right li:last-child:hover{
-    background-color: #ffa297;
+    color:#ff666a;
   }
   .hello-user{
     padding-left: 10px;
@@ -103,10 +106,12 @@
     height: 60px;
     line-height: 60px;
     text-align: center;
-    color: #FF666A;
+    color:rgba(0, 0, 0, 0.7);
   }
   .hello-user:hover{
     cursor: pointer;
+    color: #ff666A;
+    text-decoration: none;
   }
   ul{
     list-style: none;

@@ -1,336 +1,45 @@
 <template>
-  <div class="allRegidter" style="min-width: 800px">
+  <div class="allRegidter">
     <div class="row">
-      <div class="col-sm-6 col-sm-push-3 col-xs-8 col-xs-push-2">
+      <div class="col-sm-6 col-sm-push-3">
         <el-form :model="ruleForm" status-icon :rules="rules2" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="手机号" prop="phoneNum">
-            <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off"></el-input>
+          <el-form-item label="" prop="phoneNum">
+            <span style="margin-right: 10px"><img src="../../assets/phone.png" alt=""></span>
+            <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
-          <el-form-item label="昵称" prop="userName">
-            <el-input type="text" v-model="ruleForm.userName" placeholder="请输入昵称" autocomplete="off"></el-input>
+          <el-form-item label="" prop="userName">
+            <span style="margin-right: 10px"><img src="../../assets/user.png" alt=""></span>
+            <el-input type="text" v-model="ruleForm.userName" placeholder="请输入昵称" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="pass">
-            <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off"></el-input>
+          <el-form-item label="" prop="pass">
+            <span style="margin-right: 10px"><img src="../../assets/password.png" alt=""></span>
+            <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="checkPass">
-            <el-input type="password" v-model="ruleForm.checkPass" placeholder="请再次输入密码" autocomplete="off"></el-input>
+          <el-form-item label="" prop="checkPass">
+            <span style="margin-right: 10px"><img src="../../assets/password.png" alt=""></span>
+            <el-input type="password" v-model="ruleForm.checkPass" placeholder="请再次输入密码" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
-          <el-form-item label="验证码" prop="code">
-            <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off"></el-input>
-            <el-button type="primary" @click="getMessage()" style="margin-top:28px">获取验证码</el-button>
+          <el-form-item label="" prop="code">
+            <span style="margin-right: 10px"><img src="../../assets/safe.png" alt=""></span>
+            <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off" style="width: 45%"></el-input>
+            <el-button type="primary" @click="getMessage()" style="width: 24%">获取验证码</el-button>
           </el-form-item>
-          <el-form-item label="邀请码" prop="inviteNum" placeholder="请输入邀请码">
-            <el-input type="text" v-model="ruleForm.inviteNum"></el-input>
+          <el-form-item label="" prop="inviteNum">
+            <span style="margin-right: 10px"><img src="../../assets/friend.png" alt=""></span>
+            <el-input type="text" v-model="ruleForm.inviteNum" placeholder="请输入好友邀请码" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
+          <div class="checkbox-container" style="margin-left: 120px;margin-bottom: 40px">
+            <input type="checkbox" v-model="box">
+            <div class="text-checkbox" style="font-size: 12px;color: white">我同意小沫短租<a class="div-a" href="/rightnav/service">《服务协议》</a></div>
+          </div>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
+            <el-button @click="resetForm('ruleForm')" style="margin-left: 100px">重置</el-button>
+            <el-button type="primary" @click="submitForm('ruleForm')" style="margin-left: 70px">注册</el-button>
           </el-form-item>
         </el-form>
       </div>
     </div>
-    <div class="container">
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-        <div class="circle"></div>
-      </div>
-    </div>
+
   </div>
 </template>
 <script>
@@ -399,6 +108,7 @@
       return {
         getcode:'',
         mydata:'',
+        box:true,
         ruleForm: {
           phoneNum:'',
           userName:'',
@@ -447,77 +157,62 @@
         alert(_this.getcode);
 
       },
-      // checkRegister(formName){
-      //   let _this = this
-      //   axios.get(`http://127.0.0.1:3000/userorderdis/getallphone/${_this.ruleForm.phoneNum}`).then((result)=> {
-      //     this.mydata = result.data.data;
-      //     for(var i = 0 ; i < this.mydata.length; i++){
-      //       if(this.mydata[i]==_this.ruleForm.phoneNum){
-      //         alert('该用户已注册，请直接登录！')
-      //         break;
-      //       }else{
-      //         submitForm(formName){
-      //           _this.$refs[formName].validate((valid) => {
-      //             if (valid) {
-      //               alert('注册成功！即将跳转到登陆页面…');
-      //               let _this = this
-      //               _this.$router.push({path: '/login'})
-      //               axios.post("http://127.0.0.1:3000/userorderdis/register", {
-      //                 uphone: _this.ruleForm.phoneNum,
-      //                 uinvitecode: _this.ruleForm.inviteNum,
-      //                 upwd: _this.ruleForm.pass,
-      //                 uname: _this.ruleForm.userName
-      //               }).then((result)=> {
-      //                 console.log(result.data)
-      //               },(err) =>{
-      //                 console.log(result.err)
-      //               })
-      //             } else {
-      //               console.log('error submit!!');
-      //               return false;
-      //             }
-      //           });
-      //         }
-      //         resetForm(formName){
-      //           _this.$refs[formName].resetFields();
-      //         }
-      //       }
-      //     }
-      //   },(err) =>{
-      //     // console.log(result.err)
-      //   })
-      // },
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('注册成功！即将跳转到登陆页面…');
-            let _this = this
-            _this.$router.push({path: '/login'})
-            axios.post("http://127.0.0.1:3000/userorderdis/register", {
-              uphone: _this.ruleForm.phoneNum,
-              uinvitecode: _this.ruleForm.inviteNum,
-              upwd: _this.ruleForm.pass,
-              uname: _this.ruleForm.userName
-            }).then((result)=> {
-              console.log(result.data)
-            },(err) =>{
-              console.log(result.err)
-            })
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+        if(this.box!=true){
+          alert("请同意小沫服务协议。")
+        }else{
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              alert('注册成功！即将跳转到登陆页面…');
+              let _this = this
+              _this.$router.push({path: '/login'})
+              axios.post("http://127.0.0.1:3000/userorderdis/register", {
+                uphone: _this.ruleForm.phoneNum,
+                uinvitecode: _this.ruleForm.inviteNum,
+                upwd: _this.ruleForm.pass,
+                uname: _this.ruleForm.userName
+              }).then((result)=> {
+                console.log(result.data)
+              },(err) =>{
+                console.log(result.err)
+              })
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
+        }
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-    }
+    },
+
   }
 </script>
 <style scoped>
-  @import "../../assets/css/style.css";
   .allRegidter{
-    margin-top: 100px;
+    padding:70px 0;
+    background-image: url(../../assets/registerbg.jpg);
+    margin-top:60px;
+  }
+  .checkbox-container {
+    display: flex;
+    margin-top: 35px;
+  }
+  .text-checkbox {
+    color: #aaa;
+    font-size: 16px;
+    letter-spacing: -0.00933333em;
+    font-weight: 300;
+    margin-left: 15px;
+  }
+  .div-a{
+    color: white;
+  }
+  .div-a:hover{
+    color: #ff666A;
+    text-decoration: none;
   }
 </style>
+

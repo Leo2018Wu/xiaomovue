@@ -5,35 +5,36 @@
       <div v-if="isshow==1">
         <img class="radius-img" :src="'../../../static/images/'+assessments[0].uHeadPic" alt="">
         <p>{{assessments[0].uName}}</p>
-        <p>{{assessments[0].aDate}}</p>
+        <p>{{assessments[0].aDate.substring(0,10)}}</p>
         <div class="content">{{assessments[0].aContent}}</div>
       </div>
       <div v-else-if="isshow==2">
         <img class="radius-img" :src="'../../../static/images/'+assessments[1].uHeadPic" alt="">
         <p>{{assessments[1].uName}}</p>
-        <p>{{assessments[1].aDate}}</p>
+        <p>{{assessments[1].aDate.substring(0,10)}}</p>
         <div class="content">{{assessments[1].aContent}}</div>
       </div>
       <div v-else-if="isshow==3">
         <img class="radius-img" :src="'../../../static/images/'+assessments[2].uHeadPic" alt="">
         <p>{{assessments[2].uName}}</p>
-        <p>{{assessments[2].aDate}}</p>
+        <p>{{assessments[2].aDate.substring(0,10)}}</p>
         <div class="content">{{assessments[2].aContent}}</div>
       </div>
       <div v-else="isshow==4">
         <img class="radius-img" :src="'../../../static/images/'+assessments[3].uHeadPic" alt="">
         <p>{{assessments[3].uName}}</p>
-        <p>{{assessments[3].aDate}}</p>
+        <p>{{assessments[3].aDate.substring(0,10)}}</p>
         <div class="content">{{assessments[3].aContent}}</div>
       </div>
 
     </div>
     <div class="icon-all">
       <ul class="icon">
-        <li v-on:click ="change(1)"></li>
-        <li v-on:click ="change(2)"></li>
-        <li v-on:click ="change(3)"></li>
-        <li v-on:click ="change(4)"></li>
+        <li v-on:click ="changeone" ref="one" style="background-color:#ff666a;"></li>
+        <li v-on:click ="changetwo" ref="two"></li>
+        <li v-on:click ="changethre" ref="thre"></li>
+        <li v-on:click ="changefou" ref="fou"></li>
+
       </ul>
     </div>
 
@@ -54,15 +55,40 @@
 
     },
     methods: {
-      change: function (num) {
-        this.isshow = num;
+      changeone() {
+        this.isshow = 1;
+        this.$refs.one.style.backgroundColor = '#ff666a';
+        this.$refs.two.style.backgroundColor = '#fff';
+        this.$refs.thre.style.backgroundColor = '#fff';
+        this.$refs.fou.style.backgroundColor = '#fff';
+      },
+      changetwo() {
+        this.isshow =2;
+        this.$refs.two.style.backgroundColor = '#ff666a';
+        this.$refs.one.style.backgroundColor = '#fff';
+        this.$refs.thre.style.backgroundColor = '#fff';
+        this.$refs.fou.style.backgroundColor = '#fff';
+      },
+      changethre() {
+        this.isshow = 3;
+        this.$refs.thre.style.backgroundColor = '#ff666a';
+        this.$refs.two.style.backgroundColor = '#fff';
+        this.$refs.one.style.backgroundColor = '#fff';
+        this.$refs.fou.style.backgroundColor = '#fff';
+      },
+      changefou() {
+        this.isshow = 4;
+        this.$refs.fou.style.backgroundColor = '#ff666a';
+        this.$refs.two.style.backgroundColor = '#fff';
+        this.$refs.thre.style.backgroundColor = '#fff';
+        this.$refs.one.style.backgroundColor = '#fff';
       },
     },
     mounted() {
-      this.$axios.get(`/assessment/details/recommend/${this.recommend}`).then((result) => {
+      axios.get(`http://127.0.0.1:3000/assessment/details/recommend/${this.recommend}`).then((result) => {
         // this.mydata = result.data.data[0].uName;
         this.mydata = result.data.data
-        // console.log(this.mydata)
+        console.log(this.mydata)
         for (var i = 0; i < 4; i++) {
           this.assessments.push(this.mydata[i])
           // console.log(this.assessments[0])
@@ -119,7 +145,6 @@
     margin: 0 auto 50px;
   }
   .icon li{
-
     width: 40px;
     height: 6px;
     background-color: #fff;
