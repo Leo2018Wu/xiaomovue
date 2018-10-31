@@ -5,12 +5,12 @@ export default new Vuex.Store({
   state: {
     create_start_date: '',
     create_end_date: '',
-    startdate:'',
-    enddate:'',
+    // startdate:'',
+    // enddate:'',
     name1:'',
     identity1:'',
     phone1:'',
-    number:'1',
+    // number:'1',
     newdate:'',
     uId:'',
     // 刘铭君开始
