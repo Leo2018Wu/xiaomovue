@@ -104,10 +104,12 @@
       };
     },
     mounted(){
-      let _this=this
+      let _this=this;
+        this.$store.state.househscore=this.househscore;
       axios.get(  `http://localhost:3000/house/details/`+this.hId).then(function (result) {
         _this.houseprice=result.data.data[0].hPrice;
         _this.househscore=result.data.data[0].hScore;
+        _this.$store.state.housescore=result.data.data[0].hScore;
         _this.hName = result.data.data[0].hName;
       })
         .catch(function (error) {

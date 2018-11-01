@@ -22,25 +22,25 @@
     data() {
       return {
         options: [{
-          value: '选项1',
+          value: '北京',
           label: '北京'
         }, {
-          value: '选项2',
+          value: '上海',
           label: '上海'
         }, {
-          value: '选项3',
+          value: '广州',
           label: '广州'
         }, {
-          value: '选项4',
+          value: '深圳',
           label: '深圳'
         }, {
-          value: '选项5',
+          value: '苏州',
           label: '苏州'
         }, {
-          value: '选项6',
+          value: '南京',
           label: '南京'
         },{
-          value: '选项7',
+          value: '杭州',
           label: '杭州'
         }],
       }
