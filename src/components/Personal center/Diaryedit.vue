@@ -23,11 +23,11 @@
         message:'',
         oId:this.$route.params.oIdr,
         oneOrder:[],
-        upath:''
+        upath:[ ]
       };
     },
     mounted(){
-      axios.get(`http://localhost:3000/order/getoneorder/${this.oId}`).then((result)=> {
+      axios.get(`http://127.0.0.1:3000/order/getoneorder/${this.oId}`).then((result)=> {
         this.oneOrder = result.data.data
       },(err) =>{
         console.log(result.err)
