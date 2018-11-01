@@ -15,7 +15,7 @@
 
 </div>
     <div class="a1" v-if="isshow == 1">
-      <div style="width:90%;margin:0 auto; ">
+      <div style="width:90%;margin:0 auto; " >
         <div>
         <img :src="`../../../static/images/pinglun/`+info[0].dImages" style="border-radius:50px;height:50px;width:50px;margin-top:30px;float:left;">
         <div >

@@ -2,12 +2,12 @@
 
     <div class="dianpin col-xs-8" style="clear:both;margin-top:10px;">
       <div style="margin-top:10px;margin-bottom:20px;font-size:20px;line-height:40px;background-color:#fff;">
-        <span  v-on:click="changeone" ref="first" >{{dian}}</span>
-        <span  v-on:click="changetwo" ref="second" style="margin-left:20px;">{{fang}}</span>
+        <span  v-on:click="changeone" ref="first" >本房源点评({{dianlen}})</span>
+        <span  v-on:click="changetwo" ref="second" style="margin-left:20px;">房客日记({{darilylen}})</span>
       </div>
 
       <div class="a1" v-if="isshow == 1" style="background-color:#fff;">
-        <div style="width:100%;height:1200px;">
+        <div style="width:100%;height:800px;">
         <say-house></say-house>
         </div>
       </div>
@@ -28,11 +28,9 @@
       data() {
         return {
           activeName: 'second',
-          dian:"本房源点评",
-          // fenshu:" (23) ",
-          fang:"房客日记",
-          // jinum:" (22)",
+          dianlen:this.$store.state.dianlen,
           isshow:1,
+          darilylen:4,
         };
       },
       computed:{
