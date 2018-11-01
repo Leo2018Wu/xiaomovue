@@ -59,17 +59,15 @@
             <p class="occp">可免费获赠最高保额10万元的住宿旅行意外险</p>
           </div>
           <div class="occf">
-            <el-form class="demo-ruleForm">
-              <el-form-item label="真实姓名" required>
-                <el-input v-model="name"placeholder="请输入真实的信息" style="width: 50%"></el-input>
+            <el-form class="demo-ruleForm" :model="ruleForm" :rules="rules" ref="ruleForm">
+              <el-form-item label="真实姓名" prop="name" required>
+                <el-input v-model="ruleForm.name"placeholder="请输入真实的信息" style="width: 50%"></el-input>
               </el-form-item>
-              <el-form-item label="身份证号" required>
-                <el-form-item>
-                  <el-input v-model="identity"placeholder="请输入真实的信息" style="width: 50%"></el-input>
-                </el-form-item>
+              <el-form-item label="身份证号" prop="identity" required>
+                <el-input v-model="ruleForm.identity"placeholder="请输入真实的信息" style="width: 50%"></el-input>
               </el-form-item>
-              <el-form-item label=" 手 机 号" required>
-                <el-input v-model="phone" placeholder="请输入真实的信息" style="width: 50%"></el-input>
+              <el-form-item label=" 手 机 号" prop="phone" required>
+                <el-input v-model="ruleForm.phone" placeholder="请输入真实的信息" style="width: 50%"></el-input>
               </el-form-item>
             </el-form>
           </div>
@@ -107,7 +105,7 @@
               <tr>
                 <th style="width: 25%">{{title}}</th>
                 <td style="width: 15%">￥{{$store.state.houseprice}}</td>
-                <td style="width: 15%">{{$store.state.number}}</td>
+                <td style="width: 15%">1</td>
                 <td style="width: 15%">{{(Date.parse(create_end_date)-Date.parse(create_start_date))/1000/60/60/24}}天</td>
                 <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
                 <td style="width: 15%">￥{{(Date.parse(create_end_date)-Date.parse(create_start_date))/1000/60/60/24*$store.state.houseprice}}</td>
@@ -167,7 +165,7 @@
               退房后会有保洁阿姨检查电量，如发现超出正常用电量，将会从住宿押金中扣除超出的部分费用
             </p>
             <center><p class="bottomP"><input type="checkbox" v-model="box">&nbsp;我同意
-              <router-link to="/rightnav/service">&nbsp;<a>《小猪服务协议》</a></router-link>
+              <router-link to="/rightnav/service">&nbsp;<a style="text-decoration: none">《小猪服务协议》</a></router-link>
               及该房东制定的退订规则及入住规定</p></center>
           </div>
         </div>
@@ -197,7 +195,25 @@
         sname:sessionStorage.getItem('sname'),
         sphone:sessionStorage.getItem('sphone'),
 
-
+        ruleForm: {
+          phone: '',
+          name:'',
+          identity:'',
+        },
+        rules: {
+          phone: [
+            {required: true, message: '请输入手机号',trigger: 'blur'},
+            {pattern:/^1[3|4|5|7|8][0-9]\d{8}$/,message: '长度为11位有效手机号', trigger: 'blur'}
+          ],
+          name:[
+            { required: true, message: '请输入真实名', trigger: 'blur' },
+            { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+          ],
+          identity:[
+            { required: true, message: '请输入身份证号', trigger: 'blur' },
+            { pattern:/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,message: '长度是18位有效身份证', trigger: 'blur' }
+          ],
+        },
         pickerBeginDateBefore: {
           disabledDate: (time) => {
             if (this.$store.state.create_end_date === '') {
@@ -247,42 +263,42 @@
         }
       },
       // 添加入住人的姓名身份证手机
-      name: {
-        get:function() {
-          console.log('get!!!')
-          return this.$store.state.name1
-        },
-        set(value) {
-          console.log('set');
-          this.$store.state.name1 = value
-        }
-      },
-      identity: {
-        get:function() {
-          console.log('get!!!')
-          return this.$store.state.identity1
-        },
-        set(value) {
-          console.log('set');
-          this.$store.state.identity1 = value
-        }
-      },
-      phone: {
-        get:function() {
-          console.log('get!!!')
-          return this.$store.state.phone1
-        },
-        set(value) {
-          console.log('set');
-          this.$store.state.phone1 = value
-        }
-      },
+      // name: {
+      //   get:function() {
+      //     console.log('get!!!')
+      //     return this.$store.state.name1
+      //   },
+      //   set(value) {
+      //     console.log('set');
+      //     this.$store.state.name1 = value
+      //   }
+      // },
+      // identity: {
+      //   get:function() {
+      //     console.log('get!!!')
+      //     return this.$store.state.identity1
+      //   },
+      //   set(value) {
+      //     console.log('set');
+      //     this.$store.state.identity1 = value
+      //   }
+      // },
+      // phone: {
+      //   get:function() {
+      //     console.log('get!!!')
+      //     return this.$store.state.phone1
+      //   },
+      //   set(value) {
+      //     console.log('set');
+      //     this.$store.state.phone1 = value
+      //   }
+      // },
     },
 
     methods:{
       submits(){
         console.log(this.box)
-        if(this.$store.state.name1==''||this.$store.state.phone1==''||this.$store.state.date1==''||this.box==false){
+        if(this.create_start_date==''||this.create_end_date==''||this.ruleForm.name==''||this.ruleForm.phone==''||this.ruleForm.identity==''||this.box==false){
           alert('请确认信息不为空')
         }else{
           let _this=this
@@ -305,31 +321,37 @@
           console.log('当前时间'+_this.$store.state.newdate)
           axios.post("http://localhost:3000/order", {
             arrvialDate: _this.$store.state.create_start_date,
-            leaveDate: _this.$store.state.create_start_date,
+            leaveDate: _this.$store.state.create_end_date,
             hPrice: _this.$store.state.houseprice,
             oDate: _this.$store.state.newdate,
             oStatus: 0,
             uId: sessionStorage.getItem('suId'),
             hId: _this.$store.state.househId,
-            occName: _this.$store.state.name1,
-            occCordId: _this.$store.state.identity1,
-            occPhone: _this.$store.state.phone1,
+            occName:_this.ruleForm.name,
+            occCordId:_this.ruleForm.identity,
+            occPhone:_this.ruleForm.phone,
           }).then(function (result) {
             console.log(result.data)
           })
           alert('提交订单成功,即将跳转支付页面！');
           this.$router.push({path: '/pay'})
           // this.$store.state.name1 = '',
-          // this.$store.state.phone1 = '',
-          // this.$store.state.identity1 = ''
+          //   this.$store.state.phone1 = '',
+          //   this.$store.state.identity1 = ''
+          // this.$store.state.state.create_end_date = ''
+          // this.$store.state.state.create_start_date = ''
 
           sessionStorage.setItem('start_date',_this.$store.state.create_start_date)
           sessionStorage.setItem('end_date',_this.$store.state.create_end_date)
           sessionStorage.setItem('shouseprice',_this.$store.state.houseprice)
-          sessionStorage.setItem('susername',_this.$store.state.name1)
-          sessionStorage.setItem('sidentity',_this.$store.state.identity1)
-          sessionStorage.setItem('suserphone',_this.$store.state.phone1)
+          // sessionStorage.setItem('susername',_this.$store.state.name1)
+          // sessionStorage.setItem('sidentity',_this.$store.state.identity1)
+          // sessionStorage.setItem('suserphone',_this.$store.state.phone1)
           sessionStorage.setItem('shName',_this.$store.state.hName)
+
+          sessionStorage.setItem('susername',_this.ruleForm.name)
+          sessionStorage.setItem('sidentity',_this.ruleForm.identity)
+          sessionStorage.setItem('suserphone',_this.ruleForm.phone)
         }
       }
     },
@@ -341,7 +363,7 @@
 
 <style scoped>
   .writepage{
-    margin-top: 60px;
+    margin-top: 80px;
   }
   .Basic{
     border: 1px solid gainsboro;

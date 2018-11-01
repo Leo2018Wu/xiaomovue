@@ -29,9 +29,9 @@
 </template>
 
 <script>
-    export default {
-        name: "ContactUs"
-    }
+  export default {
+    name: "ContactUs"
+  }
 </script>
 
 <style scoped>
