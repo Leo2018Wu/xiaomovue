@@ -105,7 +105,7 @@
               <tr>
                 <th style="width: 25%">{{title}}</th>
                 <td style="width: 15%">￥{{$store.state.houseprice}}</td>
-                <td style="width: 15%">{{$store.state.number}}</td>
+                <td style="width: 15%">1</td>
                 <td style="width: 15%">{{(Date.parse(create_end_date)-Date.parse(create_start_date))/1000/60/60/24}}天</td>
                 <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
                 <td style="width: 15%">￥{{(Date.parse(create_end_date)-Date.parse(create_start_date))/1000/60/60/24*$store.state.houseprice}}</td>
@@ -165,7 +165,7 @@
               退房后会有保洁阿姨检查电量，如发现超出正常用电量，将会从住宿押金中扣除超出的部分费用
             </p>
             <center><p class="bottomP"><input type="checkbox" v-model="box">&nbsp;我同意
-              <router-link to="/rightnav/service">&nbsp;<a>《小猪服务协议》</a></router-link>
+              <router-link to="/rightnav/service">&nbsp;<a style="text-decoration: none">《小猪服务协议》</a></router-link>
               及该房东制定的退订规则及入住规定</p></center>
           </div>
         </div>
@@ -214,8 +214,6 @@
             { pattern:/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,message: '长度是18位有效身份证', trigger: 'blur' }
           ],
         },
-
-
         pickerBeginDateBefore: {
           disabledDate: (time) => {
             if (this.$store.state.create_end_date === '') {
@@ -323,7 +321,7 @@
           console.log('当前时间'+_this.$store.state.newdate)
           axios.post("http://localhost:3000/order", {
             arrvialDate: _this.$store.state.create_start_date,
-            leaveDate: _this.$store.state.create_start_date,
+            leaveDate: _this.$store.state.create_end_date,
             hPrice: _this.$store.state.houseprice,
             oDate: _this.$store.state.newdate,
             oStatus: 0,
@@ -337,11 +335,11 @@
           })
           alert('提交订单成功,即将跳转支付页面！');
           this.$router.push({path: '/pay'})
-          this.$store.state.name1 = '',
-          this.$store.state.phone1 = '',
-          this.$store.state.identity1 = ''
-          this.$store.state.state.create_end_date = ''
-          this.$store.state.state.create_start_date = ''
+          // this.$store.state.name1 = '',
+          //   this.$store.state.phone1 = '',
+          //   this.$store.state.identity1 = ''
+          // this.$store.state.state.create_end_date = ''
+          // this.$store.state.state.create_start_date = ''
 
           sessionStorage.setItem('start_date',_this.$store.state.create_start_date)
           sessionStorage.setItem('end_date',_this.$store.state.create_end_date)
@@ -365,7 +363,7 @@
 
 <style scoped>
   .writepage{
-    margin-top: 60px;
+    margin-top: 80px;
   }
   .Basic{
     border: 1px solid gainsboro;

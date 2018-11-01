@@ -19,9 +19,9 @@
 </template>
 
 <script>
-    export default {
-        name: "Declaration"
-    }
+  export default {
+    name: "Declaration"
+  }
 </script>
 
 <style scoped>

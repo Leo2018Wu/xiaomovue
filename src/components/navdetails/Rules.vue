@@ -22,9 +22,9 @@
 </template>
 
 <script>
-    export default {
-        name: "Rules"
-    }
+  export default {
+    name: "Rules"
+  }
 </script>
 
 <style scoped>

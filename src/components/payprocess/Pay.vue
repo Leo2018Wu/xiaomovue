@@ -9,8 +9,10 @@
         <div class="Paytop">
           <br>
           <center>
-            <h3 class="Ph3"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;订单提交成功，请尽快支付现金</h3>
+            <h2 class="Ph3"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;订单提交成功，请尽快支付现金</h2>
           </center>
+          <br>
+          <center><h4>请您在<span style="color:red">&nbsp;{{minute}}:{{second}}</span>&nbsp;分钟之内完成支付</h4></center>
           <br>
         </div>
         <br>
@@ -41,7 +43,29 @@
             <br>
             <div class="t4">
               <span class="label label-info">订单费用信息</span><br><br>
-              房租：￥{{((Date.parse(end_date)-Date.parse(start_date))/1000/60/60/24)*shouseprice}}&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+              <!--房租：￥{{((Date.parse(end_date)-Date.parse(start_date))/1000/60/60/24)*shouseprice}}&nbsp;&nbsp;&nbsp;&nbsp;<br><br>-->
+              <div class="paytable">
+                <table class="table table-bordered" style="width: 95%;background: white">
+                  <tbody>
+                  <tr>
+                    <th style="width: 25%"></th>
+                    <td style="width: 15%">日均价</td>
+                    <td style="width: 15%">预定数量</td>
+                    <td style="width: 15%">天数</td>
+                    <td style="width: 15%">优惠</td>
+                    <td style="width: 15%">总价</td>
+                  </tr>
+                  <tr>
+                    <th style="width: 25%">房租</th>
+                    <td style="width: 15%">￥{{shouseprice}}</td>
+                    <td style="width: 15%">1</td>
+                    <td style="width: 15%">{{(Date.parse(end_date)-Date.parse(start_date))/1000/60/60/24}}天</td>
+                    <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
+                    <td style="width: 15%">￥{{((Date.parse(end_date)-Date.parse(start_date))/1000/60/60/24)*shouseprice}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -126,6 +150,9 @@
         sname:sessionStorage.getItem('sname'),
         sphone:sessionStorage.getItem('sphone'),
 
+        minutes:20,
+        seconds:0,
+
         susername:sessionStorage.getItem('susername'),
         suserphone:sessionStorage.getItem('suserphone'),
         sidentity:sessionStorage.getItem('sidentity'),
@@ -139,6 +166,13 @@
       'app-steps2':Steps2,
     },
     mounted(){
+      // this.add()
+
+      this._timeout=setInterval(()=>{
+        this.add()
+      },1000)
+
+
       //获取刚输入的订单号也就是最大的订单id
       axios.get("http://127.0.0.1:3000/order/getMaxOrder").then((result)=> {
         this.maxId = result.data.data[0].oId;
@@ -148,6 +182,45 @@
       })
     },
     methods: {
+      // num:function (n) {
+      //   return n<10 ? "0" + n : "" + n
+      // },
+      // add() {
+      //   var _this = this;
+      //   var time = window.setInterval(function () {
+      //     if (_this.seconds == 0 && _this.minutes != 0) {
+      //       _this.seconds = 59;
+      //       _this.minutes -= 1;
+      //     } else if (_this.minutes == 0 && _this.seconds == 0) {
+      //       _this.seconds = 0;
+      //       window.clearInterval(time);
+      //       _this.$router.push({path: '/unfinish'})
+      //     } else {
+      //       _this.seconds -= 1
+      //     }
+      //   }, 1000);
+      // },
+
+
+
+      num:function (n) {
+        return n<10 ? "0" + n : "" + n
+      },
+      add() {
+        var _this = this;
+        if (_this.seconds == 0 && _this.minutes != 0) {
+          _this.seconds = 59;
+          _this.minutes -= 1;
+        } else if (_this.minutes == 0 && _this.seconds == 0) {
+          _this.seconds = 0;
+          clearInterval(_this._timeout);
+          _this.$router.push({path: '/unfinish'})
+        } else {
+          _this.seconds -= 1
+        }
+      },
+
+
       pays(index) {
         let _this = this
         if (this.radio1 == false && this.radio2 == false && this.radio3 == false && this.radio4 == false)
@@ -155,23 +228,50 @@
         else
           this.$router.push({path: '/finish'})
         // 修改获取到的订单号的订单状态
-        console.log(this.maxId+1)
+        console.log(this.maxId + 1)
         axios.post('http://127.0.0.1:3000/order/updateorder', {
-          oId:this.maxId+1,
+          oId: this.maxId + 1,
           oStatus: 1,
         })
         // sessionStorage.removeItem('sname')
         // sessionStorage.removeItem('sphone')
-        this.$store.state.hName=''
-        this.$store.state.create_start_date=''
-        this.$store.state.create_end_date=''
-        this.$store.state.name1=''
-        this.$store.state.identity1=''
-        this.$store.state.phone1=''
+        this.$store.state.hName = ''
+        this.$store.state.create_start_date = ''
+        this.$store.state.create_end_date = ''
+        this.$store.state.name1 = ''
+        this.$store.state.identity1 = ''
+        this.$store.state.phone1 = ''
         // ((Date.parse($store.state.create_end_date)-Date.parse($store.state.create_start_date))/1000/60/60/24)*$store.state.houseprice=''
       },
       handleChange(val) {
         console.log(val);
+      }
+    },
+
+
+    beforeDestroy(){
+      clearInterval(this._timeout)
+    },
+
+
+    // watch: {
+    //   second: {
+    //     handler(newVal) {
+    //       this.num(newVal)
+    //     }
+    //   },
+    //   minute: {
+    //     handler(newVal) {
+    //       this.num(newVal)
+    //     }
+    //   }
+    // },
+    computed: {
+      second: function () {
+        return this.num(this.seconds)
+      },
+      minute: function () {
+        return this.num(this.minutes)
       }
     }
   }
@@ -179,7 +279,7 @@
 
 <style scoped>
   .paypage{
-    margin-top: 60px;
+    margin-top: 80px;
   }
   .Paytop,.Ordnum,.unsubscribe,.ways{
     border: 1px solid gainsboro;
@@ -187,12 +287,6 @@
     border-radius: 10px;
     background-color: #F5F5F5;
   }
-  /*.help{*/
-  /*border: 1px solid gainsboro;*/
-  /*box-shadow: 4px 4px 8px grey;*/
-  /*border-radius: 10px;*/
-  /*background-color:#F5F5F5 ;*/
-  /*}*/
   .Ph3{
     color:#FF666A
   }

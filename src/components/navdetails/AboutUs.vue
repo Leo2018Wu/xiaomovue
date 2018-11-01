@@ -47,9 +47,9 @@
 </template>
 
 <script>
-    export default {
-        name: "AboutUs"
-    }
+  export default {
+    name: "AboutUs"
+  }
 </script>
 <style scoped>
   .about{

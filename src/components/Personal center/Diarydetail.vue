@@ -11,18 +11,24 @@
         <el-col :span="24"><div class="grid-content bg-purple-dark"><span style="float: right;cursor: pointer;color: #FF666A" @click = del()>删除</span></div></el-col>
       </el-row>
       <el-row>
-        <el-col :span="4"><div class="grid-content bg-purple-dark">
-          <img src="../../assets/first-center-01.jpg" style="height: 100%;width: 100%"/></div>
+        <div v-for="image in mydata1" style="margin: 2%">
+        <el-col :span="4" >
+          <div class="grid-content bg-purple-dark">
+          <img :src="image" style="height: 50%;width: 100%"/>
+          </div>
         </el-col>
+        </div>
       </el-row>
       <hr>
       <span>评论</span>
-      <div style="background-color:#eee;"  >
+      <div style="background-color:#fafafa;"  >
         <div v-for="assessment in assessments">
         <el-row style="padding:10px" >
-          <el-col :span="3"><div class="grid-content bg-purple">
+          <el-col :span="3">
+            <div class="grid-content bg-purple">
             <img src="../../assets/first-center-01.jpg" style="height: 100%;width: 100%;border-radius: 50%"/>
-          </div></el-col>
+          </div>
+          </el-col>
           <el-col :span="20" :offset="1"><div class="grid-content bg-purple-light">
             <h3>{{assessment.uName}}</h3>
             <h5>{{assessment.daDate}}</h5>
@@ -64,14 +70,9 @@
       return {
 
         dialogVisible: false,
-        diaryOne: [
-          // {dTitle:'泰国曼谷芭提雅旅游日记',dContent:'去过很多城市，欣赏过很多风景，体会过很多民风，感觉次次旅游都是走马观花，只留下浅浅的记忆，'},
-          // {dTitle:'叮咚，您有一份熊猫遛娃国庆假期旅游日记，请查收！',dContent:'还是青岛，旅游日记，我只写自己出行的城市，一个人出行，感官更敏感，观察更细致'},
-          // {dTitle:'我的南京旅游日记',dContent:' 这是两地旅游日记的第二篇，如果对菲律宾感兴趣可以看我的前一篇游记'},
-          // {dTitle:'旅游日记 －－包子篇',dContent:'我换了个窗户边的座位，坐在我们一排的是个湖南的阿姨，与yaping开始搭话，原来是女儿带她一起出来旅游的，一提到她女儿她很开心和我们聊开了，女儿是成都某重本的'},
-          // {dTitle:'厦门旅游攻略·学生党旅游·旅游日记',dContent:'……[TOC] 厦门，是一座海边很美的旅游城市，值得一去，废话不多说，接下来分享一下去厦门的几点建议和我的行程安排吧。'},
-
-        ],
+        diaryOne: [],
+        mydata:[],
+        mydata1:[],
         assessments:[ ]
       };
     },
@@ -79,6 +80,9 @@
       let dId = this.$route.params.did
       axios.get(`http://localhost:3000/diarys/ddiarys/${dId}`).then((result) => {
         this.diaryOne = result.data.data
+        this.mydata=this.diaryOne[0].dImages
+        this.mydata = this.mydata.substr(0,this.mydata.length-1)
+        this.mydata1=this.mydata.split(',')
       }, (err) => {
         console.log(result.err)
       })
