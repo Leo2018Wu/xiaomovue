@@ -1,24 +1,24 @@
 <template>
   <!--<div>-->
-    <div class="row">
-      <div class="home-third-header">
-        <h1>身在四海，如在家！</h1>
-        <p>属于我们的故事</p>
-      </div>
+  <div class="row">
+    <div class="home-third-header">
+      <h1>身在四海，如在家！</h1>
+      <p>属于我们的故事</p>
+    </div>
     <div>
       <el-carousel :interval="2000" type="card" height="400px">
         <el-carousel-item v-for="item in 6" :key="item">
-          <h3>{{ item }}</h3>
+          <h3 style="color: transparent">{{ item }}</h3>
         </el-carousel-item>
       </el-carousel>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "HomeThird"
-    }
+  export default {
+    name: "HomeThird"
+  }
 </script>
 
 <style scoped>

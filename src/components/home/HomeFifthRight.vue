@@ -5,34 +5,35 @@
       <div v-if="isshow==1">
         <img class="radius-img" :src="'../../../static/images/'+diarys[0].uHeadPic" alt="">
         <p>{{diarys[0].uName}}</p>
-        <p>{{diarys[0].dDate}}</p>
+        <p>{{diarys[0].dDate.substring(0,10)}}</p>
         <div class="content">{{diarys[0].dContent}}</div>
       </div>
       <div v-else-if="isshow==2">
         <img class="radius-img" :src="'../../../static/images/'+diarys[1].uHeadPic" alt="">
         <p>{{diarys[1].uName}}</p>
-        <p>{{diarys[1].dDate}}</p>
+        <p>{{diarys[1].dDate.substring(0,10)}}</p>
         <div class="content">{{diarys[1].dContent}}</div>
       </div>
       <div v-else-if="isshow==3">
         <img class="radius-img" :src="'../../../static/images/'+diarys[2].uHeadPic" alt="">
         <p>{{diarys[2].uName}}</p>
-        <p>{{diarys[2].dDate}}</p>
+        <p>{{diarys[2].dDate.substring(0,10)}}</p>
         <div class="content">{{diarys[2].dContent}}</div>
       </div>
       <div v-else="isshow==4">
         <img class="radius-img" :src="'../../../static/images/'+diarys[3].uHeadPic" alt="">
         <p>{{diarys[3].uName}}</p>
-        <p>{{diarys[3].dDate}}</p>
+        <p>{{diarys[3].dDate.substring(0,10)}}</p>
         <div class="content">{{diarys[3].dContent}}</div>
       </div>
 
     </div>
     <ul class="icon">
-      <li v-on:click ="change(1)"></li>
-      <li v-on:click ="change(2)"></li>
-      <li v-on:click ="change(3)"></li>
-      <li v-on:click ="change(4)"></li>
+      <li v-on:click ="changeone" ref="one" style="background-color:#ff666a;"></li>
+      <li v-on:click ="changetwo" ref="two"></li>
+      <li v-on:click ="changethre" ref="thre"></li>
+      <li v-on:click ="changefou" ref="fou"></li>
+
     </ul>
   </div>
 </template>
@@ -50,9 +51,37 @@
       }
 
     },
-    methods:{
-      change:function (num) {
-        this.isshow = num;
+    methods: {
+      // change:function (num) {
+      //   this.isshow = num;
+      // },
+      changeone() {
+        this.isshow = 1;
+        this.$refs.one.style.backgroundColor = '#ff666a';
+        this.$refs.two.style.backgroundColor = '#fff';
+        this.$refs.thre.style.backgroundColor = '#fff';
+        this.$refs.fou.style.backgroundColor = '#fff';
+      },
+      changetwo() {
+        this.isshow = 2;
+        this.$refs.two.style.backgroundColor = '#ff666a';
+        this.$refs.one.style.backgroundColor = '#fff';
+        this.$refs.thre.style.backgroundColor = '#fff';
+        this.$refs.fou.style.backgroundColor = '#fff';
+      },
+      changethre() {
+        this.isshow = 3;
+        this.$refs.thre.style.backgroundColor = '#ff666a';
+        this.$refs.two.style.backgroundColor = '#fff';
+        this.$refs.one.style.backgroundColor = '#fff';
+        this.$refs.fou.style.backgroundColor = '#fff';
+      },
+      changefou() {
+        this.isshow = 4;
+        this.$refs.fou.style.backgroundColor = '#ff666a';
+        this.$refs.two.style.backgroundColor = '#fff';
+        this.$refs.thre.style.backgroundColor = '#fff';
+        this.$refs.one.style.backgroundColor = '#fff';
       },
     },
     mounted(){
@@ -61,10 +90,10 @@
           $(this).html($(this).text().replace(/\s+/g, "").substr(0, 70) + "...")
         }
       }),
-        this.$axios.get(`/diarys/${this.aCommend}`).then((result)=> {
+        axios.get(`http://127.0.0.1:3000/diarys/${this.aCommend}`).then((result)=> {
           // this.mydata = result.data.data[0].uName;
           this.mydata = result.data.data
-          // console.log(this.mydata)
+          console.log(this.mydata)
           for(var i = 0 ; i < 4; i++){
             this.diarys.push(this.mydata[i])
             // console.log(this.diarys[0])
@@ -131,8 +160,5 @@
     float: left;
     vertical-align: bottom;
     cursor: pointer;
-  }
-  .icon li:hover{
-    background-color: #ff666a;
   }
 </style>

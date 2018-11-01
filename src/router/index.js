@@ -82,15 +82,15 @@ export default new Router({
           children:[
             {path:'/center/orderempty',component:Myorder},
             {path:'/center/orderempty/Successdetail/:oIdq',component:Successdetail},
-            {path:'/center/orderempty/:oIdw',component:Waitdetail},
-            {path:'/center/orderempty/:oIde',component:Finishdetail},
+            {path:'/center/orderempty/Waitdetail/:oIdw',component:Waitdetail},
+            {path:'/center/orderempty/Finishdetail/:oIde',component:Finishdetail},
             {path: '/center/orderempty/diary/:oIdr',component:Diaryedit},
             {path: '/center/orderempty/assessment/:oIdt',component:Assessmentedit},
             {path:'/center/orderempty/Cancledetail/:oIdy',component:Cancledetail},
           ]
 
         },
-        {path:'/center/updatepwd',component:Updatepwd}
+        {path:'/center/updatepwd',component:Updatepwd},
       ]
     },
 

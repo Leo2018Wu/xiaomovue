@@ -45,14 +45,21 @@
 }
 .el-tabs__nav-scroll{
   background-color: #fff;
-  border-bottom: 3px solid #dcdfe6;
+  border-bottom: 2px solid #dcdfe6;
 }
-#tab-first, #tab-second,#tab-third{
+/*myorder导航背景颜色和字体颜色*/
+/*----------------------------------------------*/
+#tab-first, #tab-second,#tab-third,#tab-fourth{
   margin-right: 15px;
+ color: rgba(0,0,0,0.7);
+ background-color: rgba(147,149,86,0.3);
+  width: 100px;
 }
-/*.el-collapse-item__header {*/
-   /*height:100%;*/
-  /*line-height:100%;*/
- /*margin-bottom: 20px;*/
-  /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);*/
-/*}*/
+#tab-first.is-active,#tab-second.is-active,#tab-third.is-active,#tab-fourth.is-active {
+  color: #fff;
+  background-color: #ff666A;
+  border-right-color: #dcdfe6;
+  border-left-color: #dcdfe6;
+ }
+/*-----------------------------------------------------*/
+

@@ -5,6 +5,8 @@
         <li data-target="#carousel-item" data-slide-to="0" class="active"></li>
         <li data-target="#carousel-item" data-slide-to="1"></li>
         <li data-target="#carousel-item" data-slide-to="2"></li>
+        <li data-target="#carousel-item" data-slide-to="3"></li>
+        <li data-target="#carousel-item" data-slide-to="4"></li>
       </ol>
       <div class="carousel-inner " role="listbox">
         <div class="item active">
@@ -15,6 +17,12 @@
         </div>
         <div class="item">
           <img src="../../assets/first-top-03.jpg" alt="">
+        </div>
+        <div class="item">
+          <img src="../../assets/first-top-04.jpg" alt="">
+        </div>
+        <div class="item">
+          <img src="../../assets/first-top-05.jpg" alt="">
         </div>
       </div>
       <a class="left carousel-control" href="#carousel-item" role="button" data-slide="prev">
@@ -27,7 +35,6 @@
     <div class="choose">
       <app-choose></app-choose>
     </div>
-
   </div>
 </template>
 
