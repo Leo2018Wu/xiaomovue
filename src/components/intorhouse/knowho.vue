@@ -9,7 +9,7 @@
         <p  > 其他额外费用：每天免30度电，超出1元1℃，为了节约，不是为了收钱 </p>
       </div>
       </div>
-      <div style="width:100%;height:200px; ">
+      <div style="width:100%;height:150px; ">
        <div style="margin-left:10%;border-bottom:2px solid #eaeaea;height:150px;width:80%;">
         <h2 style="font-size:25px;color:#afafaf;">预订方式</h2>
         <p style="margin-top:20px;">下单即可入住，无需房东确认。</p>
@@ -17,8 +17,8 @@
         <p >额外的服务费用不包含在总房租内，由房东线下收取。 </p>
       </div>
       </div>
-      <div style="position:absolute;bottom: 0;">
-        <h2 style="font-size:25px;color:#afafaf;margin-left:10%;">退订规则</h2>
+      <div style=" width:100%;height:160px; ">
+        <h2 style="font-size:25px;color:#afafaf;margin-left:10%;  ">退订规则</h2>
         <el-steps :active="2" align-center>
           <el-step title="预定成功" description="如取消订单，定金全部退还"></el-step>
           <el-step title="入住前5天14:00前" description="如取消订单，扣除前5天定金"></el-step>
@@ -45,13 +45,13 @@
   .knowho{
      margin-left:2%;
     margin-top:10px;
-    height:600px;
+    height:650px;
     background-color: #fff;
   }
   p{
     line-height:16px;
   }
-  @media (max-width:1144px) {
+  @media (max-width:1200px) {
     .knowho {
       width: 90%;
       margin-left: 5%;

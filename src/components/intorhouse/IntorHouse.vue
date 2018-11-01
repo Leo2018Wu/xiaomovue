@@ -2,7 +2,8 @@
   <div class="allhezi row">
 
     <p class="col-xs-6 p1"  >{{housename[0]}}</p>
-    <p class="col-xs-6 p2" style="clear:both;" >{{houselocation[0]}}</p>
+    <p class="col-xs-6 p2" style="clear:both;" >
+      <span class="glyphicon glyphicon-map-marker"><span style="margin-left:-10px;">{{houselocation[0]}}</span></span></p>
     <lunbo-lun></lunbo-lun>
     <rigfix-rig></rigfix-rig>
     <detail-de></detail-de>
@@ -73,7 +74,7 @@
   }
        .p2{
          margin-left:10px;
-         color: #ff666a;
+         color: #5d5d5d;
          /*color:black;*/
        }
        @media (max-width:1100px) {

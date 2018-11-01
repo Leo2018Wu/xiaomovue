@@ -63,7 +63,7 @@
 
 
   }
-  @media (max-width:1144px) {
+  @media (max-width:1200px) {
     .lunbo{
       width:90%;
       margin-left:5%;
@@ -75,6 +75,7 @@
     }
 
   }
+
 
   .el-carousel__item h3 {
      color: #475669;

@@ -2,7 +2,7 @@
     <div class="map col-xs-12 col-xs-pull-1" >
       <el-row >
         <el-col :offset="2" :span="5">
-          <el-input :id="suggestId" v-model="houseloc[0]" :clearable='clearable' placeholder="请输入店铺地址,获取店铺坐标" >
+          <el-input :id="suggestId" v-model="houseloc" :clearable='clearable' placeholder="请输入店铺地址,获取店铺坐标" >
           </el-input>
         </el-col>
         <el-col :span="2">
@@ -25,7 +25,7 @@
     export default {
       data() {
         return {
-          houseloc: [], //详细地址
+          houseloc:'', //详细地址
           userlocation: { lng: "", lat: "" },
           clearable: true,
           suggestId: "suggestId",
@@ -158,29 +158,14 @@
         }
 
       },
-      // created() {
-      //   var map = new BMap.Map("allmap");
-      //   var point = new BMap.Point(116.331398,39.897445);
-      //   map.centerAndZoom(point,12);
-      //   var myGeo = new BMap.Geocoder();
-      //   // 将地址解析结果显示在地图上,并调整地图视野
-      //   console.log("地图： " + this.houseloc[0])
-      //   myGeo.getPoint( this.houseloc[0], function(point){
-      //     if (point) {
-      //       map.centerAndZoom(point, 16);
-      //       map.addOverlay(new BMap.Marker(point));
-      //     }else{
-      //       alert("您选择地址没有解析到结果!");
-      //     }
-      //   }, "北京市");
-      // },
+
       mounted() {
         this.$nextTick(function () {
           this.drawMap();
         });
         let _this = this
         axios.get(`http://localhost:3000/house/details/` + this.hId).then(function (result) {
-          _this.houseloc.push(result.data.data[0].hLocation);
+          _this.houseloc = result.data.data[0].hLocation;
 
         })
           .catch(function (error) {
@@ -211,7 +196,7 @@
     .el-tag {
       cursor: pointer;
     }
-    @media (max-width:1144px) {
+    @media (max-width:1200px) {
       .map {
         width:135%;
 
