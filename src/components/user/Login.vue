@@ -1,12 +1,12 @@
 <template>
   <div class="row">
-    <div class="login-wrapper" style="margin-top: 120px">
+    <div class="login-wrapper" style="margin-top: 60px">
       <div class="login-left">
         <img src="../../../src/assets/loginbg.jpg">
         <div class="h1">点击进入小沫短租</div>
       </div>
       <div class="login-right">
-        <div class="h2">登&nbsp;录</div>
+        <div class="h2" style="margin-top: 70px">登&nbsp;录</div>
         <div class="form-group">
           <input v-model="phonenum" id="phonenum" type="text" placeholder="请输入手机号">
           <label for="phonenum">手机号</label>
@@ -175,8 +175,8 @@
   }
   .login-wrapper {
     margin: 50px auto;
-    width: 800px;
-    height: 440px;
+    width: 1140px;
+    height: 600px;
     background-color: #fff;
     box-shadow: 0px 2px 50px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
