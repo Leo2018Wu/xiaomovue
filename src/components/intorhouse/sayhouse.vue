@@ -1,6 +1,6 @@
 <template>
       <div>
-        <div style="position:absolute;bottom: 50px;margin-left:44%;">
+        <div style="position:absolute;bottom: 50px;margin-left:43%;">
           <button @click="tofour"> < </button>
           <input type="button" value="1"  v-on:click="change(1)"  >
           <input type="button" value="2"  v-on:click="change(2)"  >
@@ -13,10 +13,10 @@
           <span class="demonstration" style="font-size:25px;font-weight:bold;color:rgba(111,147,255,0.81);margin-top:25px;position:absolute; ">点评 {{househscore[0]}} 分</span>
           <el-rate v-model="value1" style="margin-top:65px;position:absolute;"></el-rate>
           <p style="display:inline-block;margin-left:20%;margin-top:65px;">
-            <span style="margin-left:20px;">整洁卫生{{numwei}}</span>
-            <span style="margin-left:20px;">描述相符{{nummao}}</span>
-            <span style="margin-left:20px;">整洁卫生{{numan}}</span>
-            <span style="margin-left:20px;">性价比{{numan}}</span>
+            <span style="margin-left:20px;">整洁卫生{{househscore[0]}}</span>
+            <span style="margin-left:20px;">描述相符{{househscore[0]}}</span>
+            <span style="margin-left:20px;">整洁卫生{{househscore[0]}}</span>
+            <span style="margin-left:20px;">性价比{{househscore[0]}}</span>
           </p>
 
 
@@ -202,6 +202,7 @@
 </template>
 
 <script>
+  import axios from "axios"
     export default {
         name: "sayhouse",
       data(){
@@ -210,11 +211,7 @@
             value1:'',
             isshow:1,
             numbler:5,
-            numwei:4.9,
-            nummao:4.9,
-            numjiao:4.9,
-            numan:4.9,
-            numjia:4.9,
+
             hId:1,
             allinfo:[],
             hIdsco:this.$route.params.hId,
@@ -224,25 +221,37 @@
       },
       mounted(){
         let _this=this
-        axios.get(`http://localhost:3000/assessment/allinfo`).then(function (result) {
-          _this.allinfo.push(result.data.data[0],result.data.data[1],result.data.data[2],result.data.data[3],
-            result.data.data[4],result.data.data[5],result.data.data[6],result.data.data[7],
-            result.data.data[8],result.data.data[9],result.data.data[10],result.data.data[11],
-            result.data.data[12],result.data.data[13],result.data.data[14],result.data.data[15]);
+
+        // alert(_this.hIdsco)
+        // axios.get(`localhost:3000/assessment/allassment/${this.hIdsco}`).then(function (result) {
+        //
+        //   alert(_this.$route.params.hId)
+        //   alert(_this.hIdsco)
+        //   console.log(result.data.data)
+        //
+        // }).catch(function (err) {
+        //   console.log(error);
+        //
+        // })
+           axios.get(`http://localhost:3000/assessment/allinfo`).then(function (result) {
+           _this.allinfo.push(result.data.data[0],result.data.data[1],result.data.data[2],result.data.data[3],
+              result.data.data[4],result.data.data[5],result.data.data[6],result.data.data[7],
+             result.data.data[8],result.data.data[9],result.data.data[10],result.data.data[11],
+             result.data.data[12],result.data.data[13],result.data.data[14],result.data.data[15]);
 
         })
-          .catch(function (error) {
-            console.log(error);
-          });
-          axios.get(  `http://localhost:3000/house/details/`+this.hIdsco).then(function (result) {
+         .catch(function (error) {
+       console.log(error);
+         });
+           axios.get(  `http://localhost:3000/house/details/`+this.hIdsco).then(function (result) {
 
             _this.househscore.push(result.data.data[0].hScore);
-            _this.value1=result.data.data[0].hScore;
+           _this.value1=result.data.data[0].hScore;
 
-          })
-            .catch(function (error) {
-              console.log(error);
-            });
+           })
+           .catch(function (error) {
+             console.log(error);
+           });
 
       },
       methods:{
@@ -262,7 +271,7 @@
 <style scoped>
 .a1,.a2,.a3,.a4{
   width:100%;
-  height:1050px;
+  height:1200px;
 }
 button,input{
   border:1px solid #fff;

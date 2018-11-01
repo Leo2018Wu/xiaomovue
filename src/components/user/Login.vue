@@ -12,15 +12,17 @@
         <div class="row">
           <div class="col-xs-4 col-sm-4 col-lg-4 col-sm-push-4 col-xs-push-4">
             <input v-model="password" style="height: 50px;margin-top: 30px;width: 400px;" type="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+            <router-link to="/fpwd">
+              <p style="color:#fff;margin-top:10px;text-decoration: none;">找回密码？</p>
+            </router-link>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4 col-sm-4 col-sm-push-4 col-xs-push-4" style="text-align: center">
-            <button type="submit" class="btn btn-primary" style="height: 60px;width: 100px;margin-top:30px" v-on:click="UserButton()">登录</button>
+            <button type="submit" class="btn btn-primary" style="height: 60px;width: 100px;margin-top:50px" v-on:click="UserButton()">登录</button>
           </div>
-          <router-link to="/fpwd">
-          <p style="color:#fff;margin-top:10px;">找回密码？</p>
-          </router-link>
+
+
         </div>
       </div>
     </form>
@@ -37,7 +39,8 @@
         password:'',
         uPhone:'',
         uid:'',
-        mydata:''
+        mydata:'',
+        myname:"陈文杰"
       }
     },
     methods:{
@@ -65,6 +68,7 @@
               sessionStorage.setItem('sphone',info.data.uPhone);
               sessionStorage.setItem('sname',info.data.uName);
               sessionStorage.setItem('suId',info.data.uId);
+
               // _this.$router.push({path: '/'})
               window.location.href='http://localhost:8080'
             }

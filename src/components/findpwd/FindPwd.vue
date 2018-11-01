@@ -11,22 +11,16 @@
           </el-form-item>
           <el-form-item label="验证码" prop="code">
             <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off"></el-input>
-            <el-button @click="sendCode" type="primary" style="margin-top: 15px">发送验证码</el-button>
+            <el-button type="primary" @click="getMessage" style="margin-top:28px">获取验证码</el-button>
+            <el-button type="primary" @click="submitForm('ruleForm')"   >更改密码</el-button>
           </el-form-item>
-          <el-form-item>
 
-            <el-button type="primary" @click="submitForm('ruleForm')">更改密码</el-button>
-
-          </el-form-item>
         </el-form>
 
       </form>
       </div>
 
     </div>
-
-
-
 </template>
 <script>
   export default {
@@ -45,57 +39,54 @@
       var validateCode = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请获取验证码'));
-        } else if (value !== this.checkCode) {
+        } else if (value !== this.getcode) {
           callback(new Error('验证码有误，请重新输入!'));
         } else {
           callback();
         }
       };
-
-
       return {
         ruleForm: {
           phoneNum: '',
-          yan: ''
+          code: '',
+          length:''
         },
         rules: {
-          name: [
-            {required: true, message: '请输入手机号', trigger: 'blur'},
-            {min: 3, max: 5, message: '长度为11个数字', trigger: 'blur'}
-          ],
-          yan: [
-            {required: true, message: '请输入验证码', trigger: 'blur'},
-            {min: 3, max: 5, message: '长度在为6个数字', trigger: 'blur'}
-          ],
-        },
-        rules2: {
           phoneNum: [
             {validator: validatephone, trigger: 'blur'}
           ],
           code: [
-            {validator: validateCode, trigger: 'blur'}
+            {validator: validateCode, trigger: 'blur' }
           ],
-
-
-        }
+        },
       }
     },
 
-        methods:{
+
+
+
+    methods:{
         submitForm(formName)
         {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              alert('submit!');
-              this.$router.replace("/cpwd")
+              let _this=this
+              axios.get(`http://localhost:3000/userorderdis/getallphone/${this.ruleForm.phoneNum}`).then(function (result) {
+               if(result.data.data.length == 1){
+                 _this.$store.state.chphone=_this.ruleForm.phoneNum;
+                 _this.$router.replace("/cpwd")
+               }else{
+                 _this.ruleForm.code=" ";
+                 alert("该手机号不存在，请重新注册！")
+               }
+              });
             } else {
               console.log('error submit!!');
               return false;
             }
           })
         },
-
-          sendCode()
+      getMessage()
         {
           let _this = this;
           _this.getcode = '';
@@ -104,19 +95,12 @@
           }
           alert(_this.getcode);
         }
-
       }
-
   }
 </script>
-
-
-
 <style scoped>
   * {
     margin: 0;
     padding: 0;
   }
-
-
 </style>

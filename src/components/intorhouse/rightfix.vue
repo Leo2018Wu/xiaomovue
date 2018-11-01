@@ -1,49 +1,38 @@
 <template>
-  <div class="rigfix">
-    <div>
-      <span><img src="../../../static/images/shou.png"></span>
-      <span class="shoufont" >收藏</span>
-      <span style="margin-left:30px;"><img src="../../../static/images/show.png"></span>
-      <span class="shoufont">分享</span>
-      <span class="pinfen">评分:  {{househscore}}分</span>
-    </div>
-    <div class="order">
-      <p class="p1" style="padding:12px;">
-        <span>￥</span><span style="font-size:30px;">{{houseprice}}</span></p>
-      <span style="margin-top:-40px;float:right;margin-right:60px;">每晚</span>
+  <div class="rigfix col-xs-3">
+      <div class="order" >
+        <br>
+        <div style=" margin-left:10px; ">
+          <span><img src="../../../static/images/shou.png" style="width:20px;height:20px;"></span>
+          <span class="shoufont" @click="save">收藏</span>
+          <span style="margin-left:30px;"><img src="../../../static/images/show.png" style="width:20px;height:20px;"></span>
+          <span class="shoufont">分享</span>
+          <span class="pinfen">评分:  {{househscore}}分</span>
+        </div>
+        <p class="p1" style="padding:12px;">
+          <span style="color: #ff666A">￥</span><span style="font-size:30px;text-align: left;color: #ff666A">{{houseprice}}</span>
+          &nbsp;&nbsp;<span style="font-size:14px;text-align: right;color: #2c2c2c">/每晚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor: pointer;color: #ff666A" @click="todisount">更多优惠>></span></span></p>
+        <div style="text-align: center">
+          <span>共</span>
+          <div style="display:inline-block; ">
+            <template>
+              <el-input-number v-model="num2" :disabled="true" style="width: 150px"></el-input-number>
+            </template>
+          </div>
+          <span>套</span>
+        </div>
 
-      <div class="block" style="margin-top:10px;">
-        <el-date-picker
-          v-model="value7"
-          type="daterange"
-          align="right"
-          unlink-panels
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :picker-options="pickerOptions2">
-        </el-date-picker>
+          <button style="width:100%;height:45px;background-color:#FF666A;border:0 solid #fff;color:#fff;display: inline-block;margin-top: 20px;border-radius: 5px;font-size: 18px" @click="quekorder">立即预定</button>
+
+        <div style="text-align: center">
+          <img :src="headimage" style="width:30%;height:30%;margin:20px 20px;border-radius: 50%;text-align: center">
+          <p>等雨停</p>
+        </div>
+        <div style="text-align: center;font-size: 18px;margin-top: 15px;color: #ff666A">
+          <p>在线聊天</p>
+        </div>
       </div>
 
-      <div style="margin-top:30px;display: inline-block; ">
-        <template>
-          <el-input-number v-model="num2" :disabled="true"></el-input-number>
-        </template>
-      </div>
-      <span>套</span>
-
-      <button style="width:40%;height:45px;background-color:#FF666A;border:0 solid #fff;color:#fff;display: inline-block;" @click="quekorder">立即预定</button>
-
-
-      <div>
-        <img :src="headimage" style="width:20%;height:20%;margin:20px 20px;border-radius: 50%;">
-        <p style="margin-top:-25%;margin-left:30%;font-size:20px;">aimeelai</p>
-        <img src="../../../static/images/pinglun/shiming.png" style="margin-left:28%;margin-top:5%;">
-        <img src="../../../static/images/pinglun/small.png" style="margin-left:80%;margin-top:-45%;" >
-      </div>
-      <div style="width:100%;height:15%;">
-        <el-button   icon="el-icon-message" style="width:100%;background-color:#FF666A;color:#fff;">在线聊天</el-button>
-      </div>
-    </div>
   </div>
 
 
@@ -54,35 +43,51 @@
 </template>
 
 <script>
+  import axios from "axios"
   export default {
     name: "rightfix",
     methods: {
       handleClick() {
         alert('button click');
       },
+      todisount(){
+        this.$router.push({path:'/discounts'})
+      },
       quekorder(){
-        this.$store.state.hName=this.hName;
-        this.$store.state.houseprice=this.houseprice;
-        this.$router.push({path:'/write'})
-        this.$store.state.househId=this.hId;
-
-
+        console.log(!sessionStorage.getItem("suId"));
+        if(sessionStorage.getItem("suId") == null){
+          alert("请先登录!")
+          return;
+        }else{
+          this.$store.state.hName=this.hName;
+          this.$store.state.houseprice=this.houseprice;
+          this.$store.state.househId=this.hId;
+          this.$router.push({path:'/write'})
+        }
       },
 
       handleChange(value) {
         console.log(value);
       },
-      // save(){
-      //   let _this = this;
-      //   axios.get(`http://localhost:3000/house/details/`+this.hId).then(function (result) {
-      //     sDate:new Date();
-      //     hId:this.$route.params.hId;
-      //     uId:sessionStorage.uId;
-      //
-      //
-      //
-      //   })
-      // }
+      save(){
+        if(sessionStorage.getItem("suId") == null){
+          alert("请先登录!")
+          return;
+        }else{
+          axios.post("http://localhost:3000/save/add",{
+            sDate:new Date().toLocaleDateString(),
+            uId:sessionStorage.getItem('suId'),
+            hId:this.hId,
+          }).then((resopnse)=>{
+            alert("收藏成功")
+          }).catch((err)=>{
+            alert("收藏失败")
+          })
+
+        }
+
+
+      }
     },
 
 
@@ -94,6 +99,7 @@
         headimage:"../../../static/images/pinglun/4.jpg",
         value6: '',
         value7: '',
+        num2:1,
         hId:this.$route.params.hId,
       };
     },
@@ -103,25 +109,17 @@
         _this.houseprice=result.data.data[0].hPrice;
         _this.househscore=result.data.data[0].hScore;
         _this.hName = result.data.data[0].hName;
-
-
       })
         .catch(function (error) {
           console.log(error);
         });
       window.onscroll = function(){
-        //变量scrollTop是滚动条滚动时，距离顶部的距离
         var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
-        //变量windowHeight是可视区的高度
         var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-        //变量scrollHeight是滚动条的总高度
         var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
-        //滚动条到底部的条件
         var height=scrollHeight-scrollTop-windowHeight;
         if(height<=240){
-          //写后台加载数据的函数
-
-          $(".rigfix").css("top","-160px");
+          $(".rigfix").css("top","-215px");
           //动画效果有延迟，效果不好，使用不当
           // $(".rigfix").animate({top:'-160px'},50);
         }else{
@@ -146,49 +144,46 @@
 
 <style scoped>
   .rigfix{
-    height:350px;
+
     position: fixed;
-    top:100px;
-    right:0;
+    top:120px;
+
     bottom:200px;
 
   }
 
   .shoufont,.pinfen{
-    font-size:16px;
-    font-family: "宋体";
-    font-weight: bold;
+    font-size:15px;
+
+
   }
   .shoufont:hover,.pinfen:hover{
     color: #ff666a;
   }
   .pinfen{
-    margin-left:50px;
+    margin-left:20px;
   }
   .order{
     width:100%;
-    height:350px;
+    height:430px;
     background-color: #ffffff;
-    margin-top:28px;
+    margin-top:54px;
+
   }
   .p1{
     margin-left:30px;
     margin-top:10px;
     color:#ff666a;
   }
-  @media (max-width:1144px) {
+  @media (max-width:1200px) {
     .rigfix{
       display: none;
     }
   }
-  @media (min-width:1300px) {
+  @media (min-width:1200px) {
     .rigfix{
-      right:40px;
+      right:80px;
     }
   }
-  @media (min-width:1144px) and (max-width:1300px) {
-    .rigfix{
-      right:0;
-    }
-  }
+
 </style>
