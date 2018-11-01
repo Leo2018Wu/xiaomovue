@@ -3,33 +3,27 @@
     <h3>标题</h3><textarea v-model="title" cols="60" rows="1"></textarea>
     <textarea v-model="message" cols="120" rows="13"></textarea>
     <button type="submit" style="float: right" @click = addDiary() >提交</button>
-    <el-upload
-      action="https://jsonplaceholder.typicode.com/posts/"
-      list-type="picture-card"
-      :on-preview="handlePictureCardPreview"
-      :on-remove="handleRemove">
-      <i class="el-icon-plus"></i>
-    </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="">
-    </el-dialog>
+    <input type="file" name="avatar"
+           @change="changeImage($event)"
+           accept="image/gif,image/jpeg,image/jpg,image/png"
+           ref="avatarInput"
+           multiple
+           id="file" ><br/>
   </div>
 
 </template>
 
 <script>
   import axios from 'axios'
-  // let oId = this.$route.params.
   export default {
     name: "Assessmentedit",
     data() {
       return {
-        dialogImageUrl: '',
-        dialogVisible: false,
         title:'',
         message:'',
         oId:this.$route.params.oIdr,
-        oneOrder:[]
+        oneOrder:[],
+        upath:''
       };
     },
     mounted(){
@@ -40,13 +34,6 @@
       })
     },
     methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
       addDiary(){
         console.log(this.oId)
         if(this.title==''){
@@ -54,29 +41,32 @@
         }else if (this.message==''){
           alert('你还没有输入日记内容哦')
         }else{
-            axios.post('http://localhost:3000/diarys/orders/add',{
-              // arrvialDate:this.oneOrder[0].arrvialDate.toLocaleString(),
-              dContent:this.message,
-              dDate:new Date().toLocaleString(),
-              recommend:1,
-              uId:1,
-              hId:this.oneOrder[0].hId,
-              dTitle:this.title,
-               oId:this.oneOrder[0].hId,
-          }).then((response)=>{
-            // if(response.data.status==200){
-            alert('评论成功！')
-
-              this.title = '';
-              this.message = ''
-            // }
-            // else alert('评论失败')
-          }).catch((err)=>{
-            alert('评论失败')
-            console.log(err)
-          })
+          var zipFormData=new FormData();
+          for(var i = 0 ; i< this.upath.length ; i++){
+            zipFormData.append('dImages',this.upath[i])
+          }
+          zipFormData.append('dContent',this.message)
+          zipFormData.append('dDate',new Date().toLocaleString())
+          zipFormData.append('recommend',1)
+          zipFormData.append('uId',1)
+          zipFormData.append('hId',this.oneOrder[0].hId)
+          zipFormData.append('dTitle',this.title)
+          zipFormData.append('oId',this.oneOrder[0].hId)
+          let config={headers:{'Content-Type':'multipart/form-data'}}
+          axios.post('http://localhost:3000/diarys/orders/add', zipFormData,config)
+            .then(function (response) {
+              console.log(response);
+              console.log(response.data);
+              console.log(response.bodyText);
+              alert("日记发布成功")
+              this.title=''
+              this.message=''
+            })
         }
-        }
+        },
+      changeImage(e) {
+        this.upath = e.target.files;
+      },
       }
 
   }

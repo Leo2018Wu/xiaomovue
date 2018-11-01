@@ -2,24 +2,7 @@
   <div>
     <el-card class="box-card" v-for="(orderInfo,index) in orderInfos">
       <div slot="header" class="clearfix">
-        <el-row>
-          <el-col :span="10"><div class="grid-content bg-purple"><span>房源概述</span></div></el-col>
-          <el-col :span="9" :offset="1"><div class="grid-content bg-purple-light"><span style="color: #FF666A;">已取消</span></div></el-col>
-          <el-col :span="4"><div class="grid-content bg-purple">
-            <el-button class="button" type="text" @click="centerDialogVisible = true">删除</el-button>
-            <el-dialog
-              title="删除"
-              :visible.sync="centerDialogVisible"
-              width="30%"
-              center>
-              <span>你确定要删除此订单？</span>
-              <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
-  </span>
-            </el-dialog>
-          </div></el-col>
-        </el-row>
+        <span>房源概述</span>
       </div>
       <div class="text item">
         <el-row>
@@ -39,8 +22,25 @@
           <el-col :span="4">
             <div class="grid-content bg-purple">
               <h4>￥{{orderInfo.hPrice}}</h4>
-              <router-link :to="'/center/orderempty/Cancledetail/'+orderInfo.oId"><el-button type="text" class="button">详情</el-button></router-link>
+              <h5>订单已取消</h5>
             </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="2":offset="20"><router-link :to="'/center/orderempty/Cancledetail/'+orderInfo.oId"><el-button type="text" class="button">详情</el-button></router-link></el-col>
+          <el-col :span="2">
+            <el-button class="button" type="text" @click="centerDialogVisible = true">删除</el-button>
+            <el-dialog
+              title="删除"
+              :visible.sync="centerDialogVisible"
+              width="30%"
+              center>
+              <span>你确定要删除此订单？</span>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="centerDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
+                </span>
+            </el-dialog>
           </el-col>
         </el-row>
       </div>
@@ -87,7 +87,7 @@
 </script>
 
 <style scoped>
-  h4{
+  h4,h5{
     color: #ff666A;
   }
   span{

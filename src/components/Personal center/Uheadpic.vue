@@ -15,11 +15,7 @@
       :visible.sync="centerDialogVisible"
       width="30%"
       center>
-      <!--<div class="headPic">-->
-        <!--<img :src="headPath" class="head" title="点击更换头像"/>-->
-      <!--</div>-->
-      <!--<div style="width:100px;height:100px;margin-top: -100px; border-radius: 50%;backgroundImage: 'url(' + headPath + ')';">-->
-        <input type="file" name="avatar"
+      <input type="file" name="avatar"
                @change="changeImage($event)"
                accept="image/gif,image/jpeg,image/jpg,image/png"
                ref="avatarInput"
@@ -60,6 +56,7 @@
         axios.post('http://localhost:3000/userorderdis/updatePhoto',zipFormData,config)
           .then(function(result){
             console.log(result.data)
+            // sessionStorage.setItem('photo',result.data.data.uHeadPic)
           })
         alert("头像更换成功")
         window.location.reload()
