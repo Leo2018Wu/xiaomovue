@@ -22,7 +22,7 @@
           <el-form-item label="" prop="code">
             <span style="margin-right: 10px"><img src="../../assets/safe.png" alt=""></span>
             <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off" style="width: 45%"></el-input>
-            <el-button type="primary" @click="getMessage()" style="width: 24%">获取验证码</el-button>
+            <el-button type="primary" id="showcode" @click="getMessage" value="免费获取验证码" style="width: 24%">获取验证码</el-button>
           </el-form-item>
           <el-form-item label="" prop="inviteNum">
             <span style="margin-right: 10px"><img src="../../assets/friend.png" alt=""></span>
@@ -67,11 +67,11 @@
         }
       }
       var validatePwd = (rule, value, callback) => {
-        var pattern = /^\S{3,20}$/g
+        var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/
         if (value === '') {
           callback(new Error('请输入密码'))
         } else if (!pattern.test(value)) {
-          callback(new Error('请输入3-20个非空白字符'))
+          callback(new Error('请输入8-16个字符必须包含大写字母，小写字母和数字，至少8个字符'))
         } else {
           if (this.ruleForm.pass !== '') {
             this.$refs.ruleForm.validateField('checkPass')
@@ -91,7 +91,7 @@
       var validateCode = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请获取验证码'));
-        } else if (value !== this.getcode) {
+        } else if (value !== this.ruleForm.code) {
           callback(new Error('验证码有误，请重新输入!'));
         } else {
           callback();
@@ -105,6 +105,7 @@
       //     callback();
       //   }
       // };
+
       return {
         getcode:'',
         mydata:'',
@@ -150,11 +151,36 @@
         },(err) =>{
           console.log(result.err)
         })
-        this.getcode='';
-        for(let i = 0;i < 6;i++){
-          _this.getcode += Math.floor(Math.random()*10);
+        this.ruleForm.code='';
+        for(let i =0;i<6;i++){
+          _this.ruleForm.code += Math.floor(Math.random()*10);
         }
-        alert(_this.getcode);
+        axios.get('http://v.juhe.cn/sms/send?mobile='+ _this.ruleForm.phoneNum+'&tpl_id=109980&tpl_value=%23code%23%3d'+_this.ruleForm.code+'&key=1a0fa998344f2822bbaf4c05e1235c7b')
+          .then(function(res){
+              console.log(res)
+            }
+          )
+        function invokeSettime(obj){
+          var countdown=60;
+          settime(obj);
+          function settime(obj) {
+            if (countdown == 0) {
+              $(obj).attr("disabled",false);
+              $(obj).text("获取验证码");
+              countdown = 60;
+              return;
+            } else {
+              $(obj).attr("disabled",true);
+              $(obj).text("(" + countdown + ")s重新发送");
+              countdown--;
+            }
+            setTimeout(function() {
+                settime(obj) }
+              ,1000)
+          }
+        }
+
+        new invokeSettime("#showcode");
 
       },
       submitForm(formName) {

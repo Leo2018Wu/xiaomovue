@@ -94,6 +94,9 @@
             <span class="door left"></span>
             <span class="door right"></span>
           </nav>
+          <div style="margin: 0 auto;width: 120px;height: 120px;">
+            <img src="../../assets/images/cry4.png" style="max-width: 100%" alt="">
+          </div>
           <p style="text-align: center">糟糕，没有符合的房间！建议您减少筛选条件！</p>
         </el-row>
         <el-row v-else>
@@ -237,11 +240,12 @@
         _this.mydata=JSON.stringify(res.data.data);
         this.search({});
       }),(err)=>{
+        this.search({})
         console.log(err)
       }
     },
     watch:{
-      'formData.style':'search',
+     'form.city':'search'
     },
     methods:{
       showStyle(style){
