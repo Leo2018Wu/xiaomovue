@@ -89,7 +89,8 @@
     text-decoration: none;
   }
   a:hover{
-    color:#FF666A;}
+    color:#FF666A;
+  }
   .himg{
     width: 100%;
     display:block;

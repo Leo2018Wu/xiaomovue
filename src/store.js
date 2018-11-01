@@ -35,6 +35,9 @@ export default new Vuex.Store({
     hName:'',
     houseprice:'',
     househId:'',
+    chphone:'',
+    housescore:'',
+    dianlen:'',
 
   },
 })

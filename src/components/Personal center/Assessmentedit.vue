@@ -6,16 +6,12 @@
     </div>
     <textarea v-model="message" cols="120" rows="13"></textarea>
     <button type="submit" style="float: right" @click = addComment() >提交</button>
-    <el-upload
-      action="https://jsonplaceholder.typicode.com/posts/"
-      list-type="picture-card"
-      :on-preview="handlePictureCardPreview"
-      :on-remove="handleRemove">
-      <i class="el-icon-plus"></i>
-    </el-upload>
-    <el-dialog :visible.sync="dialogVisible">
-      <img width="100%" :src="dialogImageUrl" alt="">
-    </el-dialog>
+    <input type="file" name="avatar"
+           @change="changeImage($event)"
+           accept="image/gif,image/jpeg,image/jpg,image/png"
+           ref="avatarInput"
+           multiple
+           id="file" ><br/>
   </div>
 
 </template>
@@ -27,8 +23,6 @@
     data() {
       return {
         value1: '',
-        dialogImageUrl: '',
-        dialogVisible: false,
         message:'',
         oneOrder:[],
         oId:this.$route.params.oIdt
@@ -42,40 +36,39 @@
       })
     },
     methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      },
       addComment(){
         let oId = this.$route.params.oIdt
         if(this.message==''){
           alert('你还没有输入评论内容哦')
         }else{
-          axios.post('http://localhost:3000/assessment/details/addAssessment',{
-            // arrvialDate:this.oneOrder[0].arrvialDate.toLocaleString(),
-            aDate:new Date().toLocaleString(),
-            aContent:this.message,
-            aCommend:1,
-            uId:this.oneOrder[0].uId,
-            hId:this.oneOrder[0].hId,
-            oId:this.oneOrder[0].oId,
-            aScore:this.value1
-          }).then((response)=>{
-            // if(response.data.status==200){
-            alert('评论成功！')
-            this.message = ''
-            this.value1 = ''
-            // }
-            // else alert('评论失败')
-          }).catch((err)=>{
-            alert('评论失败')
-            console.log(err)
-          })
+          var zipFormData=new FormData();
+          for(var i = 0 ; i< this.upath.length ; i++){
+            zipFormData.append('aImages',this.upath[i])
+          }
+          // zipFormData.append('arrvialDate',this.oneOrder[0].arrvialDate.toLocaleString())
+          zipFormData.append('aDate',new Date().toLocaleString())
+          zipFormData.append('aContent',this.message)
+          zipFormData.append('aCommend',1)
+          zipFormData.append('uId',this.oneOrder[0].uId)
+          zipFormData.append('hId',this.oneOrder[0].hId)
+          zipFormData.append('oId',this.oneOrder[0].hId)
+          zipFormData.append('aScore',this.value1)
+          let config={headers:{'Content-Type':'multipart/form-data'}}
+          axios.post('http://localhost:3000/assessment/details/addAssessment', zipFormData,config)
+            .then(function (response) {
+              // console.log(response);
+              // console.log(response.data);
+              // console.log(response.bodyText);
+              alert("评论发布成功")
+              this.message=''
+              this.value1=''
+              this.upath=''
+            })
         }
-      }
+      },
+      changeImage(e) {
+        this.upath = e.target.files;
+      },
     },
 
   }

@@ -5,7 +5,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './style.css'
 import store from './store.js'
 import router from './router'
-import './assets/style.css'
 import Axios from "axios"
 import lodash from 'lodash'
 import clipbord from "vue-clipboard2"

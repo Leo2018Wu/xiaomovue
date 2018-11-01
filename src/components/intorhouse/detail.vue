@@ -1,17 +1,17 @@
 <template>
   <div class="detailho col-xs-8" >
-    <div class=" chen" style=" margin-bottom:40px;margin-left:10%;height:80px; border-bottom:2px solid #eaeaea;width:80%;background-color:#fff;margin-top:30px;  ">
+    <div class=" chen" style=" text-align:center;margin-bottom:40px;margin-left:10%;height:80px; border-bottom:2px solid #eaeaea;width:80%;background-color:#fff;margin-top:30px;  ">
       <div style="width:50%;float:left;   ">
-        <img src="../../../static/images/housedetail/xiao.png" style="float: left; ">
+
         <p style="font-size:30px; ">宜居 {{num}} 人</p>
 
-        <p style="font-size:18px; margin-top:5px;">客房独享整套房屋</p>
+        <p style="font-size:18px; margin-top:15px;">客房独享整套房屋</p>
       </div>
       <div  style=" width:50%; float:right;  ">
-        <img src="../../../static/images/housedetail/chung.png" style="float: left;">
-        <p style="font-size:30px;;position:relative;margin-top:10px;">共 {{bed}} 床</p>
 
-        <p style="font-size:18px;margin-top:5px; ">双人床: 1.8m 宽 x 2 m 长 x 1 张</p>
+        <p style="font-size:30px;;position:relative;">共 {{bed}} 床</p>
+
+        <p style="font-size:18px;margin-top:15px; ">双人床: 1.8m 宽 x 2 m 长 x 1 张</p>
       </div>
     </div>
 
@@ -107,7 +107,7 @@
   p{
     line-height:22px;
   }
-  @media (max-width:1144px) {
+  @media (max-width:1200px) {
     .detailho {
       width: 90%;
       margin-left: 5%;

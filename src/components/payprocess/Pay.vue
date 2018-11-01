@@ -93,12 +93,18 @@
           <div class="payway">
             <span class="label label-info">支付方式</span><br><br>
             <h5>支付平台</h5>
+            <!--<el-radio-group v-model="radio">-->
             <ul class="list-inline">
-              <li><input type="radio" v-model="radio1" name="radios" id="1"><label for="1">&nbsp;&nbsp;<img src="../../assets/pay1.jpg" alt="" style="max-width: 50px"></label></li>
-              <li><input type="radio" v-model="radio2" name="radios" id="2"><label for="2">&nbsp;&nbsp;<img src="../../assets/pay2.jpg" alt="" style="max-width: 50px"></label></li>
-              <li><input type="radio" v-model="radio3" name="radios" id="3"><label for="3">&nbsp;&nbsp;<img src="../../assets/pay3.jpg" alt="" style="max-width: 80px"></label></li>
-              <li><input type="radio" v-model="radio4" name="radios" id="4"><label for="4">&nbsp;&nbsp;<img src="../../assets/pay4.jpg" alt="" style="max-width: 80px"></label></li>
+              <!--<li><input type="radio" v-model="radio1" name="radios" value="1">&nbsp;&nbsp;<img src="../../assets/pay1.jpg" alt="" style="max-width: 50px"></li>-->
+              <!--<li><input type="radio" v-model="radio2" name="radios" value="2">&nbsp;&nbsp;<img src="../../assets/pay2.jpg" alt="" style="max-width: 50px"></li>-->
+              <!--<li><input type="radio" v-model="radio3" name="radios" value="3">&nbsp;&nbsp;<img src="../../assets/pay3.jpg" alt="" style="max-width: 80px"></li>-->
+              <!--<li><input type="radio" v-model="radio4" name="radios" value="4">&nbsp;&nbsp;<img src="../../assets/pay4.jpg" alt="" style="max-width: 80px"></li>-->
+              <li><el-radio v-model="radio" label="1">&nbsp;&nbsp;<img src="../../assets/pay1.jpg" alt="" style="max-width: 50px"></el-radio></li>
+              <li><el-radio v-model="radio" label="2">&nbsp;&nbsp;<img src="../../assets/pay2.jpg" alt="" style="max-width: 50px"></el-radio></li>
+              <li><el-radio v-model="radio" label="3">&nbsp;&nbsp;<img src="../../assets/pay3.jpg" alt="" style="max-width: 80px"></el-radio></li>
+              <li><el-radio v-model="radio" label="4">&nbsp;&nbsp;<img src="../../assets/pay4.jpg" alt="" style="max-width: 80px"></el-radio></li>
             </ul>
+            <!--</el-radio-group>-->
           </div>
         </div>
         <br>
@@ -141,10 +147,11 @@
     name: "Pay",
     data(){
       return {
-        radio1: false,
-        radio2: false,
-        radio3: false,
-        radio4: false,
+        radio:false,
+        // radio1: false,
+        // radio2: false,
+        // radio3: false,
+        // radio4: false,
         activeNames: ['1'],
         maxId:'',
         sname:sessionStorage.getItem('sname'),
@@ -223,7 +230,8 @@
 
       pays(index) {
         let _this = this
-        if (this.radio1 == false && this.radio2 == false && this.radio3 == false && this.radio4 == false)
+        if (this.radio == false)
+        // if (this.radio1 == false || this.radio2 == false || this.radio3 == false || this.radio4 == false)
           alert('请选择支付方式!')
         else
           this.$router.push({path: '/finish'})
