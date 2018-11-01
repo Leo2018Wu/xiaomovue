@@ -302,28 +302,28 @@
           alert('请确认信息不为空')
         }else{
           let _this=this
-          var date = new Date();
-          var seperator1 = "-";
-          var year = date.getFullYear();
-          var month = date.getMonth() + 1;
-          var strDate = date.getDate();
-          let house = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
-          let minute = date.getMinutes()  < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
-          let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-          if (month >= 1 && month <= 9) {
-            month = "0" + month;
-          }
-          if (strDate >= 0 && strDate <= 9) {
-            strDate = "0" + strDate;
-          }
-          var currentdate = year + seperator1 + month + seperator1 + strDate+' '+house+minute+seconds;
-          _this.$store.state.newdate=currentdate
-          console.log('当前时间'+_this.$store.state.newdate)
+          // var date = new Date();
+          // var seperator1 = "-";
+          // var year = date.getFullYear();
+          // var month = date.getMonth() + 1;
+          // var strDate = date.getDate();
+          // let house = date.getHours() < 10 ? '0' + date.getHours() + ':' : date.getHours() + ':';
+          // let minute = date.getMinutes()  < 10 ? '0' + date.getMinutes() + ':' : date.getMinutes() + ':';
+          // let seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+          // if (month >= 1 && month <= 9) {
+          //   month = "0" + month;
+          // }
+          // if (strDate >= 0 && strDate <= 9) {
+          //   strDate = "0" + strDate;
+          // }
+          // var currentdate = year + seperator1 + month + seperator1 + strDate+' '+house+minute+seconds;
+          // _this.$store.state.newdate=currentdate
+          // console.log('当前时间'+_this.$store.state.newdate)
           axios.post("http://localhost:3000/order", {
             arrvialDate: _this.$store.state.create_start_date,
             leaveDate: _this.$store.state.create_end_date,
             hPrice: _this.$store.state.houseprice,
-            oDate: _this.$store.state.newdate,
+            // oDate: _this.$store.state.newdate,
             oStatus: 0,
             uId: sessionStorage.getItem('suId'),
             hId: _this.$store.state.househId,
