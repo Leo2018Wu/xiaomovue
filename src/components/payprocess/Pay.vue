@@ -108,7 +108,7 @@
           </div>
         </div>
         <br>
-        <center><a><el-button type="danger" @click="pays" round>支付</el-button></a></center>
+        <center><a><el-button type="danger" @click="pays" round>立即支付</el-button></a></center>
         <br>
         <!--帮助-->
         <div class="help">
