@@ -6,16 +6,21 @@
         <div class="h1">点击进入小沫短租</div>
       </div>
       <div class="login-right">
-        <div class="h2" style="margin-top: 70px">登&nbsp;录</div>
+        <!--<div class="h2" style="margin-top: 70px">登&nbsp;录</div>-->
+        <div style="width: 40px;height: 40px;margin-top:20px">
+          <img src="../../../static/images/photo/animated_favicon1.gif" alt="" style="margin-top: 20px;max-width: 100%;max-height: 100%;transform: scale(2,2)">
+        </div>
         <div class="form-group">
-          <input v-model="phonenum" id="phonenum" type="text" placeholder="请输入手机号">
+          <input v-model="phonenum" id="phonenum" type="text"  placeholder="请输入手机号">
           <label for="phonenum">手机号</label>
         </div>
         <div class="form-group">
           <input v-model="password" id="password" type="password" placeholder="请输入密码">
           <label for="password">密码</label>
         </div>
+        <div ><a href="http://localhost:8080/fpwd" style="color: #aaaaaa">找回密码</a></div>
         <div class="button-area">
+
           <button class="btn btn-primary" v-on:click="UserButton()">登&nbsp;录</button>
         </div>
       </div>
@@ -87,6 +92,7 @@
     padding: 0;
     height: 100%;
   }
+  a:hover{text-decoration: none}
   body {
     font-family: 'Lato', sans-serif;
     display: -webkit-box;
