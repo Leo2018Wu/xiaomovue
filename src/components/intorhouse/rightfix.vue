@@ -187,7 +187,7 @@
   }
   @media (min-width:1500px) {
     .rigfix{
-      right:15%;
+      right:10%;
 
     }
   }
