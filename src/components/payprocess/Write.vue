@@ -173,7 +173,7 @@
         <center><a><el-button type="danger" @click="submits" round>提交订单</el-button></a></center>
       </div>
     </div>
-    <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
+    <a href="#to" title="飞回顶部" style="right:0;bottom:3%;position:fixed">
       <div style="width: 100px;height: 100px;"><img src="../../assets/rocket.png" alt="" style="max-width:100%;max-height:100%"></div>
     </a>
   </div>

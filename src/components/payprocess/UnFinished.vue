@@ -16,7 +16,7 @@
             <h2>请到个人中心付款</h2>
           </center>
           <br>
-          <center><h5>小沫更多好房等你来选，看看更多房源吧</h5></center>
+          <center><h5>小沫更多好房等你来选，看看 <router-link to="/house/order"><a>更多</a></router-link> 房源吧</h5></center>
           <center><router-link to="/center/orderempty"><a>去支付</a></router-link></center>
         </div>
         <br>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
+    <a href="#to" title="飞回顶部" style="right:0;bottom:3%;position:fixed">
       <div style="width: 100px;height: 100px;"><img src="../../assets/rocket.png" alt="" style="max-width:100%;max-height:100%"></div>
     </a>
   </div>
