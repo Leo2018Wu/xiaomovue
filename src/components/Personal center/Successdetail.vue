@@ -8,7 +8,7 @@
             <div class="t1">
               <span class="label label-info">入住信息</span><br><br>
               房源信息：{{mydatas[0].hName}}<br><br>
-              入住时段：{{mydatas[0].arrvialDate}}-{{mydatas[0].leaveDate}}<br>
+              入住时段：{{mydatas[0].arrvialDate}}---{{mydatas[0].leaveDate}}<br>
             </div>
             <br>
             <div class="t2" >
@@ -45,10 +45,10 @@
                     <th style="width: 25%">房租</th>
                     <td style="width: 15%">￥{{mydatas[0].hPrice}}</td>
                     <td style="width: 15%">1</td>
-                    <td style="width: 15%">{{(Date.parse(mydatas[0].leaveDate.substring(0,10))-Date.parse(mydatas[0].arrvialDate.substring(0,10)))/1000/60/60/24}}天</td>
+                    <td style="width: 15%">{{(Date.parse(mydatas[0].leaveDate)-Date.parse(mydatas[0].arrvialDate))/1000/60/60/24}}天</td>
                     <!--assessments[0].aDate.substring(0,10)-->
                     <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
-                    <td style="width: 15%">￥{{(Date.parse(mydatas[0].leaveDate.substring(0,10))-Date.parse(mydatas[0].arrvialDate.substring(0,10)))/1000/60/60/24*mydatas[0].hPrice}}</td>
+                    <td style="width: 15%">￥{{(Date.parse(mydatas[0].leaveDate)-Date.parse(mydatas[0].arrvialDate))/1000/60/60/24*mydatas[0].hPrice}}</td>
                   </tr>
                   </tbody>
                 </table>

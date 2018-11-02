@@ -8,7 +8,7 @@
                     </div></el-col>
                     <el-col :span="20":offset="2"><div class="grid-content bg-purple-light">
                       <div><h4>{{assessment.hName}}</h4>
-                      <span class="aDate">{{assessment.aDate}}</span>
+                      <span class="aDate">{{assessment.aDate.substring(0,10)}}</span>
                       <el-button style="float: right; padding: 3px 0" type="text">
                         <el-button type="text" @click="centerDialogVisible = true">
                           <i class="el-icon-delete"></i>

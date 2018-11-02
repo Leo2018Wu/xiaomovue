@@ -2,12 +2,12 @@
 
     <div class="dianpin col-xs-8" style="clear:both;margin-top:10px;">
       <div style="margin-top:10px;margin-bottom:20px;font-size:20px;line-height:40px;background-color:#fff;">
-        <span  v-on:click="changeone" ref="first" >本房源点评({{dianlen}})</span>
+        <span  v-on:click="changeone" ref="first" >本房源点评({{dianlength}})</span>
         <span  v-on:click="changetwo" ref="second" style="margin-left:20px;">房客日记({{darilylen}})</span>
       </div>
 
       <div class="a1" v-if="isshow == 1" style="background-color:#fff;">
-        <div style="width:100%;height:800px;">
+        <div style="width:100%;">
         <say-house></say-house>
         </div>
       </div>
@@ -28,25 +28,11 @@
       data() {
         return {
           activeName: 'second',
-          dianlen:this.$store.state.dianlen,
           isshow:1,
           darilylen:4,
+          dianlength:'',
+          hIdsco:this.$route.params.hId,
         };
-      },
-      computed:{
-          sayhome: {
-            get() {
-              return this.dian + this.fenshu
-            }
-          },
-
-        wridar: {
-          get() {
-            return this.fang + this.jinum
-          }
-        }
-
-
       },
       components:{
           "say-house":sayhouse,
@@ -70,8 +56,14 @@
 
       },
       mounted(){
-        this.$refs.first.style.color = '#ff666a';
-      }
+        let _this=this;
+        _this.$refs.first.style.color = '#ff666a';
+          axios.get(`http://localhost:3000/assessment/allassment/${_this.hIdsco}`).then(function (res) {
+            _this.dianlength=res.data.data.length;
+          }).catch(function (err) {
+            console.log(error);
+          })
+      },
     }
 </script>
 

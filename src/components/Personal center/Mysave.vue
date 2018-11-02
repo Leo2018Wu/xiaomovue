@@ -8,6 +8,7 @@
             <span>{{save.hName}}</span>
             <div class="bottom clearfix">
               <time class="time">{{save.hLocation}}</time><br>
+              <time class="time">{{save.sDate.substring(0,10)}}</time><br>
               <el-button style="color: #ff666A" type="text" @click="centerDialogVisible = true;">删除</el-button>
               <el-dialog
                 title="删除"

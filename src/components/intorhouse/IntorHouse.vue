@@ -3,7 +3,7 @@
 
     <p class="col-xs-6 p1"  >{{housename[0]}}</p>
     <p class="col-xs-6 p2" style="clear:both;" >
-      <span class="glyphicon glyphicon-map-marker"><span style="margin-left:-10px;">{{houselocation[0]}}</span></span></p>
+      <span class="glyphicon glyphicon-map-marker"><span  >{{houselocation[0]}}</span></span></p>
     <lunbo-lun></lunbo-lun>
     <rigfix-rig></rigfix-rig>
     <detail-de></detail-de>

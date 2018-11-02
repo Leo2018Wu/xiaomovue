@@ -25,7 +25,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
     <el-button  type="primary" @click="centerDialogVisible2 = false">取 消</el-button>
-    <el-button type="primary" @click="centerDialogVisible2 = false;submitForm('ruleForm2')">确 定</el-button>
+    <el-button type="primary" @click="centerDialogVisible2 = false;updateIdInfo()">确 定</el-button>
   </span>
     </el-dialog>
     <span style="color: rgba(114,113,108,0.91)">仅用于必要的安全环节，其他情况下将为您严格保密</span>
@@ -80,27 +80,28 @@
           }
         };
       },
+      mounted(){
+        axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result)=> {
+          this.ruleForm2.tureName = result.data.data[0].uTrueName
+          this.ruleForm2.idCard = result.data.data[0].uCardId
+          this.ruleForm2.sex = result.data.data[0].uSex
+        },(err) =>{
+          console.log(result.err)
+        })
+      },
       methods: {
-        submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              axios.post('http://localhost:3000/userorderdis/updateIdInfo',{
-                uId:1,
-                uTrueName: this.ruleForm2.tureName,
-                uCardId:this.ruleForm2.idCard,
-                uSex:this.ruleForm2.sex
-              }).then((response)=>{
-                alert('修改成功')
-              }).catch((err)=>{
-                alert('修改失败')
-                console.log(err)
-              })
-              alert('submit!');
-            } else {
-              console.log('error submit!!');
-              return false;
-            }
-          });
+        updateIdInfo(){
+          axios.post('http://localhost:3000/userorderdis/updateIdInfo',{
+            uId:1,
+            uTrueName: this.ruleForm2.tureName,
+            uCardId:this.ruleForm2.idCard,
+            uSex:this.ruleForm2.sex
+          }).then((response)=>{
+            alert('修改成功')
+          }).catch((err)=>{
+            alert('修改失败')
+            console.log(err)
+          })
         },
         resetForm(formName) {
           this.$refs[formName].resetFields();
