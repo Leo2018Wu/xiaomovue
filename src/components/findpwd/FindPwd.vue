@@ -1,26 +1,24 @@
 <template>
 
-  <div style="min-width: 800px">
-      <img src="../../../static/images/housedetail/findbackground.jpg" style="width:100%;float:left;">
-    <div>
-
-      <form style="position:absolute;z-index:999;margin-top:200px; "  class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-3">
+  <div  class="fpwd container">
+    <div class="col-sm-4 col-sm-push-3 ">
+      <form style="margin-top:200px;" >
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
           <el-form-item label="手机号" prop="phoneNum">
             <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="验证码" prop="code">
             <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off"></el-input>
-            <el-button type="primary" @click="getMessage" style="margin-top:28px">获取验证码</el-button>
-            <el-button type="primary" @click="submitForm('ruleForm')"   >更改密码</el-button>
+            <button  style="width:40%;margin-top:30px;" @click="getMessage"  >获取验证码</button>
+            <button  style="width:40%;margin-left:40px;" @click="submitForm('ruleForm')">更改密码</button>
           </el-form-item>
 
         </el-form>
 
       </form>
       </div>
+</div>
 
-    </div>
 </template>
 <script>
   export default {
@@ -102,5 +100,18 @@
   * {
     margin: 0;
     padding: 0;
+  }
+  .fpwd{
+
+    width:100%;
+    height:800px;
+    background-image: url("../../assets/registerbg.jpg");
+  }
+  button{
+    background-color:#287ba7;
+    border:0;
+    border-radius:5px;
+
+
   }
 </style>
