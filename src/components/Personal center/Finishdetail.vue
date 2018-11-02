@@ -29,7 +29,7 @@
         <div class="Costs">
           <br>
           &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
-          <br>
+          <br><br>
           <div class="table">
             <table class="table table-bordered" style="width: 95%;background: white">
               <tbody>
@@ -69,10 +69,6 @@
     name: "Pay",
     data(){
       return {
-        radio1: false,
-        radio2: false,
-        radio3: false,
-        radio4: false,
         activeNames: ['1'],
         oId:this.$route.params.oIde,
         mydatas:[],

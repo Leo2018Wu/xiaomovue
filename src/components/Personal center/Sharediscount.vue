@@ -1,6 +1,6 @@
 <template>
  <div>
-  <img src="../../assets/discount.png"/>
+  <img style="width: 100%;height: 100%" src="../../assets/discount.png"/>
    <div class="discountNum">
          <span class="share_region">
            {{mydata.uPhone}}
@@ -49,21 +49,6 @@
             })
             .catch(_ => {});
         },
-        // updateuInviteCode(){
-        //     axios.post('http://localhost:3000/userorderdis/perfect/1',{
-        //       // activityCommentId:12,
-        //       uInviteCode:this.invitation
-        //     }).then((response)=>{
-        //       // if(response.data.status==200){
-        //       // alert('修改成功！')
-        //       // }
-        //       // else alert('评论失败')
-        //     }).catch((err)=>{
-        //       // alert('修改失败')
-        //       console.log(err)
-        //     })
-        //
-        // }
       },
       mounted(){
         axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
@@ -82,7 +67,8 @@
 <style scoped>
 
 img{
-  width: 100%;
+  width: 80%;
+  height: 80%;
 }
 .erweima{
     width:180px;
@@ -116,7 +102,7 @@ img{
  .link{
    position: absolute;
    left: 50%;
-   margin-left: -30%;
+   margin-left: -25%;
    margin-top: 8%;
    list-style: none;
  }
