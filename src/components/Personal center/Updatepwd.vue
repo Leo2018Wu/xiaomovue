@@ -74,7 +74,7 @@
     },
     //${sessionStorage.getItem('suId')}
     mounted(){
-      axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result)=> {
+      axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.userInfo = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -88,7 +88,7 @@
             if (this.ruleForm2.code === this.ruleForm2.checkCode) {
               alert('身份验证成功')
               axios.post("http://localhost:3000/userorderdis/perfect/idchangpwd",{
-                uid:1,
+                uid:sessionStorage.getItem('suId'),
                 upwd:_this.ruleForm2.checkPass
               }).then((result)=>{
                 _this.ruleForm2.pass="",
@@ -136,5 +136,18 @@
 <style>
   .updatePwd{
     width: 50%;
+  }
+  .el-icon-delete{
+    color: #ff666A;
+  }
+  .el-button--primary {
+    color: #fff;
+    background-color: #ff666A;
+    border-color: #ff666A;
+  }
+  .el-button--primary:focus, .el-button--primary:hover {
+    background: #ff666A;
+    border-color: #ff666A;
+    color: #fff;
   }
 </style>

@@ -17,7 +17,7 @@
         <p >额外的服务费用不包含在总房租内，由房东线下收取。 </p>
       </div>
       </div>
-      <div style=" width:100%;height:160px; ">
+      <div style=" width:100%;">
         <h2 style="font-size:25px;color:#afafaf;margin-left:10%;  ">退订规则</h2>
         <el-steps :active="2" align-center>
           <el-step title="预定成功" description="如取消订单，定金全部退还"></el-step>
@@ -45,7 +45,7 @@
   .knowho{
      margin-left:2%;
     margin-top:10px;
-    height:650px;
+
     background-color: #fff;
   }
   p{

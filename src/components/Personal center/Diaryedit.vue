@@ -23,11 +23,11 @@
         message:'',
         oId:this.$route.params.oIdr,
         oneOrder:[],
-        upath:''
+        upath:[ ]
       };
     },
     mounted(){
-      axios.get(`http://localhost:3000/order/getoneorder/${this.oId}`).then((result)=> {
+      axios.get(`http://127.0.0.1:3000/order/getoneorder/${this.oId}`).then((result)=> {
         this.oneOrder = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -40,6 +40,8 @@
           alert('你还没有输入日记标题哦')
         }else if (this.message==''){
           alert('你还没有输入日记内容哦')
+        }else if (this.upath == ''){
+          alert('你还没有提交图片哦')
         }else{
           var zipFormData=new FormData();
           for(var i = 0 ; i< this.upath.length ; i++){
@@ -48,7 +50,7 @@
           zipFormData.append('dContent',this.message)
           zipFormData.append('dDate',new Date().toLocaleString())
           zipFormData.append('recommend',1)
-          zipFormData.append('uId',1)
+          zipFormData.append('uId',sessionStorage.getItem('suId'))
           zipFormData.append('hId',this.oneOrder[0].hId)
           zipFormData.append('dTitle',this.title)
           zipFormData.append('oId',this.oneOrder[0].hId)

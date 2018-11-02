@@ -101,7 +101,7 @@
   .detailho{
     margin-left:2%;
     margin-top:10px;
-    height:1100px;
+
     background-color: #fff;
   }
   p{
@@ -116,9 +116,7 @@
       height:200px;
     }
   }
-  .ruzhu{
-    height:200px;
-  }
+
 
 </style>
 

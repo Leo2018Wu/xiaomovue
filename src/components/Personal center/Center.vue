@@ -19,7 +19,7 @@
             <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;我的收藏</router-link>
           <router-link class="list-group-item"  tag="li" active-class="active" to="/center/occupant">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;常用入住人</router-link>
-          <router-link class="list-group-item"  tag="li" active-class="active" to="/center/personaldata">
+          <router-link class="list-group-item"  tag="li" active-class="active" to="/center/updateInfo">
             <span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;个人资料</router-link>
           <router-link class="list-group-item"  tag="li" active-class="active" to="/center/updatepwd">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;密码设置</router-link>

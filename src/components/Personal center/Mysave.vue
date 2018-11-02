@@ -8,6 +8,7 @@
             <span>{{save.hName}}</span>
             <div class="bottom clearfix">
               <time class="time">{{save.hLocation}}</time><br>
+              <time class="time">{{save.sDate.substring(0,10)}}</time><br>
               <el-button style="color: #ff666A" type="text" @click="centerDialogVisible = true;">删除</el-button>
               <el-dialog
                 title="删除"
@@ -20,7 +21,7 @@
     <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
   </span>
               </el-dialog>
-              <el-button type="text" style="color: #ff666A;float: right">详情</el-button>
+              <router-link :to="`/intorhouse/${save.hId}`"> <el-button type="text" style="color: #ff666A;float: right">详情</el-button></router-link>
             </div>
           </div>
         </el-card>
@@ -80,21 +81,15 @@
         centerDialogVisible: false,
         mydata:[],
         saves: [
-          // {hName:'海景房1'},
-          // {hName:'海景房2'},
-          // {hName:'海景房3'},
-          // {hName:'海景房4'},
-          // {hName:'海景房5'},
-          // {hName:'海景房6'},
-          // {hName:'海景房7'},
         ]
       };
     },
 
     mounted(){
-      axios.get('http://localhost:3000/save/uSave/1').then((result)=> {
+      axios.get(`http://localhost:3000/save/uSave/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.mydata = result.data.data
         this.saves.push(this.mydata)
+        console.log(this.saves);
       },(err) =>{
         console.log(result.err)
       })

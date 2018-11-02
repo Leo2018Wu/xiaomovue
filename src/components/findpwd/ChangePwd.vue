@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%; ">
     <div>
-      <img src="../../../static/images/housedetail/2.jpg" style="width:100%;float:left;">
+      <img src="../../../static/images/housedetail/max-sandelin-239035-unsplash.jpg" style="width:100%;float:left;">
     </div>
   <div style="margin-top:150px;position:absolute;z-index:99;" class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-4">
     <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
@@ -14,7 +14,7 @@
       <el-form-item label="验证码" prop="code">
         <el-input type="text" v-model="ruleForm2.code" placeholder="请输入验证码" autocomplete="off"></el-input>
         <el-button type="primary" @click="getMessage" style="margin-top:28px">获取验证码</el-button>
-        <el-button type="primary" @click="submitForm('ruleForm2')"   >更改密码</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm2')"  style="margin-left:33%" >更改密码</el-button>
       </el-form-item>
     </el-form>
   </div>

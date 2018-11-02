@@ -1,6 +1,6 @@
 <template>
   <div class="rigfix col-xs-3">
-      <div class="order" >
+      <div class="order"  >
         <br>
         <div style=" margin-left:10px; ">
           <span><img src="../../../static/images/shou.png" style="width:20px;height:20px;"></span>
@@ -28,8 +28,8 @@
           <img :src="headimage" style="width:30%;height:30%;margin:20px 20px;border-radius: 50%;text-align: center">
           <p>等雨停</p>
         </div>
-        <div style="text-align: center;font-size: 18px;margin-top: 15px;color: #ff666A">
-          <p>在线聊天</p>
+        <div style="text-align: center;font-size: 18px;margin-top: 15px;color: #ff666A;">
+          <p >在线聊天</p>
         </div>
       </div>
 
@@ -105,11 +105,9 @@
     },
     mounted(){
       let _this=this;
-        this.$store.state.househscore=this.househscore;
       axios.get(  `http://localhost:3000/house/details/`+this.hId).then(function (result) {
         _this.houseprice=result.data.data[0].hPrice;
         _this.househscore=result.data.data[0].hScore;
-        _this.$store.state.housescore=result.data.data[0].hScore;
         _this.hName = result.data.data[0].hName;
       })
         .catch(function (error) {
@@ -121,7 +119,7 @@
         var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
         var height=scrollHeight-scrollTop-windowHeight;
         if(height<=240){
-          $(".rigfix").css("top","-215px");
+          $(".rigfix").css("top","-240px");
           //动画效果有延迟，效果不好，使用不当
           // $(".rigfix").animate({top:'-160px'},50);
         }else{
@@ -167,7 +165,7 @@
   }
   .order{
     width:100%;
-    height:430px;
+    padding:10px;
     background-color: #ffffff;
     margin-top:54px;
 
@@ -184,8 +182,13 @@
   }
   @media (min-width:1200px) {
     .rigfix{
-      right:80px;
+      right:5%;
     }
   }
+  @media (min-width:1500px) {
+    .rigfix{
+      right:15%;
 
+    }
+  }
 </style>

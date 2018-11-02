@@ -22,8 +22,8 @@
           </div>
         </div>
         </div>
-
-        <div class="block" style="position:absolute;bottom:50px;right:10%;">
+        <div style="width:100%;padding:30px;">
+        <div class="block dibu" style="margin-left:70%;">
           <span class="demonstration">显示总数</span>
           <el-pagination
             @size-change="handleSizeChange"
@@ -34,6 +34,7 @@
             :total="len">
           </el-pagination>
         </div>
+        </div>
       </div>
 
 </template>
@@ -41,57 +42,67 @@
 <script>
   import axios from "axios"
     export default {
-        name: "sayhouse",
+      name: "sayhouse",
 
-          data() {
-          return {
-            message:'hello Vue!',
-                  hIdsco:this.$route.params.hId,
-                  househscore:this.$store.state.housescore,
-            // 分页
-            articleInfoList: [],//每页显示的数据
-            articleList: [],//所有的数据
-            currentPage: 1,//当前页
-            currentPage1: 4,//当前页
-            len: 0,//默认总的数据长度
-            pageSize: 3,//默认每页显示的数量
-          }
-        },
-        created(){
-          let _this =this
-          axios.get(`http://localhost:3000/assessment/allassment/${_this.hIdsco}`).then(function (res) {
-                _this.articleList=res.data.data;
-                _this.len = res.data.data.length;
-                _this.$store.state.dianlen=res.data.data.length;
-                _this.handleInfo();
-                }).catch(function (err) {
-                  console.log(error);
-                })
-        },
-        methods: {
-          handleCurrentChange(val) {
-            this.articleInfoList=this.articleList[val-1]
-          },
-          handleInfo() {
-            // 页数，如果有小数，只取整数部分
-            let pageNum = Number(String(this.len / this.pageSize).split(".")[0]);
-            // 定义一个空数组
-            let newArr = [];
-            // 遍历获取的数据，每次遍历都从数组的0位置开始截取，截取数量为每页显示的数量
-            for (let i = 0; i < pageNum; i++) {
-              newArr.push(this.articleList.splice(0, this.pageSize));
-            }
-            // 判断剩余的数据有没有小于每一页的数量，如果小于，就把剩余的数据放进newArr数组
-            if (this.articleList.length < this.pageSize) {
-              newArr.push(this.articleList.splice(0, this.articleList.length));
-            }
-            // 将新的数组赋给articleList[],用来渲染页面
-            this.articleList = newArr;
-            // 第一次进入页面显示this.articleList[]数组的第一个元素
-            this.articleInfoList = this.articleList[0]
-          },
-
+      data() {
+        return {
+          message: 'hello Vue!',
+          hIdsco: this.$route.params.hId,
+          househscore: this.$store.state.housescore,
+          // 分页
+          articleInfoList: [],//每页显示的数据
+          articleList: [],//所有的数据
+          currentPage: 1,//当前页
+          currentPage1: 4,//当前页
+          len: 0,//默认总的数据长度
+          pageSize: 3,//默认每页显示的数量
         }
+      },
+      created() {
+        let _this = this
+
+        axios.get(`http://localhost:3000/assessment/allassment/${_this.hIdsco}`).then(function (res) {
+          _this.articleList = res.data.data;
+          _this.len = res.data.data.length;
+          _this.handleInfo();
+        }).catch(function (err) {
+          console.log(error);
+        })
+      },
+      methods: {
+        handleCurrentChange(val) {
+          this.articleInfoList = this.articleList[val - 1]
+        },
+        handleInfo() {
+          // 页数，如果有小数，只取整数部分
+          let pageNum = Number(String(this.len / this.pageSize).split(".")[0]);
+          // 定义一个空数组
+          let newArr = [];
+          // 遍历获取的数据，每次遍历都从数组的0位置开始截取，截取数量为每页显示的数量
+          for (let i = 0; i < pageNum; i++) {
+            newArr.push(this.articleList.splice(0, this.pageSize));
+          }
+          // 判断剩余的数据有没有小于每一页的数量，如果小于，就把剩余的数据放进newArr数组
+          if (this.articleList.length < this.pageSize) {
+            newArr.push(this.articleList.splice(0, this.articleList.length));
+          }
+          // 将新的数组赋给articleList[],用来渲染页面
+          this.articleList = newArr;
+          // 第一次进入页面显示this.articleList[]数组的第一个元素
+          this.articleInfoList = this.articleList[0]
+        },
+
+      },
+      mounted() {
+        let _this = this;
+        axios.get(`http://localhost:3000/house/details/` + this.hIdsco).then(function (result) {
+          _this.househscore = result.data.data[0].hScore;
+
+        })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
 </script>
 <style scoped>
@@ -104,5 +115,6 @@ button,input{
   span{
     color:#ff666a;
   }
+
 
 </style>

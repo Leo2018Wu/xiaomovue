@@ -15,7 +15,7 @@
             <div class="grid-content bg-purple-light">
               <p>房源名称：{{orderInfo.hName}}</p>
               <p>房源地址：{{orderInfo.hLocation}}</p>
-              <p>出租时间：{{orderInfo.hArrivalDate}}-{{orderInfo.hLeaveDate}}</p>
+              <p>出租时间：{{orderInfo.hArrivalDate}}---{{orderInfo.hLeaveDate}}</p>
               <p>下单时间：{{orderInfo.oDate}}</p>
             </div>
           </el-col>
@@ -68,7 +68,7 @@
       }
     },
     mounted(){
-      axios.get('http://localhost:3000/order/getFinishorder/1').then((result)=> {
+      axios.get(`http://localhost:3000/order/getFinishorder/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.orderInfos = result.data.data
       },(err) =>{
         console.log(result.err)
