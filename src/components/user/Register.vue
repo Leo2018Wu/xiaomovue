@@ -5,7 +5,7 @@
         <el-form :model="ruleForm" status-icon :rules="rules2" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="" prop="phoneNum">
             <span style="margin-right: 10px"><img src="../../assets/phone.png" alt=""></span>
-            <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off" style="width: 70%"></el-input>
+            <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autofocus="true" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
           <el-form-item label="" prop="userName">
             <span style="margin-right: 10px"><img src="../../assets/user.png" alt=""></span>
@@ -90,8 +90,8 @@
       };
       var validateCode = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请获取验证码'));
-        } else if (value !== this.ruleForm.code) {
+          callback(new Error('请输入验证码'));
+        } else if (value !== this.getcode) {
           callback(new Error('验证码有误，请重新输入!'));
         } else {
           callback();
@@ -151,37 +151,37 @@
         },(err) =>{
           console.log(result.err)
         })
-        this.ruleForm.code='';
+        this.getcode='';
         for(let i =0;i<6;i++){
-          _this.ruleForm.code += Math.floor(Math.random()*10);
+          _this.getcode += Math.floor(Math.random()*10);
         }
-        axios.get('http://v.juhe.cn/sms/send?mobile='+ _this.ruleForm.phoneNum+'&tpl_id=109980&tpl_value=%23code%23%3d'+_this.ruleForm.code+'&key=1a0fa998344f2822bbaf4c05e1235c7b')
+        axios.get('http://v.juhe.cn/sms/send?mobile='+ _this.ruleForm.phoneNum+'&tpl_id=111270&tpl_value=%23code%23%3d'+_this.getcode+'&key=9a45f12279dd865075121c320132b7d3')
           .then(function(res){
               console.log(res)
             }
           )
-        function invokeSettime(obj){
-          var countdown=60;
-          settime(obj);
-          function settime(obj) {
-            if (countdown == 0) {
-              $(obj).attr("disabled",false);
-              $(obj).text("获取验证码");
-              countdown = 60;
-              return;
-            } else {
-              $(obj).attr("disabled",true);
-              $(obj).text("(" + countdown + ")s重新发送");
-              countdown--;
-            }
-            setTimeout(function() {
-                settime(obj) }
-              ,1000)
-          }
-        }
-
-        new invokeSettime("#showcode");
-
+      //   function invokeSettime(obj){
+      //     var countdown=60;
+      //     settime(obj);
+      //     function settime(obj) {
+      //       if (countdown == 0) {
+      //         $(obj).attr("disabled",false);
+      //         $(obj).text("获取验证码");
+      //         countdown = 60;
+      //         return;
+      //       } else {
+      //         $(obj).attr("disabled",true);
+      //         $(obj).text("(" + countdown + ")s重新发送");
+      //         countdown--;
+      //       }
+      //       setTimeout(function() {
+      //           settime(obj) }
+      //         ,1000)
+      //     }
+      //   }
+      //
+      //   new invokeSettime("#showcode");
+      //
       },
       submitForm(formName) {
         if(this.box!=true){

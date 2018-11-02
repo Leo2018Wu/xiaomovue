@@ -1,7 +1,7 @@
 <template>
 
   <div style="min-width: 800px">
-      <img src="../../../static/images/housedetail/findbackground.jpg" style="width:100%;float:left;">
+    <img src="../../../static/images/housedetail/findbackground.jpg" style="width:100%;float:left;">
     <div>
 
       <form style="position:absolute;z-index:999;margin-top:200px; "  class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-3">
@@ -18,9 +18,9 @@
         </el-form>
 
       </form>
-      </div>
-
     </div>
+
+  </div>
 </template>
 <script>
   export default {
@@ -66,36 +66,36 @@
 
 
     methods:{
-        submitForm(formName)
-        {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              let _this=this
-              axios.get(`http://localhost:3000/userorderdis/getallphone/${this.ruleForm.phoneNum}`).then(function (result) {
-               if(result.data.data.length == 1){
-                 _this.$store.state.chphone=_this.ruleForm.phoneNum;
-                 _this.$router.replace("/cpwd")
-               }else{
-                 _this.ruleForm.code=" ";
-                 alert("该手机号不存在，请重新注册！")
-               }
-              });
-            } else {
-              console.log('error submit!!');
-              return false;
-            }
-          })
-        },
-      getMessage()
-        {
-          let _this = this;
-          _this.getcode = '';
-          for (let i = 0; i < 6; i++) {
-            _this.getcode += Math.floor(Math.random() * 10);
+      submitForm(formName)
+      {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            let _this=this
+            axios.get(`http://localhost:3000/userorderdis/getallphone/${this.ruleForm.phoneNum}`).then(function (result) {
+              if(result.data.data.length == 1){
+                _this.$store.state.chphone=_this.ruleForm.phoneNum;
+                _this.$router.replace("/cpwd")
+              }else{
+                _this.ruleForm.code=" ";
+                alert("该手机号不存在，请重新注册！")
+              }
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
           }
-          alert(_this.getcode);
+        })
+      },
+      getMessage()
+      {
+        let _this = this;
+        _this.getcode = '';
+        for (let i = 0; i < 6; i++) {
+          _this.getcode += Math.floor(Math.random() * 10);
         }
+        alert(_this.getcode);
       }
+    }
   }
 </script>
 <style scoped>
