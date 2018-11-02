@@ -1,26 +1,34 @@
 <template>
 
-  <div style="min-width: 800px">
-    <img src="../../../static/images/housedetail/findbackground.jpg" style="width:100%;float:left;">
-    <div>
 
-      <form style="position:absolute;z-index:999;margin-top:200px; "  class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-3">
+
+    <div class="pic row" >
+      <div  >
+      <form style=" margin-top:230px;position:absolute;text-align:center;">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
-          <el-form-item label="手机号" prop="phoneNum">
+
+
+          <el-form-item label="手机号" prop="phoneNum" style="width:400px;margin-left:60%;">
             <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="验证码" prop="code">
+
+
+
+          <el-form-item label="验证码" prop="code"  style="width:400px;margin-left:60%;">
             <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off"></el-input>
             <el-button type="primary" @click="getMessage" style="margin-top:28px">获取验证码</el-button>
             <el-button type="primary" @click="submitForm('ruleForm')"   >更改密码</el-button>
           </el-form-item>
 
+
+
+
+
         </el-form>
 
       </form>
     </div>
-
-  </div>
+    </div>
 </template>
 <script>
   export default {
@@ -99,6 +107,12 @@
   }
 </script>
 <style scoped>
+  .pic{
+    margin-left:5%;
+    height:700px;
+    background-image: url("../../../static/images/housedetail/kk1.jpg");
+    background-repeat: no-repeat;
+  }
   * {
     margin: 0;
     padding: 0;

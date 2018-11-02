@@ -29,9 +29,10 @@
         return {
           activeName: 'second',
           isshow:1,
-          darilylen:4,
+          darilylen:'',
           dianlength:'',
           hIdsco:this.$route.params.hId,
+          recommend:1
         };
       },
       components:{
@@ -62,7 +63,15 @@
             _this.dianlength=res.data.data.length;
           }).catch(function (err) {
             console.log(error);
+          }),
+          axios.get(`http://localhost:3000/diarys/${this.recommend}`).then(function (res) {
+             _this.darilylen=res.data.data.length;
+
           })
+            .catch(function (error) {
+              console.log(error);
+            });
+
       },
     }
 </script>

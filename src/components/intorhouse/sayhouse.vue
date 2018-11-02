@@ -13,12 +13,12 @@
 
         <div  v-for="(content,index) in articleInfoList">
         <div style=" width:90%;margin:20px auto;">
-          <img :src="`../../../static/images/pinglun/`+content.aImages" style="border-radius:50px;height:50px;width:50px;float:left;">
+          <img :src="`../../../static/images/pinglun/`+content.uHeadPic" style="border-radius:50px;height:50px;width:50px;float:left;">
           <div style="display: inline-block;margin-left:40px;width:80%;" class="allcontent">
-            <p><span>{{content.uName}}</span>  入住时间:{{content.arrvialDate.substring(0,10)}}</p>
+            <p><span>{{content.uName}}</span>  点评时间:{{content.aDate.substring(0,10)}}</p>
             <p>{{content.aContent}}</p>
             <p><span>房东回复:</span></p>
-            <p>{{content.rContent}}</p>
+            <p>{{oneallreply[index].rContent}}</p>
           </div>
         </div>
         </div>
@@ -49,6 +49,7 @@
           message: 'hello Vue!',
           hIdsco: this.$route.params.hId,
           househscore: this.$store.state.housescore,
+          oneallreply:[],
           // 分页
           articleInfoList: [],//每页显示的数据
           articleList: [],//所有的数据
@@ -60,7 +61,6 @@
       },
       created() {
         let _this = this
-
         axios.get(`http://localhost:3000/assessment/allassment/${_this.hIdsco}`).then(function (res) {
           _this.articleList = res.data.data;
           _this.len = res.data.data.length;
@@ -98,6 +98,20 @@
         axios.get(`http://localhost:3000/house/details/` + this.hIdsco).then(function (result) {
           _this.househscore = result.data.data[0].hScore;
 
+        })
+          .catch(function (error) {
+            console.log(error);
+          });
+        axios.get(`http://localhost:3000/reply/details/onehouseReply/` + this.hIdsco).then(function (result) {
+          _this.oneallreply = result.data.data;
+          // for(let i=0;i<result.data.data.length;i++){
+          //   if(result.data.data[i].rContent == ''){
+          //      result.data.data[i].rContent="非常高素质、好沟通的客人，把我们的家爱护得很好，希望下次再来";
+          //   }
+          //   _this.oneallreply[i].rContent=result.data.data[i].rContent;
+          //   console.log("这是回复"+ _this.oneallreply[i].rContent)
+          //   alert(i);
+          // }
         })
           .catch(function (error) {
             console.log(error);
