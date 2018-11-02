@@ -34,6 +34,10 @@
             <h6>友情提醒：请在入住当天18点前携带身份证到柜台办理手续</h6>
           </div>
         </div>
+        <br><br>
+        <!--宝箱领取-->
+        <app-cases></app-cases>
+        <br>
       </div>
     </div>
   </div>
@@ -41,6 +45,7 @@
 
 <script>
   import Steps3 from '../steps/Steps3.vue'
+  import Cases from './Cases.vue'
   export default {
     name: "Finish",
     data(){
@@ -51,11 +56,14 @@
         shouseprice:sessionStorage.getItem('shouseprice'),
         start_date:sessionStorage.getItem('start_date'),
         end_date:sessionStorage.getItem('end_date'),
+        mydata:[],
+        houses:[],
       }
     },
     components:{
-      'app-steps3':Steps3
-    }
+      'app-steps3':Steps3,
+      'app-cases':Cases
+    },
   }
 </script>
 

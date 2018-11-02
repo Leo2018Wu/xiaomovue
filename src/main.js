@@ -16,7 +16,7 @@ Vue.use(Element)
 Vue.use(lodash)
 // Vue.use(axios)
 // Vue.use(Axios)
-Vue.prototype.$http = Axios
+// Vue.prototype.$http = Axios
 
 // const router = new Router({
 //   routes:routes,
