@@ -25,7 +25,8 @@
         value1: '',
         message:'',
         oneOrder:[],
-        oId:this.$route.params.oIdt
+        oId:this.$route.params.oIdt,
+        upath:[ ]
       };
     },
     mounted(){
@@ -40,6 +41,8 @@
         let oId = this.$route.params.oIdt
         if(this.message==''){
           alert('你还没有输入评论内容哦')
+        }else if (this.upath == ''){
+          alert('你还没有提交图片哦')
         }else{
           var zipFormData=new FormData();
           for(var i = 0 ; i< this.upath.length ; i++){

@@ -21,7 +21,6 @@ import Myassessment from '../components/Personal center/Myassessment.vue'
 import Mydiary from '../components/Personal center/Mydiary.vue'
 import Diaryempty from '../components/Personal center/Diaryempty.vue'
 import Occupant from '../components/Personal center/Occupant.vue'
-// import Personaldata from '../components/Personal center/Personaldata.vue'
 import UpdateInfo from '../components/Personal center/UpdateInfo.vue'
 import Mysave from '../components/Personal center/Mysave.vue'
 import Updatepwd from '../components/Personal center/Updatepwd.vue'
@@ -77,7 +76,6 @@ export default new Router({
           ]
         },
         {path:'/center/occupant',component:Occupant},
-        // {path:'/center/personaldata',component:Personaldata},
         {path:'/center/updateInfo',component:UpdateInfo},
         {path:'/center/mysave',component:Mysave},
         {path:'/center/orderempty',component:Orderempty,

@@ -40,7 +40,7 @@
         'update-ture': UpdateTure,
       },
       mounted() {
-        axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result) => {
+        axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result) => {
           this.userInfo.name = result.data.data[0].uName
           this.userInfo.phone = result.data.data[0].uPhone
           this.userInfo.email = result.data.data[0].uEmail
@@ -57,7 +57,7 @@
             inputErrorMessage: '邮箱格式不正确'
           }).then(({ value }) => {
             axios.post('http://127.0.0.1:3000/userorderdis/updateuEmail',{
-              uId:1,
+              uId:sessionStorage.getItem('suId'),
               uEmail:value
             }).then((response)=>{
               alert('修改成功')
@@ -80,16 +80,16 @@
           this.$prompt('请输用户名', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
-            inputPattern:/[a-zA-Z0-9_]{3,10}/g,
+            inputPattern:/^[\w\u4e00-\u9fa5]{3,10}$/g,
             inputErrorMessage: '请输入3-10个字母/汉字/数字/下划线'
-          }).then(({ value1 }) => {
+          }).then(({value}) => {
             axios.post('http://127.0.0.1:3000/userorderdis/updateuName',{
-              uId:1,
-              uEmail:value
+              uId:sessionStorage.getItem('suId'),
+             uName:value
             }).then((response)=>{
               alert('修改成功')
-              sessionStorage.setItem('sname',this.userInfo.name)
-              window.location.href='http://localhost:8080/center/personaldata'
+              sessionStorage.setItem('sname',value)
+              window.location.href='http://localhost:8080/center/updateInfo'
             }).catch((err)=>{
               alert('修改失败')
               console.log(err)
@@ -101,7 +101,7 @@
           }).catch(() => {
             this.$message({
               type: 'info',
-              message: '取消修改'
+              message: '修改'
             });
           });
         },

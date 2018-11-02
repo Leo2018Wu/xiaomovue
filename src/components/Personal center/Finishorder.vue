@@ -68,7 +68,7 @@
       }
     },
     mounted(){
-      axios.get('http://localhost:3000/order/getFinishorder/1').then((result)=> {
+      axios.get(`http://localhost:3000/order/getFinishorder/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.orderInfos = result.data.data
       },(err) =>{
         console.log(result.err)

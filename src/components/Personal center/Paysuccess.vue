@@ -76,7 +76,7 @@
         }
       },
       mounted(){
-        axios.get('http://localhost:3000/order/getSuccessorder/1').then((result)=> {
+        axios.get(`http://localhost:3000/order/getSuccessorder/${sessionStorage.getItem('suId')}`).then((result)=> {
           this.orderInfos = result.data.data
           console.log(this.orderInfos);
         },(err) =>{

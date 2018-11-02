@@ -5,7 +5,7 @@
       </div>
     <el-row>
       <el-col :span="21" :offset="3"><div class="grid-content bg-purple">
-        <el-button style="color: #ff666A;text-align: center" type="text" @click="centerDialogVisible = true">
+        <el-button style="text-align: center" type="text" @click="centerDialogVisible = true">
           编辑头像
         </el-button>
       </div></el-col>
@@ -41,7 +41,7 @@
       };
     },
     mounted(){
-      axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result)=> {
+      axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.headPath = result.data.data[0].uHeadPic
       },(err) =>{
         console.log(result.err)
@@ -50,7 +50,7 @@
     methods: {
       edit() {
         var zipFormData=new FormData();
-        zipFormData.append('uId',1)
+        zipFormData.append('uId',sessionStorage.getItem('suId'))
         zipFormData.append('uHeadPic',this.upath[0])
         let config={headers:{'Content-Type':'multipart/form-data'}}
         axios.post('http://localhost:3000/userorderdis/updatePhoto',zipFormData,config)

@@ -33,7 +33,7 @@
       }
     },
     mounted() {
-      axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result) => {
+      axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result) => {
         this.userInfo.turename = result.data.data[0].uTrueName
         this.userInfo.idcard = result.data.data[0].uCardId
         this.userInfo.possport = result.data.data[0].uPossPort
@@ -46,11 +46,11 @@
         this.$prompt('请输入真实姓名', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          inputPattern: /^[\w\u4e00-\u9fa5]{3,10}$/g,
-          inputErrorMessage:'请输入3-10个字母/汉字/数字/下划线'
+          inputPattern: /^[\u4e00-\u9fa5]{2,4}$/,
+          inputErrorMessage:'请输入2到4个字母/汉字/数字/下划线'
         }).then(({ value }) => {
           axios.post('http://127.0.0.1:3000/userorderdis/updateTureName',{
-            uId:1,
+            uId:sessionStorage.getItem('suId'),
             uTrueName:value
           }).then((response)=>{
             alert('修改成功')
@@ -77,7 +77,7 @@
           inputErrorMessage: '请输入正确格式的身份证号'
         }).then(({ value1 }) => {
           axios.post('http://127.0.0.1:3000/userorderdis/updateuIdcard',{
-            uId:1,
+            uId:sessionStorage.getItem('suId'),
             uCardId:value
           }).then((response)=>{
             alert('修改成功')
@@ -104,7 +104,7 @@
           inputErrorMessage: '请输入正确格式的护照号'
         }).then(({ value1 }) => {
           axios.post('http://127.0.0.1:3000/userorderdis/updateuPoss',{
-            uId:1,
+            uId:sessionStorage.getItem('suId'),
             uPossPort:value
           }).then((response)=>{
             alert('修改成功')

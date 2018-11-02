@@ -129,7 +129,7 @@
           occName:this.ruleForm.name,
           occCordId:this.ruleForm.idCard,
           occPhone:this.ruleForm.phone,
-          uId:1
+          uId:sessionStorage.getItem('suId')
         }).then((response)=>{
           window.location.reload()
         }).catch((err)=>{
@@ -140,7 +140,7 @@
     },
 
     mounted(){
-      axios.get('http://localhost:3000/occupant/getOccupant/1').then((result)=> {
+      axios.get(`http://localhost:3000/occupant/getOccupant/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.persons = result.data.data
         // console.log(this.persons)
       },(err) =>{

@@ -32,7 +32,7 @@
       };
     },
     mounted(){
-      axios.get('http://localhost:3000/diarys/udiarys/1').then((result)=> {
+      axios.get(`http://localhost:3000/diarys/udiarys/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.diarys = result.data.data
 
       },(err) =>{

@@ -28,7 +28,7 @@
                       </div>
                       <hr>
                       <p>{{assessment.aContent}}</p>
-                      <div v-for="image in mydata1" style="float: left;margin: 2%">
+                      <div v-for="(image,index) in mydata1" style="float: left;margin: 2%">
                         <img :src="image"/>
                       </div>
                     </div>
@@ -51,9 +51,9 @@
       };
     },
     mounted(){
-      axios.get('http://localhost:3000/assessment/personal/userAssessment/1').then((result)=> {
+      axios.get(`http://localhost:3000/assessment/personal/userAssessment/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.assessments = result.data.data
-        this.mydata=this.assessments[0].aImages
+        this.mydata=this.assessments[index].aImages
         this.mydata = this.mydata.substr(0,this.mydata.length-1)
         this.mydata1=this.mydata.split(',')
       },(err) =>{

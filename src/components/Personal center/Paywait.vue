@@ -71,7 +71,7 @@
       }
     },
     mounted(){
-      axios.get('http://localhost:3000/order/getWaitorder/1').then((result)=> {
+      axios.get(`http://localhost:3000/order/getWaitorder/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.orderInfos = result.data.data
 
       },(err) =>{
