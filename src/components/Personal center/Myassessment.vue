@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <el-card class="box-card" v-for="(assessment,index) in assessments">
+    <el-card class="box-card" v-for="(assessment,index) in pro">
                 <div  class="text item">
                   <el-row>
                     <el-col :span="2"><div class="grid-content bg-purple">
@@ -37,6 +37,21 @@
 
                 </div>
     </el-card>
+    <el-row>
+      <el-col :span="24" offset="9">
+        <div class="block" style="margin: 20px 0">
+          <span class="demonstration"></span>
+          <el-pagination ref="elpage"
+                         @current-change="change()"
+                         :current-page.sync="pageIndex"
+                         layout="prev, pager, next"
+                         :total="pageCount"
+                         :page-size = "pageSize"
+          >
+          </el-pagination>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>
@@ -45,6 +60,10 @@
     data() {
       return {
         centerDialogVisible: false,
+        pageIndex:1,
+        pageSize:3,
+        pageCount:0,
+        pro:[],
         assessments:[ ],
         mydata:[],
         mydata1:[],
@@ -53,6 +72,8 @@
     mounted(){
       axios.get(`http://localhost:3000/assessment/personal/userAssessment/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.assessments = result.data.data
+        this.pageCount = this.assessments.length
+        this.loadData()
         this.mydata=this.assessments[index].aImages
         this.mydata = this.mydata.substr(0,this.mydata.length-1)
         this.mydata1=this.mydata.split(',')
@@ -61,6 +82,21 @@
       })
     },
     methods: {
+      loadData(){
+        this.pro=[];
+        let start=(this.pageIndex-1)*this.pageSize;
+        let end=start +this.pageSize
+        // console.log(this.diarys[1]);
+        if(end>=this.pageCount){
+          end=this.pageCount
+        }
+        for(let i=start;i<end;i++){
+          this.pro.push(this.assessments[i])
+        }
+      },
+      change(){
+        this.loadData()
+      },
       del(index){
         axios.get(`http://localhost:3000/assessment/details/delAssessment/${this.assessments[index].aId}`).then((result)=> {
           console.log("删除成功")

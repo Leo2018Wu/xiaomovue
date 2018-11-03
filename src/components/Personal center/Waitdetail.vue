@@ -1,6 +1,5 @@
 <template>
-  <div class="container" id="to">
-    <div class="row">
+  <div>
       <div class="paypage">
         <!--中间订单页面-->
         <div class="Ordnum">
@@ -28,9 +27,8 @@
             </div>
             <br>
             <div class="Costs">
-              <br>
               &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
-              <br>
+              <br><br>
               <div class="table">
                 <table class="table table-bordered" style="width: 95%;background: white">
                   <tbody>
@@ -75,7 +73,6 @@
        <a><el-button type="danger" @click="pays" round>支付</el-button></a>
         <br>
       </div>
-    </div>
     <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
       <div style="width: 100px;height: 100px;"><img src="../../assets/rocket.png" alt="" style="max-width:100%;max-height:100%"></div>
     </a>
@@ -127,34 +124,39 @@
 
 <style scoped>
   .paypage{
-    margin-top: 60px;
+    margin-top: 5px;
   }
-  .Paytop,.Ordnum,.unsubscribe,.ways{
+  .Ordnum,.unsubscribe,.ways{
     border: 1px solid gainsboro;
     box-shadow: 4px 4px 8px grey;
     border-radius: 10px;
     background-color: #F5F5F5;
   }
-  /*.help{*/
-  /*border: 1px solid gainsboro;*/
-  /*box-shadow: 4px 4px 8px grey;*/
-  /*border-radius: 10px;*/
-  /*background-color:#F5F5F5 ;*/
-  /*}*/
+  .help{
+    background-color:#F5F5F5 ;
+  }
   .Ph3{
     color:#FF666A
   }
   h5{
     font-weight: bold;
   }
-  .unsub,.list-inline,.payway,.t1,.t2,.t3,.t4,.Oh3{
+  .unsub,.list-inline,.payway,.t1,.t2,.t3,.Oh3{
     margin-left: 1%;
   }
+  /*.Costs{*/
+  /*border: 1px solid gainsboro;*/
+  /*box-shadow: 4px 4px 8px grey;*/
+  /*border-radius: 10px;*/
+  /*background-color: #F5F5F5;*/
+  /*}*/
   li{
     margin-right: 2%;
   }
   .label {
     font-size: 180%;
+    background-color: #FF666A;
+    /*label label-info*/
   }
   @media (min-width: 768px) {
     h5{

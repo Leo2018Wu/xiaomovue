@@ -74,8 +74,8 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern:/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
-          inputErrorMessage: '请输入正确格式的身份证号'
-        }).then(({ value1 }) => {
+          inputErrorMessage:'请输入正确的身份证号'
+        }).then(({ value }) => {
           axios.post('http://127.0.0.1:3000/userorderdis/updateuIdcard',{
             uId:sessionStorage.getItem('suId'),
             uCardId:value
