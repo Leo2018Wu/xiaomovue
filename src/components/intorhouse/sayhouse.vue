@@ -25,8 +25,8 @@
               <img :src="img" style=" height:60px;width:60px;margin:10px 0; ">
             </div>
           </div>
-            <div v-else="content.aImages != ''" >
-              <img :src="content.aImages" style=" height:60px;width:60px;margin:10px 0;">
+            <div v-else="content.aImages.split(',').slice(0,-1).length == 1" >
+              <img :src="content.aImages.split(',').slice(0,-1)" style=" height:60px;width:60px;margin:10px 0;">
             </div>
             <p style="margin-top:20px;"><span style="color: #767676;">房东回复:</span></p>
             <p>{{oneallreply[index].rContent}}</p>
