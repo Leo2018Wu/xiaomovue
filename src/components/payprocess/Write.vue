@@ -207,7 +207,7 @@
           ],
           name:[
             { required: true, message: '请输入真实名', trigger: 'blur' },
-            { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+            { pattern: /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,5}$/, message: '长度为2到5个中文字符', trigger: 'blur' }
           ],
           identity:[
             { required: true, message: '请输入身份证号', trigger: 'blur' },
