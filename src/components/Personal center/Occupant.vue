@@ -124,17 +124,26 @@
         })
       },
       addOccupant(){
-        axios.post('http://localhost:3000/occupant/addOccupant',{
-          // activityCommentId:12,
-          occName:this.ruleForm.name,
-          occCordId:this.ruleForm.idCard,
-          occPhone:this.ruleForm.phone,
-          uId:sessionStorage.getItem('suId')
-        }).then((response)=>{
-          window.location.reload()
-        }).catch((err)=>{
-          console.log(err)
-        })
+        /*if(this.ruleForm.phone !=  /^1[3|4|5|7|8][0-9]\d{8}$/  ){
+         alert('输入的手机号格式有误')
+
+        }else if(this.ruleForm.idCard.length != 18){
+          alert('输入的身份证号格式有误')
+        }*/
+
+          axios.post('http://localhost:3000/occupant/addOccupant',{
+            // activityCommentId:12,
+            occName:this.ruleForm.name,
+            occCordId:this.ruleForm.idCard,
+            occPhone:this.ruleForm.phone,
+            uId:sessionStorage.getItem('suId')
+          }).then((response)=>{
+            window.location.reload()
+          }).catch((err)=>{
+            console.log(err)
+          })
+
+
 
       }
     },

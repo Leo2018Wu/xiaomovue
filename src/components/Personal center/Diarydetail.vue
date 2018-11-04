@@ -10,14 +10,12 @@
       <el-row>
         <el-col :span="24"><div class="grid-content bg-purple-dark"><span style="float: right;cursor: pointer;color: #FF666A" @click = del()>删除</span></div></el-col>
       </el-row>
-      <el-row>
-        <div v-for="image in mydata1" style="margin: 2%">
-        <el-col :span="4" >
-          <div class="grid-content bg-purple-dark">
-          <img :src="image" style="height: 50%;width: 100%"/>
+      <el-row >
+        <el-col :span="4" v-for="image in mydata1">
+          <div  style="margin-right: 20px;width: 100px;height: 130px;">
+            <img :src="image"style="width: 100%;height: 100%;"/>
           </div>
         </el-col>
-        </div>
       </el-row>
       <hr>
       <span>评论</span>
@@ -41,7 +39,10 @@
   </el-card>
 </template>
 <style scoped>
-
+  p{
+    line-height: 30px;
+    text-indent:25px;
+  }
   .text {
     font-size: 14px;
   }

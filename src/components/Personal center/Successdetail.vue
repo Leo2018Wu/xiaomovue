@@ -3,7 +3,7 @@
         <br>
         <!--中间订单页面-->
         <div class="Ordnum">
-          <h3 class="Oh3">订单详情成功</h3><br>
+          <h3 class="Oh3">订单详情</h3><br>
           <div class="infornums">
             <div class="t1">
               <span class="label label-info">入住信息</span><br><br>
@@ -29,7 +29,7 @@
             <div class="Costs">
               <br>
               &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
-              <br>
+              <br><br>
               <div class="table">
                 <table class="table table-bordered" style="width: 95%;background: white">
                   <tbody>

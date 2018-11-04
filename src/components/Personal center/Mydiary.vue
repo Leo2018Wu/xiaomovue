@@ -1,7 +1,7 @@
 <template>
   <!--<div class="container">-->
     <div >
-  <el-card class="box-card" v-for="(diary,index) in diarys">
+  <el-card class="box-card" v-for="(diary,index) in pro">
     <div slot="header" class="clearfix">
       <h3 class="dtitle">{{diary.dTitle}}</h3><br>
       <router-link :to="'/center/diaryempty/'+diary.dId"><el-button style="color:#ff666A;float: right; padding: 3px 0" type="text">详情>></el-button></router-link>
@@ -12,6 +12,22 @@
       <p class="dContent">{{diary.dContent }}</p>
     </div>
   </el-card>
+      <el-row>
+        <el-col :span="24" offset="9">
+          <div class="block" style="margin: 20px 0">
+          <span class="demonstration"></span>
+          <el-pagination ref="elpage"
+                         @current-change="change()"
+                         :current-page.sync="pageIndex"
+                         layout="prev, pager, next"
+                         :total="pageCount"
+                         :page-size = "pageSize"
+          >
+          </el-pagination>
+        </div>
+        </el-col>
+      </el-row>
+
     </div>
   <!--</div>-->
 </template>
@@ -21,20 +37,36 @@
     data() {
       return {
         dialogVisible: false,
-        diarys:[
-          // {dTitle:'泰国曼谷芭提雅旅游日记',dContent:'去过很多城市，欣赏过很多风景，体会过很多民风，感觉次次旅游都是走马观花，只留下浅浅的记忆，'},
-          // {dTitle:'叮咚，您有一份熊猫遛娃国庆假期旅游日记，请查收！',dContent:'还是青岛，旅游日记，我只写自己出行的城市，一个人出行，感官更敏感，观察更细致'},
-          // {dTitle:'我的南京旅游日记',dContent:' 这是两地旅游日记的第二篇，如果对菲律宾感兴趣可以看我的前一篇游记'},
-          // {dTitle:'旅游日记 －－包子篇',dContent:'我换了个窗户边的座位，坐在我们一排的是个湖南的阿姨，与yaping开始搭话，原来是女儿带她一起出来旅游的，一提到她女儿她很开心和我们聊开了，女儿是成都某重本的'},
-          // {dTitle:'厦门旅游攻略·学生党旅游·旅游日记',dContent:'……[TOC] 厦门，是一座海边很美的旅游城市，值得一去，废话不多说，接下来分享一下去厦门的几点建议和我的行程安排吧。'},
-
-        ]
+        pageIndex:1,
+        pageSize:3,
+        pageCount:0,
+        pro:[],
+        diarys:[]
       };
     },
+    methods:{
+      loadData(){
+        this.pro=[];
+        let start=(this.pageIndex-1)*this.pageSize;
+        let end=start +this.pageSize
+        // console.log(this.diarys[1]);
+        if(end>=this.pageCount){
+          end=this.pageCount
+        }
+        for(let i=start;i<end;i++){
+          this.pro.push(this.diarys[i])
+        }
+      },
+      change(){
+        this.loadData()
+      }
+    },
     mounted(){
+      let _this=this
       axios.get(`http://localhost:3000/diarys/udiarys/${sessionStorage.getItem('suId')}`).then((result)=> {
-        this.diarys = result.data.data
-
+        _this.diarys = result.data.data
+        _this.pageCount=_this.diarys.length
+        _this.loadData()
       },(err) =>{
         console.log(result.err)
       })
@@ -42,10 +74,6 @@
   }
 </script>
 <style scoped>
-  /*.dtitle{*/
-    /*font-size: 17px;*/
-    /*font-weight: bold;*/
-  /*}*/
   .text {
     font-size: 14px;
   }

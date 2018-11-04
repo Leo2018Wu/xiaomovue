@@ -1,9 +1,7 @@
 <template>
-  <div style="width:100%; ">
-    <div>
-      <img src="../../../static/images/housedetail/max-sandelin-239035-unsplash.jpg" style="width:100%;float:left;">
-    </div>
-  <div style="margin-top:150px;position:absolute;z-index:99;" class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-4">
+  <div style="width:100%; " class="pic" >
+
+  <div style="margin-top:230px;position:absolute; " class="col-xs-6 col-xs-push-3 col-sm-4 col-sm-push-4">
     <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
       <el-form-item label="新密码" prop="pass">
         <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
@@ -13,8 +11,8 @@
       </el-form-item>
       <el-form-item label="验证码" prop="code">
         <el-input type="text" v-model="ruleForm2.code" placeholder="请输入验证码" autocomplete="off"></el-input>
-        <el-button type="primary" @click="getMessage" style="margin-top:28px">获取验证码</el-button>
-        <el-button type="primary" @click="submitForm('ruleForm2')"  style="margin-left:33%" >更改密码</el-button>
+        <el-button type="primary" @click="getMessage" style="margin-top:28px;width:30%;">获取验证码</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm2')"  style="width:30%;" >更改密码</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -123,6 +121,11 @@
     margin: 0;
     padding: 0;
   }
-
+  .pic{
+    margin-left:5%;
+    height:700px;
+    background-image: url("../../../static/images/housedetail/kk2.jpg");
+    background-repeat: no-repeat;
+  }
 
 </style>
