@@ -8,7 +8,7 @@
         <el-row>
           <el-col :span="4">
             <div class="grid-content bg-purple">
-              <img class="media-object" :src="'../../../static/images/'+orderInfo.hPic1"/>
+              <router-link :to="`/intorhouse/${orderInfo.hId}`"> <img class="media-object" :src="'../../../static/images/'+orderInfo.hPic1"/></router-link>
             </div>
           </el-col>
           <el-col :span="15" :offset="1">

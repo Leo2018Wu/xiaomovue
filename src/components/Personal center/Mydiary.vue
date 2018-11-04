@@ -13,7 +13,7 @@
     </div>
   </el-card>
       <el-row>
-        <el-col :span="24" offset="9">
+        <el-col :span="15" offset="9">
           <div class="block" style="margin: 20px 0">
           <span class="demonstration"></span>
           <el-pagination ref="elpage"

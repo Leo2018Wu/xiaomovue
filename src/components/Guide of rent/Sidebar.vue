@@ -42,6 +42,16 @@
   span{
     font-size: 17px;
   }
+  .el-menu-item {
+    font-size: 14px;
+    color: #303133;
+    padding: 0 20px;
+    cursor: pointer;
+    -webkit-transition: border-color .3s,background-color .3s,color .3s;
+    transition: border-color .3s,background-color .3s,color .3s;
+    box-sizing: border-box;
+    width: 180px;
+  }
 </style>
 
 

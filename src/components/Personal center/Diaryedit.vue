@@ -3,13 +3,15 @@
     <h3>标题</h3><textarea v-model="title" cols="60" rows="1"></textarea>
     <textarea v-model="message" cols="120" rows="13"></textarea>
     <button type="submit" style="float: right" @click = addDiary() >提交</button>
-    <el-row>
-      <el-col :span="4"v-for="picture in pictures">
-        <div  style="margin-right: 20px;width: 100px;height: 130px;">
-          <img :src="picture"style="width: 100%;height: 100%;"/>
+    <div class="container-fluid">
+      <div class="row">
+        <div v-for="picture in pictures" class="col-xs-2">
+          <div  style="margin-right: 20px;width: 100px;height: 130px;float: left">
+            <img :src="picture"style="width: 100%;height: 100%;"/>
+          </div>
         </div>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
     <br>
     <input type="file" name="avatar"
            @change="changeImage($event)"
@@ -70,10 +72,10 @@
                 console.log(response.bodyText);
               })
           }
-          // alert("日记发布成功")
-          // this.title=''
-          // this.message=''
-          // this.upath=''
+          alert("日记发布成功")
+          this.title=''
+          this.message=''
+          this.upath=''
         }
         },
       changeImage(e) {

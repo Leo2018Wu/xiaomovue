@@ -3,10 +3,10 @@
     <el-card class="box-card" v-for="(assessment,index) in pro">
                 <div  class="text item">
                   <el-row>
-                    <el-col :span="2"><div class="grid-content bg-purple">
-                      <img src="../../assets/first-center-01.jpg" class="himg"/>
+                    <el-col :span="3"><div class="grid-content bg-purple">
+                      <router-link :to="`/intorhouse/${assessment.hId}`">  <img :src="'../../../static/images/'+assessment.hPic1" class="himg"/></router-link>
                     </div></el-col>
-                    <el-col :span="20":offset="2"><div class="grid-content bg-purple-light">
+                    <el-col :span="20":offset="1"><div class="grid-content bg-purple-light">
                       <div><h4>{{assessment.hName}}</h4>
                       <span class="aDate">{{assessment.aDate.substring(0,10)}}</span>
                       <el-button style="float: right; padding: 3px 0" type="text">
@@ -28,8 +28,9 @@
                       </div>
                       <hr>
                       <p>{{assessment.aContent}}</p>
-                      <div v-for="(image,index) in mydata1" style="float: left;margin: 2%">
-                        <img :src="image"/>
+                      <div class="img" v-for="image in mydata1s[index]" style="float: left;margin: 2%">
+                        <img  :src="image"/>
+                        <!--<img :src="image" onerror="this.src='../../assets/first-center-01.jpg'" />-->
                       </div>
                     </div>
                     </el-col>
@@ -38,7 +39,7 @@
                 </div>
     </el-card>
     <el-row>
-      <el-col :span="24" offset="9">
+      <el-col :span="15" offset="9">
         <div class="block" style="margin: 20px 0">
           <span class="demonstration"></span>
           <el-pagination ref="elpage"
@@ -54,10 +55,13 @@
     </el-row>
   </div>
 </template>
+<!--<script type="text/javascript" src="../../assets/jquery-1.9.1.min.js"></script>-->
 <script>
   import axios from 'axios'
   export default {
     data() {
+
+
       return {
         centerDialogVisible: false,
         pageIndex:1,
@@ -67,16 +71,25 @@
         assessments:[ ],
         mydata:[],
         mydata1:[],
+        mydata1s:[],
       };
     },
     mounted(){
       axios.get(`http://localhost:3000/assessment/personal/userAssessment/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.assessments = result.data.data
+        // console.log( this.assessments[0])
         this.pageCount = this.assessments.length
         this.loadData()
-        this.mydata=this.assessments[index].aImages
+        let j =  this.assessments.length
+        // alert(this.assessments.length)
+        for(var i = 0 ;i < j ; i++){
+        this.mydata=this.assessments[i].aImages
         this.mydata = this.mydata.substr(0,this.mydata.length-1)
         this.mydata1=this.mydata.split(',')
+        // this.mydata1s = this.assessment[0]
+          this.mydata1s.push(this.mydata1)
+        // console.log(this.mydata1s)
+        }
       },(err) =>{
         console.log(result.err)
       })
@@ -115,6 +128,8 @@
   }
   .himg{
     border-radius: 10px;
+    width: 100%;
+    height: 100%;
   }
   .text {
     font-size: 14px;
