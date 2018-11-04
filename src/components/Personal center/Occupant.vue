@@ -42,7 +42,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogFormVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible2 = false;addOccupant()">确 定</el-button>
+        <el-button type="primary" @click="addOccupant()">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -91,27 +91,6 @@
             { pattern:/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,message: '长度是18位数字', trigger: 'blur' }
           ],
         }
-        // form: {
-        //   name: ' ',
-        //   phone: '',
-        //   idCard: '',
-        //   date2: '',
-        //   delivery: false,
-        //   type: [],
-        //   resource: '',
-        //   desc: ''
-        // },
-        // occInfos: {
-        //   name: '1111111',
-        //   region: '',
-        //   date1: '',
-        //   date2: '',
-        //   delivery: false,
-        //   type: [],
-        //   resource: '',
-        //   desc: ''
-        // },
-        // formLabelWidth: '120px'
       };
     },
     methods: {
@@ -124,24 +103,36 @@
         })
       },
       addOccupant(){
-        /*if(this.ruleForm.phone !=  /^1[3|4|5|7|8][0-9]\d{8}$/  ){
-         alert('输入的手机号格式有误')
+        const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
+        const reg2 = /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/
+        const reg3 = /^[\u4e00-\u9fa5]{2,4}$/
+        if(!reg3.test(this.ruleForm.name)){
+          this.dialogFormVisible2 = true
+        }else {
+        if(!reg2.test(this.ruleForm.idCard)){
+        this.dialogFormVisible2 = true
+        } else {
+          if(!reg.test(this.ruleForm.phone)){
+            this.dialogFormVisible2 = true
 
-        }else if(this.ruleForm.idCard.length != 18){
-          alert('输入的身份证号格式有误')
-        }*/
+        }
+        else {
+            axios.post('http://localhost:3000/occupant/addOccupant',{
+              // activityCommentId:12,
+              occName:this.ruleForm.name,
+              occCordId:this.ruleForm.idCard,
+              occPhone:this.ruleForm.phone,
+              uId:sessionStorage.getItem('suId')
+            }).then((response)=>{
+              this.dialogFormVisible2 = false
+              window.location.reload()
+            }).catch((err)=>{
+              console.log(err)
+            })
 
-          axios.post('http://localhost:3000/occupant/addOccupant',{
-            // activityCommentId:12,
-            occName:this.ruleForm.name,
-            occCordId:this.ruleForm.idCard,
-            occPhone:this.ruleForm.phone,
-            uId:sessionStorage.getItem('suId')
-          }).then((response)=>{
-            window.location.reload()
-          }).catch((err)=>{
-            console.log(err)
-          })
+          }
+      }
+        }
 
 
 

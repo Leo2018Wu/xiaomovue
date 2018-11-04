@@ -14,6 +14,7 @@
         <el-col :span="4" v-for="image in mydata1">
           <div  style="margin-right: 20px;width: 100px;height: 130px;">
             <img :src="image"style="width: 100%;height: 100%;"/>
+
           </div>
         </el-col>
       </el-row>
@@ -103,6 +104,36 @@
         })
       },
     },
+  //   del: function (cid) {
+  //     // var index=this.products.indexOf(index);
+  //     // this.products.splice(index,1);
+  //
+  //     let _this = this
+  //     $.ajax({
+  //       url:"http://localhost:3000/deletecart/"+cid,
+  //       type:"get",
+  //       success:function(result){
+  //         _this.products=[],
+  //           _this.ajax()
+  //         _this.getTotalMoney();
+  //         _this.getTotalNum();
+  //       }
+  //     })
+  //   },
+  //   ajax() {
+  //     let _this=this
+  //     axios.get(`http://localhost:3000/getcart/${this.$store.state.uid1}`).then(function (result) {
+  //       _this.products = result.data.data;
+  //       console.log(result.data)
+  //     })
+  //   }
+  // },
+  // created(){
+  //   this.ajax()
+  // }
+  // <button v-on:click="del(product.cid)">删除</button>
+
+
   }
 
 </script>
