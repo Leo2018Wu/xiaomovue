@@ -1,11 +1,11 @@
 <template>
   <div class="allRegidter">
     <div class="row">
-      <div class="col-sm-6 col-sm-push-3">
+      <div class="col-lg-6 col-lg-push-3 col-sm-6 col-sm-push-3">
         <el-form :model="ruleForm" status-icon :rules="rules2" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="" prop="phoneNum">
             <span style="margin-right: 10px"><img src="../../assets/phone.png" alt=""></span>
-            <el-input type="text" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autofocus="true" autocomplete="off" style="width: 70%"></el-input>
+            <el-input type="text" id="inputNum" v-model="ruleForm.phoneNum" placeholder="请输入手机号" autofocus="true" autocomplete="off" style="width: 70%"></el-input>
           </el-form-item>
           <el-form-item label="" prop="userName">
             <span style="margin-right: 10px"><img src="../../assets/user.png" alt=""></span>
@@ -21,8 +21,8 @@
           </el-form-item>
           <el-form-item label="" prop="code">
             <span style="margin-right: 10px"><img src="../../assets/safe.png" alt=""></span>
-            <el-input type="text" v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off" style="width: 45%"></el-input>
-            <el-button type="primary" id="showcode" @click="getMessage" value="免费获取验证码" style="width: 24%">获取验证码</el-button>
+            <el-input type="text"  v-model="ruleForm.code" placeholder="请输入验证码" autocomplete="off" style="width: 45%"></el-input>
+            <el-button type="primary" id="intText" @click="getMessage" value="免费获取验证码" style="width: 24%">获取验证码</el-button>
           </el-form-item>
           <el-form-item label="" prop="inviteNum">
             <span style="margin-right: 10px"><img src="../../assets/friend.png" alt=""></span>
@@ -98,12 +98,17 @@
         }
       };
       // var validateInviteNum = (rule, value, callback) => {
-      //   if (value == '') {
+      //   for(let i=0 ;i<){
+      //     if (value == '') {
       //     alert("请输入好友的邀请码,帮助好友获得优惠哦!没有邀请码,请继续")
       //     callback();
-      //   } else {
-      //     callback();
+      //   }else if(){
+      //
       //   }
+      //   else {
+      //     callback();
+      //   }}
+      //
       // };
 
       return {
@@ -140,6 +145,33 @@
         }
       };
     },
+    mounted(){
+      //短信倒计时
+      let tel
+      let time = 60
+      let t1
+      clearInterval(t1);
+      $('#intText').on("click", function() {
+        tel = $("#inputNum").val();
+        var myreg = /^1(3[0-9]|5[189]|8[6789])[0-9]{8}$/
+        if (!(/^1[34578]\d{9}$/.test(tel))) {
+          alert("手机号不正确");
+        } else {
+          t1 = setInterval(function() {
+
+            time--
+            $("#intText").html(time + "秒再获取")
+            $("#intText").attr("disabled", "disabled")
+            if (time == 0) {
+              time = 60
+              $("#intText").removeAttr("disabled")
+              $("#intText").html("获取验证码")
+              clearInterval(t1)
+            }
+          }, 1000);
+        }
+      })
+    },
     methods: {
       getMessage(){
         let _this = this
@@ -155,33 +187,11 @@
         for(let i =0;i<6;i++){
           _this.getcode += Math.floor(Math.random()*10);
         }
-        axios.get('http://v.juhe.cn/sms/send?mobile='+ _this.ruleForm.phoneNum+'&tpl_id=111270&tpl_value=%23code%23%3d'+_this.getcode+'&key=9a45f12279dd865075121c320132b7d3')
+        axios.get('http://v.juhe.cn/sms/send?mobile='+ _this.ruleForm.phoneNum+'&tpl_id=109980&tpl_value=%23code%23%3d'+_this.getcode+'&key=1a0fa998344f2822bbaf4c05e1235c7b')
           .then(function(res){
               console.log(res)
             }
           )
-      //   function invokeSettime(obj){
-      //     var countdown=60;
-      //     settime(obj);
-      //     function settime(obj) {
-      //       if (countdown == 0) {
-      //         $(obj).attr("disabled",false);
-      //         $(obj).text("获取验证码");
-      //         countdown = 60;
-      //         return;
-      //       } else {
-      //         $(obj).attr("disabled",true);
-      //         $(obj).text("(" + countdown + ")s重新发送");
-      //         countdown--;
-      //       }
-      //       setTimeout(function() {
-      //           settime(obj) }
-      //         ,1000)
-      //     }
-      //   }
-      //
-      //   new invokeSettime("#showcode");
-      //
       },
       submitForm(formName) {
         if(this.box!=true){

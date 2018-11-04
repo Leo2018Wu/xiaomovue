@@ -13,11 +13,22 @@
 
         <div  v-for="(content,index) in articleInfoList">
         <div style=" width:90%;margin:20px auto;">
-          <img :src="`../../../static/images/pinglun/`+content.uHeadPic" style="border-radius:50px;height:50px;width:50px;float:left;">
+          <img :src="content.uHeadPic" style="border-radius:50px;height:50px;width:50px;float:left;">
           <div style="display: inline-block;margin-left:40px;width:80%;" class="allcontent">
             <p><span>{{content.uName}}</span>  点评时间:{{content.aDate.substring(0,10)}}</p>
             <p>{{content.aContent}}</p>
-            <p><span>房东回复:</span></p>
+            <!--<div v-if="content.aImages.split(',').length == 0" style="display: none;">-->
+
+            <!--</div>-->
+            <div v-if="content.aImages.split(',').slice(0,-1).length >1 ">
+            <div v-for="(img,index) in content.aImages.split(',').slice(0,-1)" style="display: inline-block;margin-right:20px;">
+              <img :src="img" style=" height:60px;width:60px;margin:10px 0; ">
+            </div>
+          </div>
+            <div v-else="content.aImages != ''" >
+              <img :src="content.aImages" style=" height:60px;width:60px;margin:10px 0;">
+            </div>
+            <p style="margin-top:20px;"><span style="color: #767676;">房东回复:</span></p>
             <p>{{oneallreply[index].rContent}}</p>
           </div>
         </div>
@@ -91,7 +102,6 @@
           // 第一次进入页面显示this.articleList[]数组的第一个元素
           this.articleInfoList = this.articleList[0]
         },
-
       },
       mounted() {
         let _this = this;
@@ -104,15 +114,8 @@
           });
         axios.get(`http://localhost:3000/reply/details/onehouseReply/` + this.hIdsco).then(function (result) {
           _this.oneallreply = result.data.data;
-          // for(let i=0;i<result.data.data.length;i++){
-          //   if(result.data.data[i].rContent == ''){
-          //      result.data.data[i].rContent="非常高素质、好沟通的客人，把我们的家爱护得很好，希望下次再来";
-          //   }
-          //   _this.oneallreply[i].rContent=result.data.data[i].rContent;
-          //   console.log("这是回复"+ _this.oneallreply[i].rContent)
-          //   alert(i);
-          // }
-        })
+
+        } )
           .catch(function (error) {
             console.log(error);
           });

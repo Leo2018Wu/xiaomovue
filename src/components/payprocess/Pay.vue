@@ -154,6 +154,10 @@
         // radio4: false,
         activeNames: ['1'],
         maxId:'',
+        maxoccId:'',
+
+        maxorders:'',
+
         sname:sessionStorage.getItem('sname'),
         sphone:sessionStorage.getItem('sphone'),
 
@@ -179,15 +183,24 @@
         this.add()
       },1000)
 
-
+      // let _this=this
       //获取刚输入的订单号也就是最大的订单id
-      axios.get("http://127.0.0.1:3000/order/getMaxOrder").then((result)=> {
+      axios.get('http://127.0.0.1:3000/order/getMaxOrder').then((result)=> {
+        // this.maxorder = result.data.data
         this.maxId = result.data.data[0].oId;
-
+        console.log( this.maxId)
+      },(err) =>{
+        console.log(result.err)
+      })
+      axios.get('http://127.0.0.1:3000/occupant/getMaxOccId').then((result)=> {
+        // this.maxorder = result.data.data
+        this.maxoccId = result.data.data[0].occId;
+        console.log( this.maxoccId)
       },(err) =>{
         console.log(result.err)
       })
     },
+
     methods: {
       // num:function (n) {
       //   return n<10 ? "0" + n : "" + n
@@ -236,11 +249,16 @@
         else
           this.$router.push({path: '/finish'})
         // 修改获取到的订单号的订单状态
-        console.log(this.maxId + 1)
+        // console.log(this.maxId + 1)
         axios.post('http://127.0.0.1:3000/order/updateorder', {
           oId: this.maxId + 1,
           oStatus: 1,
         })
+        axios.post('http://127.0.0.1:3000/occupant/addOccOid',{
+          oId:this.maxId+1,
+          occId:this.maxoccId+1
+        })
+
         // sessionStorage.removeItem('sname')
         // sessionStorage.removeItem('sphone')
         this.$store.state.hName = ''
@@ -255,7 +273,6 @@
         console.log(val);
       }
     },
-
 
     beforeDestroy(){
       clearInterval(this._timeout)
