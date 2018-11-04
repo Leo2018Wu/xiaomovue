@@ -119,7 +119,7 @@
         var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
         var height=scrollHeight-scrollTop-windowHeight;
         if(height<=240){
-          $(".rigfix").css("top","-210px");
+          $(".rigfix").css("top","-240px");
           //动画效果有延迟，效果不好，使用不当
           // $(".rigfix").animate({top:'-160px'},50);
         }else{
