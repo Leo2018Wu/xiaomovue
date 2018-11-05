@@ -29,18 +29,7 @@
         <el-row>
           <el-col :span="2":offset="20"><router-link :to="'/center/orderempty/Cancledetail/'+orderInfo.oId"><el-button type="text" class="button">详情</el-button></router-link></el-col>
           <el-col :span="2">
-            <el-button class="button" type="text" @click="centerDialogVisible = true">删除</el-button>
-            <el-dialog
-              title="删除"
-              :visible.sync="centerDialogVisible"
-              width="30%"
-              center>
-              <span>你确定要删除此订单？</span>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="centerDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
-                </span>
-            </el-dialog>
+            <el-button class="button" type="text" @click="del(orderInfo.oId)">删除</el-button>
           </el-col>
         </el-row>
       </div>
@@ -55,10 +44,7 @@
     data(){
       return{
         centerDialogVisible: false,
-        orderInfos:[
-          // {hpic:require("../../assets/im_qr_part2.png"),hName:'海景房1',rentDate:'2018-10-11至2018-10-15',price:'288'},
-          // {hpic:require("../../assets/im_qr_part2.png"),hName:'海景房2',rentDate:'2018-10-11至2018-10-15',price:'288'},
-        ]
+        orderInfos:[]
 
       }
     },
@@ -71,17 +57,31 @@
       })
     },
     methods:{
-      del(index){
-        axios.post('http://localhost:3000/order/updateorder',{
-          oId:this.orderInfos[index].oId,
-          oStatus:3
-        }).then((response)=>{
-          window.location.reload()
-        }).catch((err)=>{
-          // alert('评论失败')
-          console.log(err)
-        })
-      }
+      del(oId) {
+        this.$confirm('确定要删除此订单?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          axios.post('http://localhost:3000/order/updateorder',{
+                oId:oId,
+                oStatus:3
+          }).then((response)=>{
+            window.location.reload()
+          }).catch((err)=>{
+            console.log(err)
+          })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
     }
   }
 </script>

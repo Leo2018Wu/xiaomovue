@@ -31,32 +31,10 @@
             <router-link :to="'/center/orderempty/Successdetail/'+orderInfo.oId"><el-button type="text" class="button">详情</el-button></router-link>
           </el-col>
           <el-col :span="2">
-            <el-button class="button" type="text" @click="centerDialogVisible = true">删除</el-button>
-            <el-dialog
-              title="删除"
-              :visible.sync="centerDialogVisible"
-              width="30%"
-              center>
-              <span>你确定要删除此订单？</span>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="centerDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
-                </span>
-            </el-dialog>
+            <el-button class="button" type="text" @click="del(orderInfo.oId)">删除</el-button>
           </el-col>
           <el-col :span="2">
-            <el-button class="button" type="text" @click="centerDialogVisible1 = true">退订</el-button>
-            <el-dialog
-              title="退订"
-              :visible.sync="centerDialogVisible1"
-              width="30%"
-              center>
-              <span>退订后退款会在三个工作日返回原来账户，退款详情请见房客指南</span>
-              <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible1 = false">取 消</el-button>
-              <el-button type="primary" @click="centerDialogVisible1 = false;cancle(index)">确 定</el-button>
-              </span>
-            </el-dialog>
+            <el-button class="button" type="text" @click="cancle(orderInfo.oId)">退订</el-button>
          </el-col>
         </el-row>
         </div>
@@ -84,27 +62,56 @@
         })
       },
       methods:{
-        del(index){
+        del(oId) {
+          this.$confirm('确定要删除此订单?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
             axios.post('http://localhost:3000/order/updateorder',{
-              oId:this.orderInfos[index].oId,
+              oId:oId,
               oStatus:3
             }).then((response)=>{
               window.location.reload()
             }).catch((err)=>{
               console.log(err)
             })
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          });
         },
-        cancle(index){
-          axios.post('http://localhost:3000/order/updateorder',{
-            oId:this.orderInfos[index].oId,
-            oStatus:-1
-          }).then((response)=>{
-
-          }).catch((err)=>{
-            // alert('评论失败')
-            console.log(err)
-          })
-        }
+        cancle(oId) {
+          this.$confirm('退订后退款会在三个工作日返回原来账户，退款详情请见房客指南', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            axios.post('http://localhost:3000/order/updateorder',{
+              oId:oId,
+              oStatus:-1
+            }).then((response)=>{
+              window.location.reload()
+            }).catch((err)=>{
+              console.log(err)
+            })
+            this.$message({
+              type: 'success',
+              message: '退订成功!'
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消退订'
+            });
+          });
+        },
       }
     }
   </script>

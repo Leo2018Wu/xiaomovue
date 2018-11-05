@@ -3,22 +3,7 @@
     <el-card class="box-card" v-for="(person,index) in persons">
       <div slot="header">
         <h4>姓名:{{person.occName}}</h4>
-        <el-button style="float: right; padding: 3px 0" type="text">
-          <el-button type="text" @click="centerDialogVisible = true">
-            <i class="el-icon-delete"></i>
-          </el-button>
-          <el-dialog
-            title="删除"
-            :visible.sync="centerDialogVisible"
-            width="30%"
-            center>
-            <span>你确定要删除此入住人？</span>
-            <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="centerDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
-  </span>
-          </el-dialog>
-        </el-button>
+        <el-button type="text"style="float: right" @click="del(person.occId)"><i class="el-icon-delete"></i></el-button>
       </div>
       <div  class="text item">
         <p>手机号码：{{person.occPhone}}</p><br>
@@ -93,14 +78,39 @@
         }
       };
     },
+    mounted(){
+      axios.get(`http://localhost:3000/occupant/getOccupant/${sessionStorage.getItem('suId')}`).then((result)=> {
+        this.persons = result.data.data
+        // console.log(this.persons)
+      },(err) =>{
+        console.log(result.err)
+      })
+    },
     methods: {
-      del(index){
-        axios.get(`http://localhost:3000/occupant/deleteOccupant/${this.persons[index].occId}`).then((result)=> {
-          alert('删除成功')
-          window.location.reload()
-        },(err) =>{
-          alert(result.err)
-        })
+      del(occId) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          axios.post('http://localhost:3000/occupant/updateOccupant',{
+                occId:occId,
+                occStatus:0,
+              }).then((response)=>{
+                window.location.reload()
+              }).catch((err)=>{
+                console.log(err)
+              })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
       addOccupant(){
         const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
@@ -122,7 +132,8 @@
               occName:this.ruleForm.name,
               occCordId:this.ruleForm.idCard,
               occPhone:this.ruleForm.phone,
-              uId:sessionStorage.getItem('suId')
+              occStatus:1,
+              uId:sessionStorage.getItem('suId'),
             }).then((response)=>{
               this.dialogFormVisible2 = false
               window.location.reload()
@@ -139,14 +150,7 @@
       }
     },
 
-    mounted(){
-      axios.get(`http://localhost:3000/occupant/getOccupant/${sessionStorage.getItem('suId')}`).then((result)=> {
-        this.persons = result.data.data
-        // console.log(this.persons)
-      },(err) =>{
-        console.log(result.err)
-      })
-    },
+
   };
 </script>
 <style scoped>

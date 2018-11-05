@@ -10,20 +10,7 @@
                       <div><h4>{{assessment.hName}}</h4>
                       <span class="aDate">{{assessment.aDate.substring(0,10)}}</span>
                       <el-button style="float: right; padding: 3px 0" type="text">
-                        <el-button type="text" @click="centerDialogVisible = true">
-                          <i class="el-icon-delete"></i>
-                        </el-button>
-                        <el-dialog
-                          title="删除"
-                          :visible.sync="centerDialogVisible"
-                          width="30%"
-                          center>
-                          <span>确定删除？</span>
-                          <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
-  </span>
-                        </el-dialog>
+                        <el-button type="text" @click="del(assessment.aId)"><i class="el-icon-delete"></i></el-button>
                       </el-button>
                       </div>
                       <hr>
@@ -60,7 +47,6 @@
     </el-row>
   </div>
 </template>
-<!--<script type="text/javascript" src="../../assets/jquery-1.9.1.min.js"></script>-->
 <script>
   import axios from 'axios'
   export default {
@@ -75,7 +61,7 @@
         mydata:[],
         mydata1:[],
         mydata1s:[],
-        // reply:[],
+        reply:[],
       };
     },
     mounted(){
@@ -121,13 +107,28 @@
       change(){
         this.loadData()
       },
-      del(index){
-        axios.get(`http://localhost:3000/assessment/details/delAssessment/${this.assessments[index].aId}`).then((result)=> {
-          console.log("删除成功")
-          window.location.reload()
-        },(err) =>{
-          console.log(result.err)
-        })
+      del(aId) {
+        this.$confirm('确定要删除此评论?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          axios.get(`http://localhost:3000/assessment/details/delAssessment/${aId}`).then((result)=> {
+            console.log("删除成功")
+            window.location.reload()
+          },(err) =>{
+            console.log(result.err)
+          })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
     },
   }

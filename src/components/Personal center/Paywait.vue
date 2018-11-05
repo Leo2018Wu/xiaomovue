@@ -34,18 +34,7 @@
             <router-link :to="'/center/orderempty/Waitdetail/'+orderInfo.oId"> <el-button type="text" class="button" @click="">详情</el-button></router-link>
           </el-col>
           <el-col :span="2">
-            <el-button class="button" type="text" @click="centerDialogVisible = true">退订</el-button>
-            <el-dialog
-            title="退订"
-            :visible.sync="centerDialogVisible"
-            width="30%"
-            center>
-            <span>你确定要取消此订单？</span>
-            <span slot="footer" class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="centerDialogVisible = false;del(index)">确 定</el-button>
-            </span>
-            </el-dialog>
+            <el-button class="button" type="text" @click="del(orderInfo.oId)">删除</el-button>
           </el-col>
         </el-row>
       </div>
@@ -79,15 +68,30 @@
       })
     },
     methods:{
-      del(index){
-        axios.post('http://localhost:3000/order/updateorder',{
-          oId:this.orderInfos[index].oId,
-          oStatus:3
-        }).then((response)=>{
-          window.location.reload()
-        }).catch((err)=>{
-          console.log(err)
-        })
+      del(oId) {
+        this.$confirm('确定要删除此订单?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          axios.post('http://localhost:3000/order/updateorder',{
+            oId:oId,
+            oStatus:3
+          }).then((response)=>{
+            window.location.reload()
+          }).catch((err)=>{
+            console.log(err)
+          })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
     }
   }
