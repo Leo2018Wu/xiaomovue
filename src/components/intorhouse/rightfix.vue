@@ -26,7 +26,7 @@
 
         <div style="text-align: center">
           <img :src="headimage" style="width:30%;height:30%;margin:20px 20px;border-radius: 50%;text-align: center">
-          <p>等雨停</p>
+          <p>万玉亭</p>
         </div>
         <div style="text-align: center;font-size: 18px;margin-top: 15px;color: #ff666A;">
           <p >在线聊天</p>
