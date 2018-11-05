@@ -15,7 +15,7 @@
     </el-button>
     <el-dialog title="添加入住人" :visible.sync="dialogFormVisible2" >
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px"style="width: 60%">
-        <el-form-item label="真实姓名" prop="tureName">
+        <el-form-item label="真实姓名" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
         <el-form-item label="身份证号" prop="idCard">
@@ -115,7 +115,7 @@
       addOccupant(){
         const reg = /^1[3|4|5|7|8][0-9]\d{8}$/
         const reg2 = /(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/
-        const reg3 = /^[\u4e00-\u9fa5]{2,4}$/
+        const reg3 = /^[\u4e00-\u9fa5]{2,5}$/
         if(!reg3.test(this.ruleForm.name)){
           this.dialogFormVisible2 = true
         }else {
