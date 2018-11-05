@@ -3,16 +3,16 @@
     <br>
     <!--中间订单页面-->
     <div class="Ordnum">
-      <h3 class="Oh3">订单详情完成</h3><br>
+      <h3 class="Oh3">订单详情</h3><br>
       <div class="infornums">
         <div class="t1">
-          <span class="label label-info">入住信息</span><br><br>
+          <span class="wait"></span>&nbsp;&nbsp;<span class="a">入住信息</span><br><br>
           房源信息：{{mydatas[0].hName}}<br><br>
           入住时段：{{mydatas[0].arrvialDate}}---{{mydatas[0].leaveDate}}<br>
         </div>
         <br>
         <div class="t2" >
-          <span class="label label-info">入住人信息</span><br><br>
+          <span class="wait"></span>&nbsp;&nbsp;<span class="a">入住人信息</span><br><br>
           <div v-for="mydata in mydatas">
             姓名：{{mydata.occName}}<br><br>
             身份证号：{{mydata.occCordId}}<br><br>
@@ -21,14 +21,13 @@
         </div>
         <br>
         <div class="t3">
-          <span class="label label-info">预定人信息</span><br><br>
-          姓名：{{mydatas[0].uTrueName}}<br><br>
+          <span class="wait"></span>&nbsp;&nbsp;<span class="a">预定人信息</span><br><br>
+          姓名：{{mydatas[0].uName}}<br><br>
           手机：{{mydatas[0].uPhone}}<br>
         </div>
         <br>
         <div class="Costs">
-          <br>
-          &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
+          &nbsp;&nbsp;<span class="label">订单费用信息</span>
           <br><br>
           <div class="table">
             <table class="table table-bordered" style="width: 95%;background: white">
@@ -46,7 +45,6 @@
                 <td style="width: 15%">￥{{mydatas[0].hPrice}}</td>
                 <td style="width: 15%">1</td>
                 <td style="width: 15%">{{(Date.parse(mydatas[0].leaveDate)-Date.parse(mydatas[0].arrvialDate))/1000/60/60/24}}天</td>
-                <!--assessments[0].aDate.substring(0,10)-->
                 <td style="width: 15%"><span style="color:#FF666A">备注：入住当天凭有效证件返现</span></td>
                 <td style="width: 15%">￥{{(Date.parse(mydatas[0].leaveDate)-Date.parse(mydatas[0].arrvialDate))/1000/60/60/24*mydatas[0].hPrice}}</td>
               </tr>
@@ -86,20 +84,14 @@
 </script>
 
 <style scoped>
-  .Ordnum,.unsubscribe,.ways{
-    border: 1px solid gainsboro;
-    box-shadow: 4px 4px 8px grey;
-    border-radius: 10px;
-    background-color: #F5F5F5;
+  .paypage{
+    margin-top: 0px;
   }
-  .help{
-    background-color:#F5F5F5 ;
-  }
-  .Ph3{
-    color:#FF666A
-  }
-  h5{
-    font-weight: bold;
+  .wait{
+    display: inline-block;
+    width: 8px;
+    height: 25px;
+    background-color: #FF666A;
   }
   .unsub,.list-inline,.payway,.t1,.t2,.t3,.Oh3{
     margin-left: 1%;
@@ -107,9 +99,10 @@
   li{
     margin-right: 2%;
   }
-  .label {
+  .a {
     font-size: 180%;
-    background-color: #FF666A;
+    background-color: #FFf;
+    color: rgba(0,0,0,0.73);
     /*label label-info*/
   }
   @media (min-width: 768px) {

@@ -30,9 +30,14 @@
                       <p>{{assessment.aContent}}</p>
                       <div class="img" v-for="image in mydata1s[index]" style="float: left;margin: 2%">
                         <img  :src="image"/>
-                        <!--<img :src="image" onerror="this.src='../../assets/first-center-01.jpg'" />-->
                       </div>
                     </div>
+                      <el-row>
+                        <el-col :span="24"> <hr>
+                          <p><span style="color: #767676;">房东回复:</span></p>
+                          <p class="rContent">{{reply[index].rContent}}</p></el-col>
+                      </el-row>
+
                     </el-col>
                   </el-row>
 
@@ -60,8 +65,6 @@
   import axios from 'axios'
   export default {
     data() {
-
-
       return {
         centerDialogVisible: false,
         pageIndex:1,
@@ -72,6 +75,7 @@
         mydata:[],
         mydata1:[],
         mydata1s:[],
+        // reply:[],
       };
     },
     mounted(){
@@ -93,6 +97,13 @@
       },(err) =>{
         console.log(result.err)
       })
+      axios.get( 'http://localhost:3000/reply/details/allreply').then((result)=> {
+        this.reply = result.data.data;
+        // console.log(this.reply[0].rContent);
+
+      } ).catch(function (error) {
+          console.log(error);
+        });
     },
     methods: {
       loadData(){
@@ -127,7 +138,6 @@
     height: 100px;
   }
   .himg{
-    border-radius: 10px;
     width: 100%;
     height: 100%;
   }

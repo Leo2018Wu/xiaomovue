@@ -3,16 +3,16 @@
       <div class="paypage">
         <!--中间订单页面-->
         <div class="Ordnum">
-          <h3 class="Oh3">订单详情等待</h3><br>
+          <h3 class="Oh3">订单详情</h3><br>
           <div class="infornums">
             <div class="t1">
-              <span class="label label-info">入住信息</span><br><br>
+              <span class="wait"></span>&nbsp;&nbsp;<span class="a">入住信息</span><br><br>
               房源信息：{{mydatas[0].hName}}<br><br>
               入住时段：{{mydatas[0].arrvialDate}}---{{mydatas[0].leaveDate}}<br>
             </div>
             <br>
             <div class="t2" >
-              <span class="label label-info">入住人信息</span><br><br>
+              <span class="wait"></span>&nbsp;&nbsp;<span class="a">入住人信息</span><br><br>
               <div v-for="mydata in mydatas">
                 姓名：{{mydata.occName}}<br><br>
                 身份证号：{{mydata.occCordId}}<br><br>
@@ -21,13 +21,13 @@
             </div>
             <br>
             <div class="t3">
-              <span class="label label-info">预定人信息</span><br><br>
-              姓名：{{mydatas[0].uTrueName}}<br><br>
+              <span class="wait"></span>&nbsp;&nbsp;<span class="a">预定人信息</span><br><br>
+              姓名：{{mydatas[0].uName}}<br><br>
               手机：{{mydatas[0].uPhone}}<br>
             </div>
             <br>
             <div class="Costs">
-              &nbsp;&nbsp;<span class="label label-info">订单费用信息</span>
+              &nbsp;&nbsp;<span class="label">订单费用信息</span>
               <br><br>
               <div class="table">
                 <table class="table table-bordered" style="width: 95%;background: white">
@@ -59,7 +59,7 @@
         <div class="ways">
           <br>
           <div class="payway">
-            <span class="label label-info">支付方式</span><br><br>
+            <span class="wait"></span>&nbsp;&nbsp;<span class="a">支付方式</span><br><br>
             <h5>支付平台</h5>
             <ul class="list-inline">
               <li><input type="radio" name="radios" checked>&nbsp;&nbsp;<img src="../../assets/pay1.jpg" alt="" style="max-width: 50px"></li>
@@ -69,8 +69,13 @@
             </ul>
           </div>
         </div>
+
+
         <br>
-       <a><el-button type="danger" @click="pays" round>支付</el-button></a>
+        <el-row>
+          <el-col :span="14":offset="10"> <el-button type="danger" @click="pays" round>支付</el-button></el-col>
+        </el-row>
+
         <br>
       </div>
     <a href="#to" title="飞回顶部" style="right:1%;bottom:3%;position:fixed">
@@ -124,38 +129,24 @@
 
 <style scoped>
   .paypage{
-    margin-top: 5px;
+    margin-top: 0px;
   }
-  .Ordnum,.unsubscribe,.ways{
-    border: 1px solid gainsboro;
-    box-shadow: 4px 4px 8px grey;
-    border-radius: 10px;
-    background-color: #F5F5F5;
-  }
-  .help{
-    background-color:#F5F5F5 ;
-  }
-  .Ph3{
-    color:#FF666A
-  }
-  h5{
-    font-weight: bold;
+  .wait{
+    display: inline-block;
+    width: 8px;
+    height: 25px;
+    background-color: #FF666A;
   }
   .unsub,.list-inline,.payway,.t1,.t2,.t3,.Oh3{
     margin-left: 1%;
   }
-  /*.Costs{*/
-  /*border: 1px solid gainsboro;*/
-  /*box-shadow: 4px 4px 8px grey;*/
-  /*border-radius: 10px;*/
-  /*background-color: #F5F5F5;*/
-  /*}*/
   li{
     margin-right: 2%;
   }
-  .label {
+  .a {
     font-size: 180%;
-    background-color: #FF666A;
+    background-color: #FFf;
+    color: rgba(0,0,0,0.73);
     /*label label-info*/
   }
   @media (min-width: 768px) {
