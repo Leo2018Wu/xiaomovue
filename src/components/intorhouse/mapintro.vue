@@ -159,6 +159,7 @@
 
       },
 
+
       mounted() {
         this.$nextTick(function () {
           this.drawMap();
