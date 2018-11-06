@@ -68,7 +68,7 @@
       }
     },
     mounted(){
-      axios.get(`http://localhost:3000/order/getFinishorder/${sessionStorage.getItem('suId')}`).then((result)=> {
+      this.$axios.get(`/order/getFinishorder/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.orderInfos = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -76,7 +76,7 @@
     },
     methods:{
       del(index){
-        axios.post('http://localhost:3000/order/updateorder',{
+        this.$axios.post(`/order/updateorder`,{
           oId:this.orderInfos[index].oId,
           oStatus:3
         }).then((response)=>{

@@ -165,7 +165,7 @@
           this.drawMap();
         });
         let _this = this
-        axios.get(`http://localhost:3000/house/details/` + this.hId).then(function (result) {
+        this.$axios.get(`/house/details/` + this.hId).then(function (result) {
           _this.houseloc = result.data.data[0].hLocation;
 
         })

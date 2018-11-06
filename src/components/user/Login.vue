@@ -18,7 +18,7 @@
           <input v-model="password" id="password" type="password" placeholder="请输入密码">
           <label for="password">密码</label>
         </div>
-        <div ><a href="http://localhost:8080/fpwd" style="color: #aaaaaa">找回密码</a></div>
+        <div ><a href="http://10.40.4.8:8080/fpwd" style="color: #aaaaaa">找回密码</a></div>
         <div class="button-area">
 
           <button class="btn btn-primary" v-on:click="UserButton()">登&nbsp;录</button>
@@ -54,7 +54,7 @@
           alert('手机号和密码不能为空！')
         }else {
           let _this = this;
-          axios.post('http://127.0.0.1:3000/userorderdis/login',
+          this.$axios.post('userorderdis/login',
             {
               uPhone: _this.phonenum,
               uPwd: _this.password
@@ -70,7 +70,7 @@
               sessionStorage.setItem('sphone',info.data.uPhone);
               sessionStorage.setItem('sname',info.data.uName);
               sessionStorage.setItem('suId',info.data.uId);
-              window.location.href = 'http://localhost:8080'
+              window.location.href = 'http://10.40.4.8:8080'
             }
             else {
               alert('用户名或密码错误')

@@ -175,7 +175,7 @@
     methods: {
       getMessage(){
         let _this = this
-        axios.get(`http://127.0.0.1:3000/userorderdis/getallphone/${_this.ruleForm.phoneNum}`,).then((result)=> {
+        this.$axios.get(`userorderdis/getallphone/${_this.ruleForm.phoneNum}`,).then((result)=> {
           let info = eval("(" + result.request.response + ")");
           if(info.data.length != 0){
             alert("该用户已经注册,请直接登录!")
@@ -202,7 +202,7 @@
               alert('注册成功！即将跳转到登陆页面…');
               let _this = this
               _this.$router.push({path: '/login'})
-              axios.post("http://127.0.0.1:3000/userorderdis/register", {
+              this.$axios.post("userorderdis/register", {
                 uphone: _this.ruleForm.phoneNum,
                 uinvitecode: _this.ruleForm.inviteNum,
                 upwd: _this.ruleForm.pass,

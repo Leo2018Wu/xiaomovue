@@ -59,12 +59,12 @@
       mounted(){
         let _this=this;
         _this.$refs.first.style.color = '#ff666a';
-          axios.get(`http://localhost:3000/assessment/allassment/${_this.hIdsco}`).then(function (res) {
+          this.$axios.get(`/assessment/allassment/${_this.hIdsco}`).then(function (res) {
             _this.dianlength=res.data.data.length;
           }).catch(function (err) {
             console.log(error);
           }),
-          axios.get(`http://localhost:3000/diarys/${this.recommend}`).then(function (res) {
+          this.$axios.get(`/diarys/${this.recommend}`).then(function (res) {
              _this.darilylen=res.data.data.length;
 
           })

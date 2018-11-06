@@ -41,7 +41,7 @@
       };
     },
     mounted(){
-      axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
+      this.$axios.get(`/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.headPath = result.data.data[0].uHeadPic
       },(err) =>{
         console.log(result.err)
@@ -53,7 +53,7 @@
         zipFormData.append('uId',sessionStorage.getItem('suId'))
         zipFormData.append('uHeadPic',this.upath[0])
         let config={headers:{'Content-Type':'multipart/form-data'}}
-        axios.post('http://localhost:3000/userorderdis/updatePhoto',zipFormData,config)
+        this.$axios.post(`/userorderdis/updatePhoto`,zipFormData,config)
           .then(function(result){
             console.log(result.data)
             // sessionStorage.setItem('photo',result.data.data.uHeadPic)

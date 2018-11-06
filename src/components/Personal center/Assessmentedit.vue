@@ -43,7 +43,7 @@
       };
     },
     mounted(){
-      axios.get(`http://localhost:3000/order/getoneorder/${this.oId}`).then((result)=> {
+      this.$axios.get(`/order/getoneorder/${this.oId}`).then((result)=> {
         this.oneOrder = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -68,7 +68,7 @@
             zipFormData.append('oId',this.oneOrder[0].hId)
             zipFormData.append('aScore',this.value1)
             let config={headers:{'Content-Type':'multipart/form-data'}}
-            axios.post('http://localhost:3000/assessment/details/addAssessment', zipFormData,config)
+            this.$axios.post(`/assessment/details/addAssessment`, zipFormData,config)
               .then(function (response) {
                 console.log(response);
                 console.log(response.data);

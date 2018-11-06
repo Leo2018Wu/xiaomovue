@@ -102,7 +102,7 @@
     },
     mounted(){
       //获取刚输入的订单号也就是最大的订单id
-      axios.get(`http://localhost:3000/order/getOrderDetail/${this.oId}`).then((result)=> {
+      this.$axios.get(`/order/getOrderDetail/${this.oId}`).then((result)=> {
         this.mydatas = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -111,7 +111,7 @@
     methods: {
       pays(index) {
         let _this = this
-          axios.post('http://127.0.0.1:3000/order/updateorder', {
+          this.$axios.post(`order/updateorder`, {
             oId:this.oId,
             oStatus: 1,
           })

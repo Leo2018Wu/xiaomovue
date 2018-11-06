@@ -51,7 +51,6 @@
 
 
   <script>
-  import axios from "axios"
   export default {
     name: "housedetail",
     data() {
@@ -78,7 +77,7 @@
 
     mounted(){
       let _this=this
-      axios.get(  `http://localhost:3000/house/details/`+this.hId).then(function (result) {
+      this.$axios.get(  `/house/details/`+this.hId).then(function (result) {
         _this.onehouseinfo.push(result.data.data[0]);
         _this.bed=result.data.data[0].hBeds;
       })

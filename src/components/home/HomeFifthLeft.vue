@@ -3,7 +3,7 @@
     <h3 style="position: relative">房客点评</h3>
     <div class="all-info">
       <div v-if="isshow==1">
-        <img class="radius-img" :src="'../../../static/images/'+assessments[0].uHeadPic" alt="">
+        <img class="radius-img" :src="'../../../static/images/'+assessments[0].uHeadpic" alt="">
         <p>{{assessments[0].uName}}</p>
         <p>{{assessments[0].aDate.substring(0,10)}}</p>
         <div class="content">{{assessments[0].aContent}}</div>
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     name: "HomeFifthLeft",
     data() {
@@ -85,10 +84,9 @@
       },
     },
     mounted() {
-      axios.get(`http://127.0.0.1:3000/assessment/details/recommend/${this.recommend}`).then((result) => {
+      this.$axios.get(`/assessment/details/recommend/${this.recommend}`).then((result) => {
         // this.mydata = result.data.data[0].uName;
         this.mydata = result.data.data
-        console.log(this.mydata)
         for (var i = 0; i < 4; i++) {
           this.assessments.push(this.mydata[i])
           // console.log(this.assessments[0])

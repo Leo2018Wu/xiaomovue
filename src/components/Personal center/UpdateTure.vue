@@ -33,7 +33,7 @@
       }
     },
     mounted() {
-      axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result) => {
+      this.$axios.get(`/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result) => {
         this.userInfo.turename = result.data.data[0].uTrueName
         this.userInfo.idcard = result.data.data[0].uCardId
         this.userInfo.possport = result.data.data[0].uPossPort
@@ -49,7 +49,7 @@
           inputPattern: /^[\u4e00-\u9fa5]{2,4}$/,
           inputErrorMessage:'请输入2到4个字母/汉字/数字/下划线'
         }).then(({ value }) => {
-          axios.post('http://127.0.0.1:3000/userorderdis/updateTureName',{
+          axios.post('http://10.40.4.8:3000/userorderdis/updateTureName',{
             uId:sessionStorage.getItem('suId'),
             uTrueName:value
           }).then((response)=>{
@@ -76,7 +76,7 @@
           inputPattern:/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,
           inputErrorMessage:'请输入正确的身份证号'
         }).then(({ value }) => {
-          axios.post('http://127.0.0.1:3000/userorderdis/updateuIdcard',{
+          axios.post('http://10.40.4.8:3000/userorderdis/updateuIdcard',{
             uId:sessionStorage.getItem('suId'),
             uCardId:value
           }).then((response)=>{
@@ -103,7 +103,7 @@
           inputPattern:/^1[45][0-9]{7}|([P|p|S|s]\d{7})|([S|s|G|g]\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\d{8})|([H|h|M|m]\d{8，10})$/g,
           inputErrorMessage: '请输入正确格式的护照号'
         }).then(({ value1 }) => {
-          axios.post('http://127.0.0.1:3000/userorderdis/updateuPoss',{
+          axios.post('http://10.40.4.8:3000/userorderdis/updateuPoss',{
             uId:sessionStorage.getItem('suId'),
             uPossPort:value
           }).then((response)=>{

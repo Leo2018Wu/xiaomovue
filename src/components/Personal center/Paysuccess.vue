@@ -76,7 +76,7 @@
         }
       },
       mounted(){
-        axios.get(`http://localhost:3000/order/getSuccessorder/${sessionStorage.getItem('suId')}`).then((result)=> {
+        this.$axios.get(`/order/getSuccessorder/${sessionStorage.getItem('suId')}`).then((result)=> {
           this.orderInfos = result.data.data
           console.log(this.orderInfos);
         },(err) =>{
@@ -85,7 +85,7 @@
       },
       methods:{
         del(index){
-            axios.post('http://localhost:3000/order/updateorder',{
+            this.$axios.post(`/order/updateorder`,{
               oId:this.orderInfos[index].oId,
               oStatus:3
             }).then((response)=>{
@@ -95,7 +95,7 @@
             })
         },
         cancle(index){
-          axios.post('http://localhost:3000/order/updateorder',{
+          this.$axios.post(`/order/updateorder`,{
             oId:this.orderInfos[index].oId,
             oStatus:-1
           }).then((response)=>{

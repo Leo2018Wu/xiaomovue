@@ -80,7 +80,7 @@
     },
     mounted() {
       let dId = this.$route.params.did
-      axios.get(`http://localhost:3000/diarys/ddiarys/${dId}`).then((result) => {
+      this.$axios.get(`/diarys/ddiarys/${dId}`).then((result) => {
         this.diaryOne = result.data.data
         this.mydata=this.diaryOne[0].dImages
         this.mydata = this.mydata.substr(0,this.mydata.length-1)
@@ -88,7 +88,7 @@
       }, (err) => {
         console.log(result.err)
       })
-      axios.get(`http://localhost:3000/diarys/ddiarys/getUandAssessments/${dId}`).then((result) => {
+      this.$axios.get(`/diarys/ddiarys/getUandAssessments/${dId}`).then((result) => {
         this.assessments = result.data.data
       }, (err) => {
         console.log(result.err)
@@ -96,7 +96,7 @@
     },
     methods: {
       del() {
-        axios.get(`http://localhost:3000/diarys/delete/${this.diaryOne[0].dId}`).then((result) => {
+        this.$axios.get(`/diarys/delete/${this.diaryOne[0].dId}`).then((result) => {
           alert("删除成功")
           window.location.reload()
         }, (err) => {

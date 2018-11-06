@@ -73,7 +73,7 @@
       }
     },
     mounted(){
-      axios.get(`http://localhost:3000/order/getOrderDetail/${this.oId}`).then((result)=> {
+      this.$axios.get(`/order/getOrderDetail/${this.oId}`).then((result)=> {
         this.mydatas = result.data.data
       },(err) =>{
         console.log(result.err)

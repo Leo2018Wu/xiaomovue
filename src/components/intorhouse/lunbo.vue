@@ -2,7 +2,7 @@
     <div class="row">
 
       <div class="lunbo col-xs-8">
-        <el-carousel indicator-position="outside" :interval="2000" height="533px">
+        <el-carousel indicator-position="outside" :interval="3000" height="533px">
           <el-carousel-item v-for="(img,index) in imglist" :key="index">
             <h3><img :src="'../../../static/images/'+img"></h3>
           </el-carousel-item>
@@ -13,7 +13,6 @@
     </div>
 </template>
 <script>
-  import axios from "axios"
   import route  from "vue-router"
     export default {
         name: "lunbo",
@@ -27,7 +26,7 @@
       },
       mounted(){
         let _this=this
-        axios.get(`http://localhost:3000/house/details/`+this.hId).then(function (result) {
+        this.$axios.get(`/house/details/`+this.hId).then(function (result) {
           _this.imglist.push(result.data.data[0].hPic1,result.data.data[0].hPic2,result.data.data[0].hPic3,result.data.data[0].hPic4);
              console.log(_this.imglist)
         })

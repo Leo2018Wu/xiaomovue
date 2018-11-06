@@ -319,7 +319,7 @@
           // var currentdate = year + seperator1 + month + seperator1 + strDate+' '+house+minute+seconds;
           // _this.$store.state.newdate=currentdate
           // console.log('当前时间'+_this.$store.state.newdate)
-          axios.post("http://localhost:3000/order", {
+          this.$axios.post(`/order`, {
             arrvialDate: _this.$store.state.create_start_date,
             leaveDate: _this.$store.state.create_end_date,
             hPrice: _this.$store.state.houseprice,

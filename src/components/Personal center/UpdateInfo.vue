@@ -40,7 +40,7 @@
         'update-ture': UpdateTure,
       },
       mounted() {
-        axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result) => {
+        this.$axios.get(`/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result) => {
           this.userInfo.name = result.data.data[0].uName
           this.userInfo.phone = result.data.data[0].uPhone
           this.userInfo.email = result.data.data[0].uEmail
@@ -56,7 +56,7 @@
             inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
             inputErrorMessage: '邮箱格式不正确'
           }).then(({ value }) => {
-            axios.post('http://127.0.0.1:3000/userorderdis/updateuEmail',{
+            this.$axios.post('userorderdis/updateuEmail',{
               uId:sessionStorage.getItem('suId'),
               uEmail:value
             }).then((response)=>{
@@ -83,13 +83,13 @@
             inputPattern:/^[\w\u4e00-\u9fa5]{3,10}$/g,
             inputErrorMessage: '请输入3-10个字母/汉字/数字/下划线'
           }).then(({value}) => {
-            axios.post('http://127.0.0.1:3000/userorderdis/updateuName',{
+            this.$axios.post('userorderdis/updateuName',{
               uId:sessionStorage.getItem('suId'),
              uName:value
             }).then((response)=>{
               alert('修改成功')
               sessionStorage.setItem('sname',value)
-              window.location.href='http://localhost:8080/center/updateInfo'
+              window.location.href='http://10.40.4.8:8080/center/updateInfo'
             }).catch((err)=>{
               alert('修改失败')
               console.log(err)

@@ -79,7 +79,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let _this=this
-            axios.get(`http://localhost:3000/userorderdis/getallphone/${this.ruleForm.phoneNum}`).then(function (result) {
+            this.$axios.get(`/userorderdis/getallphone/${this.ruleForm.phoneNum}`).then(function (result) {
               if(result.data.data.length == 1){
                 _this.$store.state.chphone=_this.ruleForm.phoneNum;
                 _this.$router.replace("/cpwd")

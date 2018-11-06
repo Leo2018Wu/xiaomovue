@@ -74,7 +74,7 @@
           alert("请先登录!")
           return;
         }else{
-          axios.post("http://localhost:3000/save/add",{
+          this.$axios.post("save/add",{
             sDate:new Date().toLocaleDateString(),
             uId:sessionStorage.getItem('suId'),
             hId:this.hId,
@@ -105,7 +105,7 @@
     },
     mounted(){
       let _this=this;
-      axios.get(  `http://localhost:3000/house/details/`+this.hId).then(function (result) {
+      this.$axios.get(`/house/details/`+this.hId).then(function (result) {
         _this.houseprice=result.data.data[0].hPrice;
         _this.househscore=result.data.data[0].hScore;
         _this.hName = result.data.data[0].hName;

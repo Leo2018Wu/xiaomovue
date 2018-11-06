@@ -95,7 +95,7 @@
     },
     methods: {
       del(index){
-        axios.get(`http://localhost:3000/occupant/deleteOccupant/${this.persons[index].occId}`).then((result)=> {
+        this.$axios.get(`/occupant/deleteOccupant/${this.persons[index].occId}`).then((result)=> {
           alert('删除成功')
           window.location.reload()
         },(err) =>{
@@ -117,7 +117,7 @@
 
         }
         else {
-            axios.post('http://localhost:3000/occupant/addOccupant',{
+            this.$axios.post(`/occupant/addOccupant`,{
               // activityCommentId:12,
               occName:this.ruleForm.name,
               occCordId:this.ruleForm.idCard,
@@ -140,7 +140,7 @@
     },
 
     mounted(){
-      axios.get(`http://localhost:3000/occupant/getOccupant/${sessionStorage.getItem('suId')}`).then((result)=> {
+      this.$axios.get(`/occupant/getOccupant/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.persons = result.data.data
         // console.log(this.persons)
       },(err) =>{

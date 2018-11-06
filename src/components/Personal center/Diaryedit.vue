@@ -38,7 +38,7 @@
       };
     },
     mounted(){
-      axios.get(`http://127.0.0.1:3000/order/getoneorder/${this.oId}`).then((result)=> {
+      this.$axios.get(`order/getoneorder/${this.oId}`).then((result)=> {
         this.oneOrder = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -65,7 +65,7 @@
             zipFormData.append('dTitle',this.title)
             zipFormData.append('oId',this.oneOrder[0].hId)
             let config={headers:{'Content-Type':'multipart/form-data'}}
-            axios.post('http://localhost:3000/diarys/orders/add', zipFormData,config)
+            this.$axios.post(`/diarys/orders/add`, zipFormData,config)
               .then(function (response) {
                 console.log(response);
                 console.log(response.data);

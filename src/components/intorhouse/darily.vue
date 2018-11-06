@@ -82,7 +82,6 @@
 </template>
 
 <script>
-  import axios from "axios"
     export default {
         name: "darily",
       data(){
@@ -98,7 +97,7 @@
 
       mounted(){
           let _this=this
-        axios.get(`http://localhost:3000/diarys/${this.recommend}`).then(function (result) {
+        this.$axios.get(`/diarys/${this.recommend}`).then(function (result) {
           _this.info.push(result.data.data[0],result.data.data[1],result.data.data[2],result.data.data[3]);
 
        })

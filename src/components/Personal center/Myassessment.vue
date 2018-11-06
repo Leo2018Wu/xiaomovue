@@ -79,7 +79,7 @@
       };
     },
     mounted(){
-      axios.get(`http://localhost:3000/assessment/personal/userAssessment/${sessionStorage.getItem('suId')}`).then((result)=> {
+      this.$axios.get(`/assessment/personal/userAssessment/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.assessments = result.data.data
         // console.log( this.assessments[0])
         this.pageCount = this.assessments.length
@@ -97,7 +97,7 @@
       },(err) =>{
         console.log(result.err)
       })
-      axios.get( 'http://localhost:3000/reply/details/allreply').then((result)=> {
+      this.$axios.get( `/reply/details/allreply`).then((result)=> {
         this.reply = result.data.data;
         // console.log(this.reply[0].rContent);
 
@@ -122,7 +122,7 @@
         this.loadData()
       },
       del(index){
-        axios.get(`http://localhost:3000/assessment/details/delAssessment/${this.assessments[index].aId}`).then((result)=> {
+        this.$axios.get(`/assessment/details/delAssessment/${this.assessments[index].aId}`).then((result)=> {
           console.log("删除成功")
           window.location.reload()
         },(err) =>{

@@ -63,7 +63,7 @@
     },
     mounted(){
       let _this=this
-      axios.get(`http://localhost:3000/diarys/udiarys/${sessionStorage.getItem('suId')}`).then((result)=> {
+      this.$axios.get(`/diarys/udiarys/${sessionStorage.getItem('suId')}`).then((result)=> {
         _this.diarys = result.data.data
         _this.pageCount=_this.diarys.length
         _this.loadData()

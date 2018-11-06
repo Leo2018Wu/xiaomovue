@@ -89,7 +89,7 @@
       'person-ture':PersonTure,
     },
     mounted(){
-      axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result)=> {
+      this.$axios.get(`/userorderdis/getUserInfos/1`).then((result)=> {
         this.ruleForm2.name = result.data.data[0].uName
         this.ruleForm2.phone = result.data.data[0].uPhone
         this.ruleForm2.email = result.data.data[0].uEmail

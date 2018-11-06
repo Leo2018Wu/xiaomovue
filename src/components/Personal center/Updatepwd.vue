@@ -74,7 +74,7 @@
     },
     //${sessionStorage.getItem('suId')}
     mounted(){
-      axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
+      this.$axios.get(`/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
         this.userInfo = result.data.data
       },(err) =>{
         console.log(result.err)
@@ -87,7 +87,7 @@
             let _this = this;
             if (this.ruleForm2.code === this.ruleForm2.checkCode) {
               alert('身份验证成功')
-              axios.post("http://localhost:3000/userorderdis/perfect/idchangpwd",{
+              this.$axios.post(`/userorderdis/perfect/idchangpwd`,{
                 uid:sessionStorage.getItem('suId'),
                 upwd:_this.ruleForm2.checkPass
               }).then((result)=>{
@@ -97,7 +97,7 @@
                   alert('修改成功')
                 sessionStorage.clear();
                 // this.$router.push({path:'/login'})
-                window.location.href='http://localhost:8080/login'
+                window.location.href='http://10.40.4.8:8080/login'
               }),(err)=>{
                 alert('修改失败')
                 console.log(err)

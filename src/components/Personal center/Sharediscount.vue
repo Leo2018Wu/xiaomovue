@@ -51,7 +51,7 @@
         },
       },
       mounted(){
-        axios.get(`http://localhost:3000/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
+        this.$axios.get(`/userorderdis/getUserInfos/${sessionStorage.getItem('suId')}`).then((result)=> {
           // this.mydata = result.data.data[0].uName;
           this.mydata = result.data.data[0]
           // console.log(this.mydata)

@@ -39,7 +39,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     name: "HomeFifthLeft",
     data(){
@@ -90,7 +89,7 @@
           $(this).html($(this).text().replace(/\s+/g, "").substr(0, 70) + "...")
         }
       }),
-        axios.get(`http://127.0.0.1:3000/diarys/${this.aCommend}`).then((result)=> {
+        this.$axios.get(`/diarys/${this.aCommend}`).then((result)=> {
           // this.mydata = result.data.data[0].uName;
           this.mydata = result.data.data
           console.log(this.mydata)

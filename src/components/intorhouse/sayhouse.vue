@@ -51,7 +51,6 @@
 </template>
 
 <script>
-  import axios from "axios"
     export default {
       name: "sayhouse",
 
@@ -72,7 +71,7 @@
       },
       created() {
         let _this = this
-        axios.get(`http://localhost:3000/assessment/allassment/${_this.hIdsco}`).then(function (res) {
+        this.$axios.get(`/assessment/allassment/${_this.hIdsco}`).then(function (res) {
           _this.articleList = res.data.data;
           _this.len = res.data.data.length;
           _this.handleInfo();
@@ -105,14 +104,14 @@
       },
       mounted() {
         let _this = this;
-        axios.get(`http://localhost:3000/house/details/` + this.hIdsco).then(function (result) {
+        this.$axios.get(`/house/details/` + this.hIdsco).then(function (result) {
           _this.househscore = result.data.data[0].hScore;
 
         })
           .catch(function (error) {
             console.log(error);
           });
-        axios.get(`http://localhost:3000/reply/details/onehouseReply/` + this.hIdsco).then(function (result) {
+        this.$axios.get(`/reply/details/onehouseReply/` + this.hIdsco).then(function (result) {
           _this.oneallreply = result.data.data;
 
         } )

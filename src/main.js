@@ -8,7 +8,7 @@ import router from './router'
 import Axios from "axios"
 import lodash from 'lodash'
 import clipbord from "vue-clipboard2"
-Axios.defaults.baseURL='http://127.0.0.1:3000'
+Axios.defaults.baseURL='http://10.40.4.8:3000'
 Vue.prototype.$axios = Axios;
 Vue.config.productionTip = false
 Vue.use(clipbord)

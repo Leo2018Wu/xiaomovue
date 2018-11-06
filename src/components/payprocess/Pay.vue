@@ -142,7 +142,6 @@
 
 <script>
   import Steps2 from '../steps/Steps2.vue'
-  import axios from 'axios'
   export default {
     name: "Pay",
     data(){
@@ -185,14 +184,14 @@
 
       // let _this=this
       //获取刚输入的订单号也就是最大的订单id
-      axios.get('http://127.0.0.1:3000/order/getMaxOrder').then((result)=> {
+      this.$axios.get(`/order/getMaxOrder`).then((result)=> {
         // this.maxorder = result.data.data
         this.maxId = result.data.data[0].oId;
         console.log( this.maxId)
       },(err) =>{
         console.log(result.err)
       })
-      axios.get('http://127.0.0.1:3000/occupant/getMaxOccId').then((result)=> {
+      this.$axios.get(`/occupant/getMaxOccId`).then((result)=> {
         // this.maxorder = result.data.data
         this.maxoccId = result.data.data[0].occId;
         console.log( this.maxoccId)
@@ -250,11 +249,11 @@
           this.$router.push({path: '/finish'})
         // 修改获取到的订单号的订单状态
         // console.log(this.maxId + 1)
-        axios.post('http://127.0.0.1:3000/order/updateorder', {
+        this.$axios.post(`/order/updateorder`, {
           oId: this.maxId + 1,
           oStatus: 1,
         })
-        axios.post('http://127.0.0.1:3000/occupant/addOccOid',{
+        this.$axios.post(`/occupant/addOccOid`,{
           oId:this.maxId+1,
           occId:this.maxoccId+1
         })

@@ -80,7 +80,7 @@
           this.$refs[formName].validate((valid) => {
             let _this=this
             if (valid) {
-              axios.post('http://localhost:3000/userorderdis/perfect/idchangpwd',{
+              this.$axios.post('/userorderdis/perfect/idchangpwd',{
                 uid:_this.uId,
                 upwd:_this.ruleForm2.pass,
               }).then((response)=>{
@@ -107,7 +107,7 @@
       },
       mounted(){
           let _this=this;
-        axios.get(`http://localhost:3000/userorderdis/perfect/${_this.$store.state.chphone}`).then(function (result) {
+        this.$axios.get(`/userorderdis/perfect/${_this.$store.state.chphone}`).then(function (result) {
                    _this.uId = result.data.data[0].uId;
         })
           .catch(function (error) {

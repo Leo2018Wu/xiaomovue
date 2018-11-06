@@ -81,7 +81,7 @@
         };
       },
       mounted(){
-        axios.get('http://localhost:3000/userorderdis/getUserInfos/1').then((result)=> {
+        this.$axios.get(`/userorderdis/getUserInfos/1`).then((result)=> {
           this.ruleForm2.tureName = result.data.data[0].uTrueName
           this.ruleForm2.idCard = result.data.data[0].uCardId
           this.ruleForm2.sex = result.data.data[0].uSex
@@ -91,7 +91,7 @@
       },
       methods: {
         updateIdInfo(){
-          axios.post('http://localhost:3000/userorderdis/updateIdInfo',{
+          this.$axios.post(`/userorderdis/updateIdInfo`,{
             uId:1,
             uTrueName: this.ruleForm2.tureName,
             uCardId:this.ruleForm2.idCard,

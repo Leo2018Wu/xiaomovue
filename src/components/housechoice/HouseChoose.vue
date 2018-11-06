@@ -71,8 +71,8 @@
 
           </div>
           <div class="col-sm-12 col-xs-12 pap" style="padding-top: 0">
-            <label class="radio-inline" v-for="style in styles" v-model="formData.style">
-              <input type="radio"  @click="showStyle(style)" >{{style}}
+            <label class="checkbox-inline" v-for="style in styles" v-model="formData.style">
+              <input type="checkbox"  @click="showStyle(style)" >{{style}}
             </label>
           </div>
         </div>
@@ -86,10 +86,10 @@
       <div class="row">
         <el-row v-if="!showReal.length">
           <nav class="shelf" style="background: #406072;margin:0 auto;margin-top:30px;">
-            <a class="book home-page" href="http://localhost:8080/#/">首页</a>
-            <a class="book about-us" href="http://localhost:8080/#/rightnav/about">关于小沫</a>
-            <a class="book contact" href="http://localhost:8080/#/rightnav/contact">联系我们</a>
-            <a class="book faq" href="http://localhost:8080/#/rightnav/service">服务协议</a>
+            <a class="book home-page" href="http://10.40.4.8:8080/">首页</a>
+            <a class="book about-us" href="http://10.40.4.8:8080/rightnav/about">关于小沫</a>
+            <a class="book contact" href="http://10.40.4.8:8080/rightnav/contact">联系我们</a>
+            <a class="book faq" href="http://10.40.4.8:8080/rightnav/service">服务协议</a>
             <span class="book not-found"></span>
             <span class="door left"></span>
             <span class="door right"></span>
@@ -189,7 +189,7 @@
           chooseDate:'',
           guestNum:'',
           keyWord:'',
-          price:'',
+          price:3000,
           facility:'',
           style:'',
           location:'',
