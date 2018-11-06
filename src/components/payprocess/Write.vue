@@ -330,6 +330,7 @@
             occName:_this.ruleForm.name,
             occCordId:_this.ruleForm.identity,
             occPhone:_this.ruleForm.phone,
+            occStatus:1,
           }).then(function (result) {
             console.log(result.data)
           })
